@@ -3,9 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
+    private $url;
+
     public function __construct()
     {
         parent::__construct();
+        $this->url = $this->geturl->get_url();
 
     }
 
@@ -70,6 +73,7 @@ class Login extends CI_Controller
                     $userAPI['nickname'] = $point->nickname;
 //                    $userAPI['name'] = $point->name;
                     $userAPI['image'] = $point->image;
+                    $userAPI['client_type'] = $type;
 //                    $userAPI['client'] = $point->client;
 //                    $userAPI['is_manager'] = $point->is_manager;
 //                    $userAPI['ticket_type'] = $point->ticket_type;
@@ -102,7 +106,7 @@ class Login extends CI_Controller
         if ($type == 'admin') {
             $url = 'https://bfx-api.herokuapp.com/admin/sign_in';
         } else {
-            $url = "https://bfx-api.herokuapp.com/admin/$type/sign_in";
+            $url = "$this->url/admin/$type/sign_in";
         }
         curl_setopt_array($curl, array(
             CURLOPT_URL => "$url",

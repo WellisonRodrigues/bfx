@@ -32,7 +32,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php echo base_url(CSS); ?>/custom.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <!--    <link href="--><?php //echo base_url(VENDOR); ?><!--/font-awesome/css/font-awesome.min.css" rel="stylesheet"-->
+    <!--    <link href="-->
+    <?php //echo base_url(VENDOR); ?><!--/font-awesome/css/font-awesome.min.css" rel="stylesheet"-->
     <!--          type="text/css">-->
     <!--    Data tables -->
     <link href="<?php echo base_url(VENDOR); ?>/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
@@ -44,11 +45,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url(VENDOR); ?>/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="<?php echo base_url(VENDOR); ?>/respond.js/1.4.2/respond.min.js"></script>
 
+
     <![endif]-->
 
 </head>
 
 <body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 <?php
 /* ISTO AQUI SERVE PARA VERIFICAR SE POSSUI OU NÃO TEMPLATE PADRÃO
  * $DEFAULT_TEMPLATE -> BOOL

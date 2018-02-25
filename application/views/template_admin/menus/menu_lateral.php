@@ -13,9 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li>
                 <?php echo anchor('usuarios', '<b style="color: #42A5F5"><i class="fas fa-list-ul"></i>&nbsp&nbspVER LISTA </b>'); ?>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <?php echo anchor('Clients/index', ' Clientes Masters '); ?>
-                    </li>
+                    <?php if ($this->session->userdata("user")['client_type'] == 'admin') { ?>
+                        <li>
+                            <?php echo anchor('Clients/index', ' Clientes Masters '); ?>
+                        </li>
+                    <?php } ?>
                     <li>
                         <?php echo anchor('Managers/index', ' Gestores '); ?>
                     </li>
@@ -32,17 +34,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li>
                 <?php echo anchor('tickets', '<b style="color: #42A5F5"><i class="fas fa-user-plus"></i> CADASTRAR </b>'); ?>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <?php echo anchor('Clients/new_client', ' Clientes Masters '); ?>
-                    </li>
+                    <?php if ($this->session->userdata("user")['client_type'] == 'admin') { ?>
+                        <li>
+                            <?php echo anchor('Clients/new_client', ' Clientes Masters '); ?>
+                        </li>
+                    <?php } ?>
                     <li>
                         <?php echo anchor('Managers/new_manager', ' Gestores '); ?>
                     </li>
                     <li>
-                        <?php echo anchor('usuarios/lista', ' Colaboradores'); ?>
+                        <?php echo anchor('Employees/new_employeer', ' Colaboradores'); ?>
                     </li>
                     <li>
-                        <?php echo anchor('usuarios/lista', ' Departamentos'); ?>
+                        <?php echo anchor('Department/new_department', ' Departamentos'); ?>
                     </li>
 
                 </ul>
