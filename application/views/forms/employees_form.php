@@ -7,20 +7,26 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 //print_r($clients['response']);
-foreach ($clients['response'] as $client) {
-    $array[$client['id']] = $client['name'];
+if ($this->session->userdata('user')['client_type'] != 'managers' and
+    $this->session->userdata('user')['client_type'] != 'employees'
+) {
+    if ($clients) {
+        foreach ($clients['response'] as $client) {
+            $array[$client['id']] = $client['full_name'];
+        }
+    }
 }
 //print_r($array);
 ?>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 style="color:#1ab7ea;"><strong>CADASTRAR GESTOR
+        <h3 style="color:#1ab7ea;"><strong>CADASTRAR COLABORADOR
             </strong></h3>
     </div>
     <div class="panel-body">
         <div class="row">
             <?php
-            echo form_open('Managers/new_manager', ['role' => 'form']);
+            echo form_open('Employees/new_employeer', ['role' => 'form']);
             ?>
             <div class="col-lg-12">
                 <div class="row">
@@ -126,34 +132,40 @@ foreach ($clients['response'] as $client) {
                             ?>
                         </div>
                     </div>
-                    <div class="col-lg-8">
-                        <div class="form-group">
-                            <label>Gestor*</label>
-                            <?php
-                            echo form_dropdown(
-                                'client',
-                                @$array,
-                                set_value($array),
-                                'class="form-control"'
-                            );
+                    <?php
+                    if ($this->session->userdata('user')['client_type'] != 'managers' and
+                        $this->session->userdata('user')['client_type'] != 'employees'
+                    ) {
+                        ?>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Gestor*</label>
+                                <?php
+                                echo form_dropdown(
+                                    'manager',
+                                    @$array,
+                                    set_value(''),
+                                    'class="form-control"'
+                                );
 
-                            ?>
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="form-group">
-                            <label>Cliente Master*</label>
-                            <?php
-                            echo form_dropdown(
-                                'client',
-                                @$array,
-                                set_value($array),
-                                'class="form-control"'
-                            );
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Cliente Master*</label>
+                                <?php
+                                echo form_dropdown(
+                                    'client',
+                                    @$array,
+                                    set_value(''),
+                                    'class="form-control"'
+                                );
 
-                            ?>
+                                ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 <div class="col-lg-12 " align="center">
                     <button type="submit" name="submit" value="salvar_alterar_usuario"

@@ -6,6 +6,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Date: 13/03/2017
  * Time: 20:24
  */
+//print_r($this->session->userdata('user')['nickname']);
+if ($this->session->userdata('user')['client_type'] == 'admin') {
+    $name = 'Master BFX';
+} elseif ($this->session->userdata('user')['client_type'] == 'client') {
+    $name = 'Master';
+} elseif ($this->session->userdata('user')['client_type'] == 'managers') {
+    $name = 'Gestor';
+} else {
+    $name = 'Funcionario';
+}
+if ($this->session->userdata('user')['nickname'] != '') {
+    $name_user = $this->session->userdata('user')['nickname'];
+} else {
+    $name_user = 'Sem nick cadastrado';
+}
 ?>
 <div class="nav navbar-top-links navbar-right">
 
@@ -13,8 +28,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <div class="col-md-9 menu-profile">
                 <div style="font-size:1em;  margin-left: auto; margin-right: 25px">
-                    <strong> Nome do Usúario </strong><br/>
-                    Master BFX
+                    <strong> <?php echo $name_user ?></strong><br/>
+                    <?php echo $name ?>
                 </div>
             </div>
             <div class="box">

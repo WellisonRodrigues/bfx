@@ -136,7 +136,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                 echo form_dropdown(
                                     'client',
                                     @$array,
-                                    set_value('', $ar),
+                                    set_value(''),
                                     'class="form-control"'
                                 );
 

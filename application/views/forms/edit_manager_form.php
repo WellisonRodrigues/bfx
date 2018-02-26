@@ -71,7 +71,7 @@ foreach ($clients['response'] as $row) {
                             echo form_input(
                                 [
                                     'name' => 'phone',
-                                    'type' => 'email',
+                                    'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente', @$manager['response']['phone']),

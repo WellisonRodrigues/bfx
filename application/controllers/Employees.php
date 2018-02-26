@@ -16,10 +16,9 @@ class Employees extends CI_Controller
         if (!$this->session->userdata("user")) {
             redirect('sair');
         }
-        $this->load->library('table');
-        $this->load->library('Geturl');
+
         $this->url = $this->geturl->get_url();
-//        print_r($this->geturl->get_url());
+
     }
 
     public function index()
@@ -100,7 +99,7 @@ class Employees extends CI_Controller
             $cpf = $this->input->post('cpf');
             $phone = $this->input->post('phone');
 //
-            if ($this->put_manager_ws($id_manager, $name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)) {
+            if ($this->put_manager_ws($id_employee, $name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)) {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -121,6 +120,44 @@ class Employees extends CI_Controller
         }
         $data['clients'] = $this->get_clients_ws();
         $data['view'] = 'forms/edit_employees_form';
+        $this->load->view('template_admin/core', $data);
+    }
+
+    public function new_employeer()
+    {
+        if ($this->input->post('submit')) {
+//            print_r($this->input->post());
+            $name = $this->input->post('name');
+            $pass = $this->input->post('pass');
+            $pass_comfirm = $this->input->post('pass_comfirm');
+            $email = $this->input->post('email');
+            $client = $this->input->post('client');
+            $phone = $this->input->post('phone');
+            $cpf = $this->input->post('cpf');
+            $manager = $this->input->post('manager');
+
+
+            if ($this->post_employees_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone, $manager)['response']['status'] == 'success') {
+                $data['alert'] =
+                    [
+                        'type' => 'sucesso',
+                        'message' => 'Usuário cadastrado com sucesso.'
+                    ];
+                $this->session->set_flashdata('alert', $data['alert']);
+                redirect('Employees/index');
+            } else {
+                $data['alert'] =
+                    [
+                        'type' => 'erro',
+                        'message' => 'Erro ao cadastrar o usuario.'
+                    ];
+                $this->session->set_flashdata('alert', $data['alert']);
+                redirect('Employees/index');
+
+            }
+        }
+        $data['clients'] = $this->get_clients_ws();
+        $data['view'] = 'forms/employees_form';
         $this->load->view('template_admin/core', $data);
     }
 
@@ -207,7 +244,7 @@ class Employees extends CI_Controller
         return $resp;
     }
 
-    private function post_manager_ws($name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone)
+    private function post_employees_ws($name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -215,7 +252,7 @@ class Employees extends CI_Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/managers",
+            CURLOPT_URL => "$this->url/admin/employees",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -224,7 +261,7 @@ class Employees extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client_id\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n'$name'\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"manager_id\"\r\n\r\n$manager\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client_id\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
