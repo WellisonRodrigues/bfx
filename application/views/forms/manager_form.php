@@ -8,8 +8,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //print_r($clients['response']);
 if ($this->session->userdata("user")['client_type'] == 'admin') {
-    foreach ($clients['response'] as $client) {
-        $array[$client['id']] = $client['full_name'];
+    if (isset($clients)) {
+        foreach ($clients['response'] as $client) {
+            $array[$client['id']] = $client['full_name'];
+        }
     }
 }
 //print_r($array);
