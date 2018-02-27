@@ -9,12 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //print_r($this->session->userdata('user')['nickname']);
 if ($this->session->userdata('user')['client_type'] == 'admin') {
     $name = 'Master BFX';
-} elseif ($this->session->userdata('user')['client_type'] == 'client') {
+} elseif ($this->session->userdata('user')['client_type'] == 'clients') {
     $name = 'Master';
 } elseif ($this->session->userdata('user')['client_type'] == 'managers') {
     $name = 'Gestor';
-} else {
-    $name = 'Funcionario';
 }
 if ($this->session->userdata('user')['nickname'] != '') {
     $name_user = $this->session->userdata('user')['nickname'];
@@ -39,7 +37,12 @@ if ($this->session->userdata('user')['nickname'] != '') {
             </div>
             <div class="col-md-2 menu-confi">
                 <div style="font-size:2em;  margin-left: 15px; margin-right: 60px">
-                    <i class="fas fa-cog"></i>
+                    <div class='dropdown'>
+                        <i class="fas fa-cog" data-toggle='dropdown'></i>
+                        <ul class='dropdown-menu' style="margin-top: 12px;margin-right: 25px">
+                            <li><a href='<?php echo base_url() ?>/Sair' class='center-block' style='color: gray'> <i
+                                            class='fas fa-sign-out-alt'> </i>&nbsp;&nbsp; Logout</a></li>
+                    </div>
                 </div>
             </div>
         </div>

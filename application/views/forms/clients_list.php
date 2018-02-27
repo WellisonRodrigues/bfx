@@ -20,7 +20,7 @@
             <div class="panel-body">
                 <?php
 
-                $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" id="tb_usuarios">']);
+                $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_clients">']);
                 $this->table->set_heading('Nome', 'Razão Social', 'CNPJ ', 'E-mail', 'N° Departamentos', 'N° Colaboradores', ' Alterar ');
                 foreach (@$clients as $usuario) {
                     $idusuario = $usuario['id'];
@@ -66,7 +66,7 @@
             }
 
         });
-//        dataTableInit("#tb_usuarios");
+        dataTableInit("#tb_clients");
     });
 </script>
 

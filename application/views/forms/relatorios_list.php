@@ -23,7 +23,16 @@
 //        echo '<br/>';
 //    }
 //
-//    echo '<br/>';
+echo '<pre>';
+print_r($relatorio['clients']);
+//echo '<br/>';
+//}
+//foreach ($relatorio['clients'] as $roe) {
+//    if ($roe['departaments']) {
+//        print_r($roe['departaments']);
+//        echo '<br/>';
+//    }
+//
 //}
 ?>
 
@@ -43,31 +52,52 @@
                 $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" id="tb_usuarios">']);
                 $this->table->set_heading('Clientes Masters ', 'Departamentos', 'Colaboradores ', 'Locais Visitados',
                     'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
-                if (isset($relatorio)) {
-                    foreach ($relatorio as $row) {
-                        foreach ($row['employee']['locals'] as $local) {
-                            foreach ($row['employee']['routes'] as $rout) {
+                if (isset($relatorio['clients'])) {
+                    foreach ($relatorio['clients'] as $row) {
+//                        foreach ($row['employee']['locals'] as $local) {
+//                            foreach ($row['employee']['routes'] as $rout) {
 //                                $idusuario = $usuario['id'];
 //                                $url_edit = base_url() . 'Clients/edit_client/' . $idusuario;
 //                                $url_delete = base_url() . 'Clients/delete_client/' . $idusuario;
 
-                                $created_at = date('d/m/Y H:i:s', strtotime(@$usuario["created_at"]));
-                                $updated_at = date('d/m/Y H:i:s', strtotime(@$usuario["updated_at"]));
+                        $created_at = date('d/m/Y H:i:s', strtotime(@$usuario["created_at"]));
+                        $updated_at = date('d/m/Y H:i:s', strtotime(@$usuario["updated_at"]));
+                        if ($row['departaments']) {
+
+                            foreach ($row['departaments'] as $departament) {
                                 $this->table->add_row(
-                                    ['data' => @$row['employee']['departament']['client_id']],
-                                    ['data' => @$row['employee']['departament']['name']],
-                                    ['data' => @$usuario["employees"]['nickname']],
-                                    ['data' => @$row['employee']['departament']['company_name']],
-                                    ['data' => @$rout['updated_at']],
-                                    ['data' => @$rout['check_in']],
-                                    ['data' => @$rout['check_out']],
-                                    ['data' => @$rout['total_km']],
-//                        ['data' => anchor("usuarios/editar/" . @$usuario["id"] . "", "<p class='fa fa-pencil'></p>", 'class = "btn btn-outline btn-primary btn-xs btn-block"'), 'align' => 'center'],
-                                    ['data' => @$rout['value_km']]
+                                    ['data' => @$row['name']],
+                                    ['data' => @$departament['title']]
+
                                 );
                             }
+                        } else {
+
+                            $this->table->add_row(
+                                ['data' => @$row['name']],
+                                ['data' => ""]
+
+                            );
+
                         }
+//                        $this->table->add_row(
+//
+//                            ['data' => @$row['name']]
+////                                ['data' => @$row['']],
+////                                ['data' => @$usuario["employees"]['nickname']],
+////                                ['data' => @$row['employee']['departament']['company_name']],
+////                                ['data' => @$rout['updated_at']],
+////                                ['data' => @$rout['check_in']],
+////                                ['data' => @$rout['check_out']],
+////                                ['data' => @$rout['total_km']],
+//////                        ['data' => anchor("usuarios/editar/" . @$usuario["id"] . "", "<p class='fa fa-pencil'></p>", 'class = "btn btn-outline btn-primary btn-xs btn-block"'), 'align' => 'center'],
+////                                ['data' => @$rout['value_km']]
+//                        );
+
+
                     }
+//                        }
+//                    }
                 }
                 echo $this->table->generate();
                 ?>

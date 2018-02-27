@@ -24,7 +24,9 @@ class Employees extends CI_Controller
     public function index()
     {
         $return = $this->get_employees_ws();
+
         $data['employees'] = $return['response'];
+
         $data['view'] = 'forms/employees_list';
         $this->load->view('template_admin/core', $data);
 //        print_r($this->get_clients_ws());
@@ -125,6 +127,7 @@ class Employees extends CI_Controller
 
     public function new_employeer()
     {
+        $return_manager = $this->get_managers_ws();
         if ($this->input->post('submit')) {
 //            print_r($this->input->post());
             $name = $this->input->post('name');
@@ -156,7 +159,9 @@ class Employees extends CI_Controller
 
             }
         }
+//        print_r($return_manager['response']);
         $data['clients'] = $this->get_clients_ws();
+        $data['manager'] = $return_manager['response'];
         $data['view'] = 'forms/employees_form';
         $this->load->view('template_admin/core', $data);
     }
@@ -261,7 +266,7 @@ class Employees extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n'$name'\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"manager_id\"\r\n\r\n$manager\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client_id\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"manager_id\"\r\n\r\n$manager\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client_id\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
@@ -418,7 +423,7 @@ class Employees extends CI_Controller
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+//                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
                 "postman-token: 30011478-d090-f8e8-b9a8-b90aba104de3",
                 "uid: $uid"
             ),

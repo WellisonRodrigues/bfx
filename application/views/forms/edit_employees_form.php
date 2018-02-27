@@ -6,8 +6,8 @@
  * Time: 21:01
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-print_r($employee['response']);
-$id = @$manager['response']['id'];
+print_r($employee);
+$id = @$employee['response']['id'];
 
 
 foreach ($clients['response'] as $row) {
@@ -38,7 +38,7 @@ foreach ($clients['response'] as $row) {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$manager['response']['name']),
+                                    'value' => set_value('cliente', @$employee['response']['name']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -55,7 +55,7 @@ foreach ($clients['response'] as $row) {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$manager['response']['cpf']),
+                                    'value' => set_value('cliente', @$employee['response']['cpf']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -75,7 +75,7 @@ foreach ($clients['response'] as $row) {
                                     'type' => 'email',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$manager['response']['phone']),
+                                    'value' => set_value('cliente', @$employee['response']['phone']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -91,7 +91,7 @@ foreach ($clients['response'] as $row) {
                                     'type' => 'email',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$manager['response']['email']),
+                                    'value' => set_value('cliente', @$employee['response']['email']),
                                     'maxlength' => '70',
                                 ]);
                             ?>

@@ -22,7 +22,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                 </div>
                 <div class="panel-body">
                     <?php
-                    $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" id="tb_usuarios">']);
+                    $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_departments">']);
                     $this->table->set_heading(' Nome ', ' Cliente Master', ' Gestor ', 'N° Colaboradores', ' Alterar ');
                     if ($departments) {
                         foreach (@$departments as $department) {
@@ -56,23 +56,23 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
             </div>
         </div>
     </div>
-    <script>
-
-        $(document).ready(function () {
-            $('.delete').bind('click', function () {
-
-                var comf = confirm('Deseja mesmo excluir?');
-
-                if (comf == true) {
-
-                } else {
-                    event.preventDefault();
-                }
-
-            });
-//        dataTableInit("#tb_usuarios");
-        });
-    </script>
+    <!--    <script>-->
+    <!---->
+    <!--        $(document).ready(function () {-->
+    <!--            $('.delete').bind('click', function () {-->
+    <!---->
+    <!--                var comf = confirm('Deseja mesmo excluir?');-->
+    <!---->
+    <!--                if (comf == true) {-->
+    <!---->
+    <!--                } else {-->
+    <!--                    event.preventDefault();-->
+    <!--                }-->
+    <!---->
+    <!--            });-->
+    <!--//        dataTableInit("#tb_usuarios");-->
+    <!--        });-->
+    <!--    </script>-->
 <?php } else { ?>
     <div class="row">
         <div class="col-md-12">
@@ -86,7 +86,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                 </div>
                 <div class="panel-body">
                     <?php
-                    $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" id="tb_usuarios">']);
+                    $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_departments">']);
                     $this->table->set_heading(' Nome ', 'N° Colaboradores', ' Alterar ');
                     if ($departments) {
 //                        foreach (@$departments as $department) {
@@ -118,21 +118,22 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
             </div>
         </div>
     </div>
-    <script>
 
-        $(document).ready(function () {
-            $('.delete').bind('click', function () {
-
-                var comf = confirm('Deseja mesmo excluir?');
-
-                if (comf == true) {
-
-                } else {
-                    event.preventDefault();
-                }
-
-            });
-//        dataTableInit("#tb_usuarios");
-        });
-    </script>
 <?php } ?>
+<script>
+
+    $(document).ready(function () {
+        $('.delete').bind('click', function () {
+
+            var comf = confirm('Deseja mesmo excluir?');
+
+            if (comf == true) {
+
+            } else {
+                event.preventDefault();
+            }
+
+        });
+        dataTableInit("#tb_departments");
+    });
+</script>

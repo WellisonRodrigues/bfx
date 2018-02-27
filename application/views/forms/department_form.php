@@ -10,9 +10,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$id = @$departments['response']['id'];
 
 //
-//foreach ($clients['response'] as $row) {
-//    $array[$row['id']] = $row['name'];
-//}
+if ($this->session->userdata('user')['client_type'] != 'managers') {
+    foreach ($managers as $row) {
+        $array[$row['id']] = $row['name'];
+    }
+}
 ?>
 
 <div class="panel panel-default">
@@ -45,24 +47,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="form-group">
-                            <label>Gestor*</label>
-                            <?php
-                            echo form_input(
-                                [
-                                    'name' => 'manager',
-                                    'type' => 'text',
-                                    'required' => 'required',
-                                    'class' => 'form-control',
-                                    'value' => set_value('cliente'),
-                                    'maxlength' => '70',
-                                ]);
-                            ?>
+                <?php if ($this->session->userdata('user')['client_type'] != 'managers') { ?>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Gestor*</label>
+                                <?php
+                                echo form_dropdown(
+                                    'manager',
+                                    @$array,
+                                    set_value(''),
+                                    'class="form-control"'
+                                );
+
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>

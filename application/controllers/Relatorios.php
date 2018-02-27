@@ -24,6 +24,7 @@ class Relatorios extends CI_Controller
     public function index()
     {
         $response = $this->get_relatorio_ws();
+//        print_r($response);
         $data['relatorio'] = $response['response'];
         $data['view'] = 'forms/relatorios_list';
         $this->load->view('template_admin/core', $data);
@@ -37,7 +38,7 @@ class Relatorios extends CI_Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/reports/dashboard",
+            CURLOPT_URL => "$this->url/admin/reports/dashboard?q[name_cont]=",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

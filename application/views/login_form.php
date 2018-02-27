@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <option id="companies" value="admin">Administrador</option>
                                 <option id="companies" value="clients">Cliente</option>
                                 <option id="companies" value="managers">Gerente</option>
-                                <option id="users" value="employees">Funcionário</option>
+<!--                                <option id="users" value="employees">Funcionário</option>-->
                             </select>
                         </div>
                         <div class="form-group">
