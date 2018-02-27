@@ -42,7 +42,7 @@
                         }
                     }
                     $this->table->add_row(
-                        ['data' => @$usuario["full_name"]],
+                        ['data' => @$usuario["nome"]],
                         ['data' => @$usuario["razao_social"]],
                         ['data' => @$usuario["cnpj"]],
                         ['data' => @$usuario["email"]],
