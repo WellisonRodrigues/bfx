@@ -6,11 +6,11 @@
  * Time: 21:01
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-//print_r($clients['response']);
+//print_r($clients['response']['clients']);
 if ($this->session->userdata("user")['client_type'] == 'admin') {
     if (isset($clients)) {
-        foreach ($clients['response'] as $client) {
-            $array[$client['id']] = $client['full_name'];
+        foreach ($clients['response']['clients'] as $client) {
+            $array[$client['id']] = $client['nome'];
         }
     }
 }

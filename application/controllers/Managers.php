@@ -23,7 +23,7 @@ class Managers extends CI_Controller
     {
         $return = $this->get_managers_ws();
         $data['managers'] = $return['response'];
-
+//print_r($return);
         $data['view'] = 'forms/managers_list';
         $this->load->view('template_admin/core', $data);
 //        print_r($this->get_clients_ws());
