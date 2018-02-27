@@ -49,7 +49,7 @@ print_r($relatorio['clients']);
             <div class="panel-body">
                 <?php
 
-                $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" id="tb_usuarios">']);
+                $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
                 $this->table->set_heading('Clientes Masters ', 'Departamentos', 'Colaboradores ', 'Locais Visitados',
                     'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
                 if (isset($relatorio['clients'])) {
@@ -119,7 +119,7 @@ print_r($relatorio['clients']);
             }
 
         });
-//        dataTableInit("#tb_usuarios");
+        dataTableInit("#tb_relatorios");
     });
 </script>
 
