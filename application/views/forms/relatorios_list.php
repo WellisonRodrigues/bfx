@@ -24,7 +24,7 @@
 //    }
 //
 //echo '<pre>';
-//print_r($relatorio['clients']);
+//print_r($relatorio);
 //echo '<br/>';
 //}
 //foreach ($relatorio['clients'] as $roe) {
@@ -65,18 +65,50 @@
                         if ($row['departaments']) {
 
                             foreach ($row['departaments'] as $departament) {
-                                $this->table->add_row(
-                                    ['data' => @$row['name']],
-                                    ['data' => @$departament['title']],
-                                    ['data' => ""],
-                                    ['data' => ""],
-                                    ['data' => ""],
-                                    ['data' => ""],
-                                    ['data' => ""],
-                                    ['data' => ""],
-                                    ['data' => ""]
+                                if ($departament['employees']) {
+                                    foreach ($departament['employees'] as $employee) {
+                                        if ($employee['locals']) {
+                                            foreach ($employee['locals'] as $local) {
+                                                $this->table->add_row(
+                                                    ['data' => @$row['name']],
+                                                    ['data' => @$departament['title']],
+                                                    ['data' => @$employee['name']],
+                                                    ['data' => @$local['company_name']],
+                                                    ['data' => ""],
+                                                    ['data' => ""],
+                                                    ['data' => ""],
+                                                    ['data' => ""],
+                                                    ['data' => ""]
 
-                                );
+                                                );
+                                            }
+                                        } else {
+                                            $this->table->add_row(
+                                                ['data' => @$row['name']],
+                                                ['data' => @$departament['title']],
+                                                ['data' => @$employee['name']],
+                                                ['data' => ""],
+                                                ['data' => ""],
+                                                ['data' => ""],
+                                                ['data' => ""],
+                                                ['data' => ""],
+                                                ['data' => ""]);
+                                        }
+                                    }
+                                } else {
+                                    $this->table->add_row(
+                                        ['data' => @$row['name']],
+                                        ['data' => @$departament['title']],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""]
+
+                                    );
+                                }
                             }
                         } else {
 
@@ -94,19 +126,6 @@
                             );
 
                         }
-//                        $this->table->add_row(
-//
-//                            ['data' => @$row['name']]
-////                                ['data' => @$row['']],
-////                                ['data' => @$usuario["employees"]['nickname']],
-////                                ['data' => @$row['employee']['departament']['company_name']],
-////                                ['data' => @$rout['updated_at']],
-////                                ['data' => @$rout['check_in']],
-////                                ['data' => @$rout['check_out']],
-////                                ['data' => @$rout['total_km']],
-//////                        ['data' => anchor("usuarios/editar/" . @$usuario["id"] . "", "<p class='fa fa-pencil'></p>", 'class = "btn btn-outline btn-primary btn-xs btn-block"'), 'align' => 'center'],
-////                                ['data' => @$rout['value_km']]
-//                        );
 
 
                     }
