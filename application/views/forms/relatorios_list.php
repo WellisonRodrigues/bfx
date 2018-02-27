@@ -23,8 +23,8 @@
 //        echo '<br/>';
 //    }
 //
-echo '<pre>';
-print_r($relatorio['clients']);
+//echo '<pre>';
+//print_r($relatorio['clients']);
 //echo '<br/>';
 //}
 //foreach ($relatorio['clients'] as $roe) {
@@ -67,7 +67,14 @@ print_r($relatorio['clients']);
                             foreach ($row['departaments'] as $departament) {
                                 $this->table->add_row(
                                     ['data' => @$row['name']],
-                                    ['data' => @$departament['title']]
+                                    ['data' => @$departament['title']],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""]
 
                                 );
                             }
@@ -75,6 +82,13 @@ print_r($relatorio['clients']);
 
                             $this->table->add_row(
                                 ['data' => @$row['name']],
+                                ['data' => ""],
+                                ['data' => ""],
+                                ['data' => ""],
+                                ['data' => ""],
+                                ['data' => ""],
+                                ['data' => ""],
+                                ['data' => ""],
                                 ['data' => ""]
 
                             );
