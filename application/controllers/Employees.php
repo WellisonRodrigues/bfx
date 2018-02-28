@@ -121,6 +121,8 @@ class Employees extends CI_Controller
             }
         }
         $data['clients'] = $this->get_clients_ws();
+        $return_manager = $this->get_managers_ws();
+        $data['manager'] = $return_manager['response'];
         $data['view'] = 'forms/edit_employees_form';
         $this->load->view('template_admin/core', $data);
     }

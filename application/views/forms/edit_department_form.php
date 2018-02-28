@@ -11,8 +11,10 @@ $id = @$departments['response']['id'];
 
 //
 if ($this->session->userdata('user')['client_type'] != 'managers') {
-    foreach ($managers as $row) {
-        $array[$row['id']] = $row['name'];
+    if ($managers['managers']) {
+        foreach ($managers['managers'] as $row) {
+            $array[$row['id']] = $row['name'];
+        }
     }
 }
 ?>

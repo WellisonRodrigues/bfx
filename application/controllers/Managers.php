@@ -40,8 +40,9 @@ class Managers extends CI_Controller
             $client = $this->input->post('client');
             $phone = $this->input->post('phone');
             $cpf = $this->input->post('cpf');
-
-
+//
+//            print_r($this->post_manager_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone));
+//            die;
             if ($this->post_manager_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)['response']['status'] == 'success') {
                 $data['alert'] =
                     [
@@ -185,11 +186,11 @@ class Managers extends CI_Controller
         return $resp;
     }
 
-    private function post_manager_ws($name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone)
+    private function post_manager_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
-        $client = $this->session->userdata('user')['clientHeader'];
+        $client_user = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -202,11 +203,11 @@ class Managers extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client_id\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
-                "client: $client",
+                "client: $client_user",
                 "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
                 "postman-token: 30011478-d090-f8e8-b9a8-b90aba104de3",
                 "uid: $uid"
@@ -239,6 +240,8 @@ class Managers extends CI_Controller
         $resp['response'] = $array;
         $resp['headers'] = $headers;
         $resp['err'] = $err;
+//        print_r($resp);
+//        die;
         return $resp;
     }
 

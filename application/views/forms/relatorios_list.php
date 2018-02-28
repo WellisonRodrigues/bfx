@@ -23,8 +23,7 @@
 //        echo '<br/>';
 //    }
 //
-//echo '<pre>';
-//print_r($relatorio);
+//\\
 //echo '<br/>';
 //}
 //foreach ($relatorio['clients'] as $roe) {
@@ -113,7 +112,7 @@
                         } else {
 
                             $this->table->add_row(
-                                ['data' => @$row['name']],
+                                ['data' => @$row['id']],
                                 ['data' => ""],
                                 ['data' => ""],
                                 ['data' => ""],

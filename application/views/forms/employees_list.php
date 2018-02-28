@@ -5,7 +5,8 @@
  * Date: 24/02/2018
  * Time: 13:39
  */
-//print_r($employees);
+//echo '<pre>';
+print_r($employees);
 ?>
 
 <!--<div class="row">-->
@@ -24,8 +25,8 @@
         $this->table->set_template(['table_open' => '<table  class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_employees">']);
         $this->table->set_heading(' Nome ', ' Departamento ', ' Gestor ', ' Cliente Master ', ' E-mail',
             'Telefone', 'CPF', ' Alterar ');
-        if ($employees) {
-            foreach (@$employees as $usuario) {
+        if ($employees['employees']) {
+            foreach (@$employees['employees'] as $usuario) {
                 $idusuario = $usuario['id'];
                 $url_edit = base_url() . 'Employees/edit_employee/' . $idusuario;
                 $url_delete = base_url() . 'Employees/delete_employee/' . $idusuario;
@@ -42,12 +43,12 @@
                 $updated_at = date('d/m/Y H:i:s', strtotime(@$usuario["updated_at"]));
                 $this->table->add_row(
                     ['data' => @$usuario["name"]],
-                    ['data' => @$usuario["departament_id"]],
-                    ['data' => ''],
-                    ['data' => ''],
+                    ['data' => @$usuario["departament"]],
+                    ['data' => @$usuario["manager"]],
+                    ['data' => @$usuario["client"]],
                     ['data' => @$usuario["email"]],
-                    ['data' => ''],
-                    ['data' => ''],
+                    ['data' => @$usuario["phone"]],
+                    ['data' => @$usuario["cpf"]],
 //                        ['data' => anchor("usuarios/editar/" . @$usuario["id"] . "", "<p class='fa fa-pencil'></p>", 'class = "btn btn-outline btn-primary btn-xs btn-block"'), 'align' => 'center'],
                     ['data' => $options]
                 );

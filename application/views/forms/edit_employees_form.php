@@ -8,10 +8,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 print_r($employee);
 $id = @$employee['response']['id'];
-
-
-foreach ($clients['response'] as $row) {
-    $array[$row['id']] = $row['full_name'];
+if ($this->session->userdata('user')['client_type'] == 'admin') {
+    if ($clients['response']['clients']) {
+        foreach ($clients['response']['clients'] as $row) {
+            $array[$row['id']] = $row['nome'];
+        }
+    }
+}
+if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session->userdata('user')['client_type'] == 'clients') {
+    if ($manager) {
+        foreach ($manager['managers'] as $manage) {
+            $arraymanager[$manage['id']] = $manage['name'];
+        }
+    }
 }
 ?>
 
@@ -132,22 +141,46 @@ foreach ($clients['response'] as $row) {
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="form-group">
-                            <label>Cliente Master*</label>
-                            <?php
-                            echo form_dropdown(
-                                'client',
-                                @$array,
-                                set_value(''),
-                                'class="form-control"'
-                            );
+                <?php
+                if ($this->session->userdata('user')['client_type'] != 'managers'
+                ) {
+                    ?>
 
-                            ?>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Gestor*</label>
+                                <?php
+                                echo form_dropdown(
+                                    'manager',
+                                    @$arraymanager,
+                                    set_value(''),
+                                    'class="form-control"'
+                                );
+
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php }
+                if ($this->session->userdata('user')['client_type'] == 'admin') { ?>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Cliente Master*</label>
+                                <?php
+                                echo form_dropdown(
+                                    'client',
+                                    @$array,
+                                    set_value(''),
+                                    'class="form-control"'
+                                );
+
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@
  * Date: 24/02/2018
  * Time: 13:39
  */
+//echo '<pre>';
 //print_r($managers);
 //print_r($clients);
 //foreach ($clients['response'] as $client) {
@@ -29,8 +30,8 @@
                 } else {
                     $this->table->set_heading(' Nome ', ' Departamento ', ' N° Colaboradores ', ' Telefone', 'CPF', ' Alterar ');
                 }
-                if ($managers) {
-                    foreach (@$managers as $usuario) {
+                if ($managers['managers']) {
+                    foreach (@$managers['managers'] as $usuario) {
                         $idusuario = $usuario['id'];
                         $url_edit = base_url() . 'Managers/edit_manager/' . $idusuario;
                         $url_deptopatch = base_url() . 'Managers/path_Managers/' . $idusuario;
@@ -47,11 +48,11 @@
                         if ($this->session->userdata("user")['client_type'] == 'admin') {
                             $this->table->add_row(
                                 ['data' => @$usuario["name"]],
-                                ['data' => @$usuario["departament_id"]],
-                                ['data' => @$usuario["client_id"]],
-                                ['data' => ''],
-                                ['data' => ''],
-                                ['data' => ''],
+                                ['data' => @$usuario["departament"]],
+                                ['data' => @$usuario["client"]],
+                                ['data' => @$usuario["phone"]],
+                                ['data' => @$usuario["cpf"]],
+                                ['data' => @$usuario["employees_count"]],
 //                        ['data' => anchor("usuarios / editar / " . @$usuario["id"] . "", " < p class='fa fa-pencil' ></p > ", 'class = "btn btn - outline btn - primary btn - xs btn - block"'), 'align' => 'center'],
                                 ['data' => $options]
                             );

@@ -18,7 +18,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin'
 }
 if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session->userdata('user')['client_type'] == 'clients') {
     if ($manager) {
-        foreach ($manager as $manage) {
+        foreach ($manager['managers'] as $manage) {
             $arraymanager[$manage['id']] = $manage['name'];
         }
     }
