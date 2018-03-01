@@ -71,7 +71,7 @@ class Login extends CI_Controller
                     $userAPI['provider'] = $point->provider;
                     $userAPI['uid'] = $point->uid;
                     $userAPI['nickname'] = $point->nickname;
-//                    $userAPI['name'] = $point->name;
+                    $userAPI['name'] = $point->name;
                     $userAPI['image'] = $point->image;
                     $userAPI['client_type'] = $type;
 //                    $userAPI['client'] = $point->client;
@@ -88,11 +88,20 @@ class Login extends CI_Controller
                 $this->session->set_flashdata('alert', $data['alert']);
                 $this->session->set_userdata('user', $userAPI);
 
-                redirect('Painel_admin');
+                if ($type == 'admin') {
+                    redirect('Clients/index');
+                }
+                if ($type == 'clients') {
+                    redirect('Managers/index');
+                }
+                if ($type == 'managers') {
+                    redirect('Employees/index');
+                }
             }
 //            }
         }
         $this->session->sess_destroy();
+
 
         $data['view'] = 'login_form';
         $data['default_template'] = false;

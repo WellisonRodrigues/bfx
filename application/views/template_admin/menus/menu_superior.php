@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Date: 13/03/2017
  * Time: 20:24
  */
-//print_r($this->session->userdata('user')['nickname']);
+//print_r($this->session->userdata('user'));
 if ($this->session->userdata('user')['client_type'] == 'admin') {
     $name = 'Master BFX';
 } elseif ($this->session->userdata('user')['client_type'] == 'clients') {
@@ -14,8 +14,8 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
 } elseif ($this->session->userdata('user')['client_type'] == 'managers') {
     $name = 'Gestor';
 }
-if ($this->session->userdata('user')['nickname'] != '') {
-    $name_user = $this->session->userdata('user')['nickname'];
+if ($this->session->userdata('user')['name'] != '') {
+    $name_user = $this->session->userdata('user')['name'];
 } else {
     $name_user = 'Sem nick cadastrado';
 }
@@ -40,7 +40,10 @@ if ($this->session->userdata('user')['nickname'] != '') {
                     <div class='dropdown'>
                         <i class="fas fa-cog" data-toggle='dropdown'></i>
                         <ul class='dropdown-menu' style="margin-top: 12px;margin-right: 25px">
-                            <li><a href='<?php echo base_url() ?>/Sair' class='center-block' style='color: gray'> <i
+                            <li><a href='<?php echo base_url() ?>/Myprofile' class='center-block' style='color: gray'> <i
+                                            class='fas fa-user'> </i>&nbsp;&nbsp; Meus Dados</a></li>
+                            <li>
+                                <a href='<?php echo base_url() ?>/Sair' class='center-block' style='color: gray'> <i
                                             class='fas fa-sign-out-alt'> </i>&nbsp;&nbsp; Logout</a></li>
                     </div>
                 </div>

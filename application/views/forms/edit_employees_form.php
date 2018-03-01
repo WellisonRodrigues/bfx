@@ -6,7 +6,7 @@
  * Time: 21:01
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-print_r($employee);
+//print_r($employee);
 $id = @$employee['response']['id'];
 if ($this->session->userdata('user')['client_type'] == 'admin') {
     if ($clients['response']['clients']) {

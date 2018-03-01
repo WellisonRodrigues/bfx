@@ -37,7 +37,13 @@ class Managers extends CI_Controller
             $pass = $this->input->post('pass');
             $pass_comfirm = $this->input->post('pass_comfirm');
             $email = $this->input->post('email');
-            $client = $this->input->post('client');
+
+            if ($this->session->userdata('user')['client_type'] != 'admin') {
+                $client = $this->input->post('client');
+            } else {
+                $client = null;
+            }
+
             $phone = $this->input->post('phone');
             $cpf = $this->input->post('cpf');
 //

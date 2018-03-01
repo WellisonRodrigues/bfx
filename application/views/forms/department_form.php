@@ -11,8 +11,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //
 if ($this->session->userdata('user')['client_type'] != 'managers') {
-    foreach ($managers as $row) {
-        $array[$row['id']] = $row['name'];
+    if ($managers) {
+        foreach ($managers as $row) {
+            $array[@$row['id']] = @$row['name'];
+        }
     }
 }
 ?>
