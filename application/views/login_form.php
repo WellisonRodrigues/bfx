@@ -30,13 +30,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input class="form-control" placeholder="E-mail" type="email" name="email" autofocus
-                                   value="ingressoscaldas@gmail.com"
+                                   value=""
                                    required>
                         </div>
                         <div class="form-group">
                             <label for="password">Senha:</label>
                             <input class="form-control" placeholder="Senha" name="password" type="password"
-                                   value="icnTDC"
+                                   value=""
                                    required>
                         </div>
                         <!--                        <div class="checkbox">-->
