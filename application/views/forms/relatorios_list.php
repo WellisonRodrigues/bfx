@@ -112,7 +112,7 @@
                         } else {
 
                             $this->table->add_row(
-                                ['data' => @$row['id']],
+                                ['data' => @$row['name']],
                                 ['data' => ""],
                                 ['data' => ""],
                                 ['data' => ""],
