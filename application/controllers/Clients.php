@@ -32,6 +32,7 @@ class Clients extends CI_Controller
     {
         if ($this->input->post('submit')) {
             $name = $this->input->post('name');
+            $full_name = $this->input->post('full_name');
             $pass = $this->input->post('pass');
             $pass_comfirm = $this->input->post('pass_comfirm');
             $email = $this->input->post('email');
@@ -39,7 +40,7 @@ class Clients extends CI_Controller
             $cnpj = $this->input->post('cnpj');
 
 
-            if ($this->post_clients_ws($name, $pass, $pass_comfirm, $email, $razao, $cnpj)['response']['status'] == 'success') {
+            if ($this->post_clients_ws($name, $full_name, $pass, $pass_comfirm, $email, $razao, $cnpj)['response']['status'] == 'success') {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -69,12 +70,13 @@ class Clients extends CI_Controller
 
             $name = $this->input->post('name');
             $pass = $this->input->post('pass');
+            $full_name = $this->input->post('full_name');
             $pass_comfirm = $this->input->post('pass_comfirm');
             $email = $this->input->post('email');
             $razao = $this->input->post('razao');
             $cnpj = $this->input->post('cnpj');
 //
-            if ($this->put_clients_ws($id_client, $name, $pass, $pass_comfirm, $email, $razao, $cnpj)) {
+            if ($this->put_clients_ws($id_client, $name,$full_name, $pass, $pass_comfirm, $email, $razao, $cnpj)) {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -121,7 +123,7 @@ class Clients extends CI_Controller
         }
     }
 
-    private function post_clients_ws($name, $pass, $pass_comfirm, $email, $razao, $cnpj)
+    private function post_clients_ws($name, $full_name, $pass, $pass_comfirm, $email, $razao, $cnpj)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -138,7 +140,7 @@ class Clients extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cnpj\"\r\n\r\n$cnpj\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"razao_social\"\r\n\r\n$razao\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$full_name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cnpj\"\r\n\r\n$cnpj\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"razao_social\"\r\n\r\n$razao\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
@@ -178,7 +180,7 @@ class Clients extends CI_Controller
         return $resp;
     }
 
-    private function put_clients_ws($id_client, $name, $pass, $pass_comfirm, $email, $razao, $cnpj)
+    private function put_clients_ws($id_client, $name, $full_name, $pass, $pass_comfirm, $email, $razao, $cnpj)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -195,7 +197,7 @@ class Clients extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"razao_social\"\r\n\r\n$razao\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cnpj\"\r\n\r\n$cnpj\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirm\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$full_name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cnpj\"\r\n\r\n$cnpj\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"razao_social\"\r\n\r\n$razao\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",

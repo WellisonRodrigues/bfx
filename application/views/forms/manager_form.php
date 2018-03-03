@@ -31,11 +31,28 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                     <div class="col-lg-8">
 
                         <div class="form-group">
-                            <label>Nome completo*</label>
+                            <label>Nome*</label>
                             <?php
                             echo form_input(
                                 [
                                     'name' => 'name',
+                                    'type' => 'text',
+                                    'required' => 'required',
+                                    'class' => 'form-control',
+                                    'value' => set_value('cliente'),
+                                    'maxlength' => '70',
+                                ]);
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+
+                        <div class="form-group">
+                            <label>Nome completo*</label>
+                            <?php
+                            echo form_input(
+                                [
+                                    'name' => 'full_name',
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
