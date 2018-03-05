@@ -50,20 +50,21 @@
                                 ['data' => @$usuario["name"]],
                                 ['data' => @$usuario["departament"]],
                                 ['data' => @$usuario["client"]],
+                                ['data' => @$usuario["employees_count"]],
                                 ['data' => @$usuario["phone"]],
                                 ['data' => @$usuario["cpf"]],
-                                ['data' => @$usuario["employees_count"]],
+//                                ['data' => @$usuario["employees_count"]],
 //                        ['data' => anchor("usuarios / editar / " . @$usuario["id"] . "", " < p class='fa fa-pencil' ></p > ", 'class = "btn btn - outline btn - primary btn - xs btn - block"'), 'align' => 'center'],
                                 ['data' => $options]
                             );
                         } else {
                             $this->table->add_row(
                                 ['data' => @$usuario["name"]],
-//                            ['data' => @$usuario["razao_social"]],
-                                ['data' => @$usuario["cnpj"]],
-                                ['data' => ''],
-                                ['data' => ''],
-                                ['data' => ''],
+                                ['data' => @$usuario["departament"]],
+//                                ['data' => @$usuario["client"]],
+                                ['data' => @$usuario["employees_count"]],
+                                ['data' => @$usuario["phone"]],
+                                ['data' => @$usuario["cpf"]],
 //                        ['data' => anchor("usuarios / editar / " . @$usuario["id"] . "", " < p class='fa fa-pencil' ></p > ", 'class = "btn btn - outline btn - primary btn - xs btn - block"'), 'align' => 'center'],
                                 ['data' => $options]
                             );
