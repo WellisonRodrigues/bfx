@@ -133,7 +133,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
                                 [
                                     'name' => 'pass',
                                     'type' => 'password',
-                                    'required' => 'required',
+                                    'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
@@ -149,7 +149,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
                                 [
                                     'name' => 'pass_comfirm',
                                     'type' => 'password',
-                                    'required' => 'required',
+                                    'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',

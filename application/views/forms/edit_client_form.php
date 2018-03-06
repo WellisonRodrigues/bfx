@@ -116,7 +116,7 @@ $id = @$client['response']['id'];
                                 [
                                     'name' => 'pass',
                                     'type' => 'password',
-                                    'required' => 'required',
+                                    'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
@@ -132,7 +132,7 @@ $id = @$client['response']['id'];
                                 [
                                     'name' => 'pass_comfirm',
                                     'type' => 'password',
-                                    'required' => 'required',
+                                    'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
