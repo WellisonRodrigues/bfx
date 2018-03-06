@@ -109,7 +109,7 @@ class Department extends CI_Controller
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+//                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
                 "postman-token: 30011478-d090-f8e8-b9a8-b90aba104de3",
                 "uid: $uid"
             ),

@@ -34,7 +34,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                     <div class="col-lg-8">
 
                         <div class="form-group">
-                            <label>Nome completo*</label>
+                            <label>Nome*</label>
                             <?php
                             echo form_input(
                                 [

@@ -7,7 +7,7 @@
  */
 
 //echo '<pre>';
-//print_r($departments);
+print_r($departments);
 if ($this->session->userdata('user')['client_type'] == 'admin' or
     $this->session->userdata('user')['client_type'] == 'clients'
 ) {
