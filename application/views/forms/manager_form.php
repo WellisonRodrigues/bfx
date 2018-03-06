@@ -39,7 +39,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('name'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -56,7 +56,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('full_name'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -72,7 +72,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('cpf'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -90,7 +90,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('phone'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -106,7 +106,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'email',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('email'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -124,7 +124,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'password',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('pass'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -141,7 +141,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                     'type' => 'password',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('pass_comfirm'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -155,7 +155,7 @@ if ($this->session->userdata("user")['client_type'] == 'admin') {
                                 echo form_dropdown(
                                     'client',
                                     @$array,
-                                    set_value(''),
+                                    set_value('client'),
                                     'class="form-control"'
                                 );
 

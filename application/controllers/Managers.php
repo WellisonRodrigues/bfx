@@ -17,6 +17,7 @@ class Managers extends CI_Controller
             redirect('sair');
         }
         $this->url = $this->geturl->get_url();
+        $this->load->library('form_validation');
     }
 
     public function index()
@@ -50,7 +51,9 @@ class Managers extends CI_Controller
 //
 //            print_r($this->post_manager_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone));
 //            die;
-            if ($this->post_manager_ws($name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)['response']['status'] == 'success') {
+            $var = $this->post_manager_ws($name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)['response'];
+
+            if ($var['status'] == 'success') {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -59,13 +62,15 @@ class Managers extends CI_Controller
                 $this->session->set_flashdata('alert', $data['alert']);
                 redirect('Managers/index');
             } else {
-                $data['alert'] =
-                    [
-                        'type' => 'erro',
-                        'message' => 'Erro ao cadastrar o usuario.'
-                    ];
-                $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Managers/index');
+                foreach ($var['errors']['full_messages'] as $full_message) {
+                    $data['alert'] =
+                        [
+                            'type' => 'erro',
+                            'message' => $full_message
+                        ];
+                    $this->session->set_flashdata('alert', $data['alert']);
+                }
+                redirect('Managers/new_manager');
 
             }
         }
@@ -102,7 +107,7 @@ class Managers extends CI_Controller
                         'message' => 'Erro ao atualizado o usuario.'
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Managers/index');
+                redirect("Managers/edit_manager/$id_manager");
 
             }
         }
