@@ -32,7 +32,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <li>
                         <?php echo anchor('Department/index', ' Departamentos'); ?>
                     </li>
-
+                    <?php
+                    if ($this->session->userdata('user')['client_type'] == 'managers'
+                    ) {
+                        ?>
+                        <li>
+                            <?php echo anchor('Agendas/index', ' Agendas'); ?>
+                        </li>
+                        <li>
+                            <?php echo anchor('Rotas/index', ' Rotas'); ?>
+                        </li>
+                    <?php } ?>
                 </ul>
             </li>
 
@@ -56,10 +66,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php echo anchor('Employees/new_employeer', ' Colaboradores'); ?>
                     </li>
 
+
                     <li>
                         <?php echo anchor('Department/new_department', ' Departamentos'); ?>
                     </li>
-
+                    <?php
+                    if ($this->session->userdata('user')['client_type'] == 'managers'
+                    ) {
+                        ?>
+                        <li>
+                            <?php echo anchor('Agendas/new_agenda', ' Agendas'); ?>
+                        </li>
+                        <li>
+                            <?php echo anchor('Rotas/new_rota', ' Rotas'); ?>
+                        </li>
+                    <?php } ?>
                 </ul>
             </li>
             <li>

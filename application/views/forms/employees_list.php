@@ -8,6 +8,8 @@
 //echo '<pre>';
 //print_r($employees);
 ?>
+<!--<li><a href='$url_deptopatch' class='center-block' style='color: gray'> <i class='fas fa-link'> </i>&nbsp;&nbsp; Vincular departamento</a></li>-->
+<!--<hr style='margin-top: 5px;margin-bottom: 5px'>-->
 
 <!--<div class="row">-->
 <div class="col-md-12">
@@ -30,12 +32,10 @@
                 $idusuario = $usuario['id'];
                 $url_edit = base_url() . 'Employees/edit_employee/' . $idusuario;
                 $url_delete = base_url() . 'Employees/delete_employee/' . $idusuario;
-                $url_deptopatch = base_url() . 'Employees/path_employee/' . $idusuario;
+//                $url_deptopatch = base_url() . 'Employees/path_employee/' . $idusuario;
                 $options = "<div class='dropdown'><i class='fas fa-wrench center-block' id='$idusuario' style='color: gray' data-toggle='dropdown'></i><ul class='dropdown-menu'>
     <li><a href='$url_edit' class='center-block' style='color: gray'> <i class='fas fa-pencil-alt'> </i>&nbsp;&nbsp; Editar dados</a></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'> 
-    <li><a href='$url_deptopatch' class='center-block' style='color: gray'> <i class='fas fa-link'> </i>&nbsp;&nbsp; Vincular departamento</a></li>
-    <hr style='margin-top: 5px;margin-bottom: 5px'>
     <li class='delete'><a href='$url_delete' class='center-block' style='color: gray'><i class='fas fa-trash'> </i>&nbsp;&nbsp; Excluir Usúario</a></li>
 
   </ul></div>";
