@@ -37,7 +37,7 @@ if ($departaments) {
     <div class="panel-body">
         <div class="row">
             <?php
-            echo form_open("Managers/edit_manager/$id", ['role' => 'form']);
+            echo form_open("Employees/edit_employee/$id", ['role' => 'form']);
             ?>
             <div class="col-lg-12">
                 <div class="row">
@@ -103,7 +103,7 @@ if ($departaments) {
                             echo form_input(
                                 [
                                     'name' => 'phone',
-                                    'type' => 'email',
+                                    'type' => 'number',
                                     'required' => 'required',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente', @$employee['response']['phone']),
@@ -138,7 +138,7 @@ if ($departaments) {
                                 [
                                     'name' => 'pass',
                                     'type' => 'password',
-                                    'required' => '',
+
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
@@ -154,7 +154,7 @@ if ($departaments) {
                                 [
                                     'name' => 'pass_comfirm',
                                     'type' => 'password',
-                                    'required' => '',
+
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
@@ -210,7 +210,7 @@ if ($departaments) {
                             <?php
                             echo form_dropdown(
                                 'departament',
-                                @$array_dp,
+                                @$arraydp,
                                 set_value(''),
                                 'class="form-control"'
                             );
