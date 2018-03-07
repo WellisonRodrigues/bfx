@@ -32,42 +32,37 @@ class Rotas extends CI_Controller
 
     public function new_rota()
     {
-        $data['alert'] =
-            [
-                'type' => 'erro',
-                'message' => 'Modulo em desenvolvimento.'
-            ];
-        $this->session->set_flashdata('alert', $data['alert']);
-        redirect('Agendas/index');
+//        $data['alert'] =
+//            [
+//                'type' => 'erro',
+//                'message' => 'Modulo em desenvolvimento.'
+//            ];
+//        $this->session->set_flashdata('alert', $data['alert']);
+//        redirect('Agendas/index');
         if ($this->input->post('submit')) {
-//            print_r($this->input->post());
-            $name = $this->input->post('name');
-            $pass = $this->input->post('pass');
-            $full_name = $this->input->post('full_name');
-            $pass_comfirm = $this->input->post('pass_comfirm');
-            $email = $this->input->post('email');
 
-            if ($this->session->userdata('user')['client_type'] != 'admin') {
-                $client = $this->input->post('client');
-            } else {
-                $client = null;
-            }
+            $params = array(
+                'company_name' => $this->input->post('company_name'),
+                'address' => $this->input->post('address'),
+                'number' => $this->input->post('number'),
+                'complement' => $this->input->post('complement'),
+                'neighborhood' => $this->input->post('neighborhood'),
+                'city' => $this->input->post('city'),
+                'state' => $this->input->post('state'),
+//                'hour' => $this->input->post('hour'),
+//                'day' => $this->input->post('day')
+            );
 
-            $phone = $this->input->post('phone');
-            $cpf = $this->input->post('cpf');
-//
-//            print_r($this->post_manager_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone));
-//            die;
-            $var = $this->post_agenda_ws($name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)['response'];
+            $var = $this->post_rota_ws($params)['response'];
 
-            if ($var['status'] == 'success') {
+            if ($var) {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
-                        'message' => 'Usuário cadastrado com sucesso.'
+                        'message' => 'Local cadastrado com sucesso.'
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Managers/index');
+                redirect('Rotas/index');
             } else {
                 foreach ($var['errors']['full_messages'] as $full_message) {
                     $data['alert'] =
@@ -77,43 +72,41 @@ class Rotas extends CI_Controller
                         ];
                     $this->session->set_flashdata('alert', $data['alert']);
                 }
-                redirect('Managers/new_manager');
+                redirect('Rotas/new_rota');
 
             }
         }
-        $data['agendas'] = $this->get_agenda_ws();
-        $data['view'] = 'forms/agenda_form';
+        $data['agendas'] = $this->get_rota_ws();
+        $data['view'] = 'forms/rotas_form';
         $this->load->view('template_admin/core', $data);
     }
 
-    public function edit_rota($id_manager)
+    public function edit_rota($id_rota)
     {
-        $data['alert'] =
-            [
-                'type' => 'erro',
-                'message' => 'Modulo em desenvolvimentos.'
-            ];
-        $this->session->set_flashdata('alert', $data['alert']);
-        redirect('Agendas/index');
-        $data['manager'] = $this->get_agenda_id_ws($id_manager);
-        if ($this->input->post('submit') and $id_manager != null) {
-            $name = $this->input->post('name');
-            $full_name = $this->input->post('full_name');
-            $pass = $this->input->post('pass');
-            $pass_comfirm = $this->input->post('pass_comfirm');
-            $email = $this->input->post('email');
-            $client = $this->input->post('client');
-            $cpf = $this->input->post('cpf');
-            $phone = $this->input->post('phone');
+
+        $data['rotas'] = $this->get_rota_id_ws($id_rota);
+        if ($this->input->post('submit') and $id_rota != null) {
+            $params = array(
+                'company_name' => $this->input->post('company_name'),
+                'address' => $this->input->post('address'),
+                'number' => $this->input->post('number'),
+                'complement' => $this->input->post('complement'),
+                'neighborhood' => $this->input->post('neighborhood'),
+                'city' => $this->input->post('city'),
+                'state' => $this->input->post('state'),
+//                'hour' => $this->input->post('hour'),
+//                'day' => $this->input->post('day')
+            );
+
 //
-            if ($this->put_agenda_ws($id_manager, $name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)) {
+            if ($this->put_rota_ws($id_rota, $params)) {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
-                        'message' => 'Usuário atualizado com sucesso.'
+                        'message' => 'Local atualizado com sucesso.'
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Managers/index');
+                redirect('Rotas/index');
             } else {
                 $data['alert'] =
                     [
@@ -121,12 +114,12 @@ class Rotas extends CI_Controller
                         'message' => 'Erro ao atualizado o usuario.'
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
-                redirect("Managers/edit_manager/$id_manager");
+                redirect("Rotas/edit_rotas/$id_rota");
 
             }
         }
 
-        $data['view'] = 'forms/edit_manager_form';
+        $data['view'] = 'forms/edit_rotas_form';
         $this->load->view('template_admin/core', $data);
     }
 
@@ -138,31 +131,34 @@ class Rotas extends CI_Controller
                 $data['alert'] =
                     [
                         'type' => 'erro',
-                        'message' => 'Erro ao deletar a agenda.'
+                        'message' => 'Erro ao deletar o local.'
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Agendas/index');
+                redirect('Rotas/index');
             } else {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
-                        'message' => 'Agenda deletada com sucesso.'
+                        'message' => 'Local deletado com sucesso.'
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Agendas/index');
+                redirect('Rotas/index');
             }
         }
     }
 
-    private function put_agenda_ws($id_manager, $name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)
+    private function put_rota_ws($id_rota, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client_user = $this->session->userdata('user')['clientHeader'];
+        $array_fields = json_encode($params);
+//        print_r($array_fields);
+//        print_r($id_agenda);
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/painel/managers/$id_manager",
+            CURLOPT_URL => "$this->url/admin/managers/locals/$id_rota",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -171,17 +167,17 @@ class Rotas extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$full_name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "$array_fields",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client_user",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-                "postman-token: 7ca904b1-90a9-5011-a525-06e2daedcfd0",
+                "content-type: application/json",
+//                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "postman-token: 7664523d-ec35-41ac-078e-172015643508",
                 "uid: $uid"
             ),
         ));
-
         $headers = [];
         curl_setopt($curl, CURLOPT_HEADERFUNCTION,
             function ($curl, $header) use (&$headers) {
@@ -213,15 +209,18 @@ class Rotas extends CI_Controller
         return $resp;
     }
 
-    private function post_agenda_ws($name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)
+    private function post_rota_ws($params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client_user = $this->session->userdata('user')['clientHeader'];
+        $array_fields = json_encode($params);
+//        print_r($array_fields);
+//        print_r($id_agenda);
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/managers",
+            CURLOPT_URL => "$this->url/admin/managers/locals",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -230,13 +229,14 @@ class Rotas extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$full_name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "$array_fields",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client_user",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-                "postman-token: 30011478-d090-f8e8-b9a8-b90aba104de3",
+                "content-type: application/json",
+//                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "postman-token: 7664523d-ec35-41ac-078e-172015643508",
                 "uid: $uid"
             ),
         ));
@@ -280,7 +280,7 @@ class Rotas extends CI_Controller
         $uid = $this->session->userdata('user')['uid'];
         $client = $this->session->userdata('user')['clientHeader'];
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/managers/agendas/$id",
+            CURLOPT_URL => "$this->url/admin/managers/locals/$id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -311,7 +311,7 @@ class Rotas extends CI_Controller
         }
     }
 
-    private function get_agenda_id_ws($id)
+    private function get_rota_id_ws($id)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -319,7 +319,7 @@ class Rotas extends CI_Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/managers/agendas/$id",
+            CURLOPT_URL => "$this->url/admin/managers/locals/$id",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

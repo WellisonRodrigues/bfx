@@ -22,6 +22,11 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
         }
     }
 }
+if ($departaments) {
+    foreach ($departaments['departaments']as $manage) {
+        $arraydp[$manage['id']] = $manage['name'];
+    }
+}
 ?>
 
 <div class="panel panel-default">
@@ -198,6 +203,22 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
                         </div>
                     </div>
                 <?php } ?>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Departamento*</label>
+                            <?php
+                            echo form_dropdown(
+                                'departament',
+                                @$array_dp,
+                                set_value(''),
+                                'class="form-control"'
+                            );
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

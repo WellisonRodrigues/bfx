@@ -7,7 +7,7 @@
  */
 
 //echo '<pre>';
-print_r($departments);
+
 if ($this->session->userdata('user')['client_type'] == 'admin' or
     $this->session->userdata('user')['client_type'] == 'clients'
 ) {
@@ -26,7 +26,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                     <?php
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_departments">']);
                     $this->table->set_heading(' Nome ', ' Cliente Master', ' Gestor ', 'N° Colaboradores', ' Alterar ');
-                    if ($departments['departaments']) {
+                    if ($departments) {
                         foreach (@$departments['departaments'] as $department) {
                             $created_at = date('d/m/Y H:i:s', strtotime(@$department["created_at"]));
                             $updated_at = date('d/m/Y H:i:s', strtotime(@$department["updated_at"]));
@@ -164,11 +164,11 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                     <?php
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_departments">']);
                     $this->table->set_heading(' Nome ', 'N° Colaboradores', ' Alterar ');
-                    if ($departments['departaments']) {
+                    if ($departments['departament']) {
 //                        foreach (@$departments as $department) {
                         $created_at = date('d/m/Y H:i:s', strtotime(@$departments["created_at"]));
                         $updated_at = date('d/m/Y H:i:s', strtotime(@$departments["updated_at"]));
-                        $iddepartment = $departments['id'];
+                        $iddepartment = $departments['departament']['id'];
                         $url_edit = base_url() . 'Department/edit_department/' . $iddepartment;
                         $url_delete = base_url() . 'Department/delete_department/' . $iddepartment;
                         $url_deptopatch = base_url() . 'Department/path_department/' . $iddepartment;
@@ -185,8 +185,8 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
 
   </ul></div>";
                         $this->table->add_row(
-                            ['data' => @$departments["name"]],
-                            ['data' => @$departments["employees"]],
+                            ['data' => @$departments['departament']["name"]],
+                            ['data' => @$departments['departament']["employees"]],
 //                        ['data' => anchor("usuarios/editar/" . @$usuario["id"] . "", "<p class='fa fa-pencil'></p>", 'class = "btn btn-outline btn-primary btn-xs btn-block"'), 'align' => 'center'],
                             ['data' => $options]
                         );

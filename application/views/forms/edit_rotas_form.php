@@ -5,9 +5,10 @@
  * Date: 03/10/2017
  * Time: 21:01
  */
+//print_r($rotas);
 defined('BASEPATH') OR exit('No direct script access allowed');
 //print_r($manager['response']);
-$id = @$agendas['response']['id'];
+$id = @$rotas['response']['id'];
 //if ($this->session->userdata('user')['client_type'] == 'admin') {
 //    if ($clients['response']['clients']) {
 //        foreach ($clients['response']['clients'] as $row) {
@@ -19,13 +20,13 @@ $id = @$agendas['response']['id'];
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 style="color:#1ab7ea;"><strong>EDITAR AGENDA
+        <h3 style="color:#1ab7ea;"><strong>EDITAR LOCAL
             </strong></h3>
     </div>
     <div class="panel-body">
         <div class="row">
             <?php
-            echo form_open("Agendas/edit_agenda/$id", ['role' => 'form']);
+            echo form_open("Rotas/edit_rota/$id", ['role' => 'form']);
             ?>
             <div class="col-lg-12">
                 <div class="row">
@@ -40,7 +41,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('company_name',@$agendas['response']['company_name']),
+                                    'value' => set_value('company_name',@$rotas['response']['company_name']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -56,7 +57,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'number',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('number',@$agendas['response']['number']),
+                                    'value' => set_value('number',@$rotas['response']['number']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -74,7 +75,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('state',@$agendas['response']['state']),
+                                    'value' => set_value('state',@$rotas['response']['state']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -90,7 +91,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('city',@$agendas['response']['city']),
+                                    'value' => set_value('city',@$rotas['response']['city']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -108,7 +109,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('address',@$agendas['response']['address']),
+                                    'value' => set_value('address',@$rotas['response']['address']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -125,7 +126,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('neighborhood',@$agendas['response']['neighborhood']),
+                                    'value' => set_value('neighborhood',@$rotas['response']['neighborhood']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -143,7 +144,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
 //                                'required' => '',
                                     'class' => 'form-control',
-                                    'value' => set_value('day',@$agendas['response']['day']),
+                                    'value' => set_value('day',@$rotas['response']['day']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -159,7 +160,7 @@ $id = @$agendas['response']['id'];
                                     'type' => 'text',
 //                                'required' => '',
                                     'class' => 'form-control',
-                                    'value' => set_value('hour',@$agendas['response']['hour']),
+                                    'value' => set_value('hour',@$rotas['response']['hour']),
                                     'maxlength' => '70',
                                 ]);
                             ?>

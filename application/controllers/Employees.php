@@ -101,8 +101,9 @@ class Employees extends CI_Controller
             $cpf = $this->input->post('cpf');
             $manager = $this->input->post('manager');
             $phone = $this->input->post('phone');
+            $departament_id = $this->input->post('departament_id');
 //
-            if ($this->put_employees_ws($id_employee,$name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager)) {
+            if ($this->put_employees_ws($id_employee, $name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager)) {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -123,13 +124,17 @@ class Employees extends CI_Controller
         }
         $data['clients'] = $this->get_clients_ws();
         $return_manager = $this->get_managers_ws();
+        $return_departaments = $this->get_department_ws();
         $data['manager'] = $return_manager['response'];
+        $data['departaments'] = $return_departaments['response'];
         $data['view'] = 'forms/edit_employees_form';
         $this->load->view('template_admin/core', $data);
     }
 
     public function new_employeer()
     {
+        $return_departaments = $this->get_department_ws();
+        $data['departaments'] = $return_departaments['response'];
         $return_manager = $this->get_managers_ws();
         if ($this->input->post('submit')) {
 //            print_r($this->input->post());
@@ -169,6 +174,63 @@ class Employees extends CI_Controller
         $this->load->view('template_admin/core', $data);
     }
 
+    private function get_department_ws()
+    {
+        $aut_code = $this->session->userdata('user')['access-token'];
+        $uid = $this->session->userdata('user')['uid'];
+        $client = $this->session->userdata('user')['clientHeader'];
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "$this->url/admin/departaments",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+//            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\nJonh Doe\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\njonhdoe@empresaspacex.com\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_HTTPHEADER => array(
+                "access-token: $aut_code",
+                "cache-control: no-cache",
+                "client: $client",
+                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "postman-token: 30011478-d090-f8e8-b9a8-b90aba104de3",
+                "uid: $uid"
+            ),
+        ));
+
+        $headers = [];
+        curl_setopt($curl, CURLOPT_HEADERFUNCTION,
+            function ($curl, $header) use (&$headers) {
+                $len = strlen($header);
+                $header = explode(':', $header, 2);
+                if (count($header) < 2) // ignore invalid headers
+                    return $len;
+
+                $name = strtolower(trim($header[0]));
+                if (!array_key_exists($name, $headers))
+                    $headers[$name] = [trim($header[1])];
+                else
+                    $headers[$name][] = trim($header[1]);
+
+                return $len;
+            }
+        );
+
+        $response = curl_exec($curl);
+        $resposta = json_decode($response);
+        $err = curl_error($curl);
+        curl_close($curl);
+        $array = $this->arrayCastRecursive($resposta);
+        $resp['response'] = $array;
+        $resp['headers'] = $headers;
+        $resp['err'] = $err;
+        return $resp;
+    }
+
     public function delete_employee($id_employee)
     {
         if ($id_employee != null or $id_employee != '') {
@@ -193,7 +255,7 @@ class Employees extends CI_Controller
         }
     }
 
-    private function put_employees_ws($id_employee,$name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager)
+    private function put_employees_ws($id_employee, $name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];

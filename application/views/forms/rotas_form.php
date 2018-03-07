@@ -28,12 +28,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 style="color:#1ab7ea;"><strong>CADASTRAR AGENDA
+        <h3 style="color:#1ab7ea;"><strong>CADASTRAR LOCAL
             </strong></h3>
     </div>
     <div class="panel-body">
         <?php
-        echo form_open('Agendas/new_agenda', ['role' => 'form']);
+        echo form_open('Rotas/new_rota', ['role' => 'form']);
         ?>
         <div class="col-lg-12">
             <div class="row">

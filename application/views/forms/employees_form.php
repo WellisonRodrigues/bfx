@@ -5,6 +5,7 @@
  * Date: 03/10/2017
  * Time: 21:01
  */
+//print_r($departaments);
 defined('BASEPATH') OR exit('No direct script access allowed');
 //print_r($clients['response']);
 if ($this->session->userdata('user')['client_type'] == 'admin'
@@ -21,6 +22,11 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
         foreach ($manager['managers'] as $manage) {
             $arraymanager[$manage['id']] = $manage['name'];
         }
+    }
+}
+if ($departaments) {
+    foreach ($departaments['departaments'] as $new) {
+        $array_dp[$new['id']] = $new['name'];
     }
 }
 //print_r($array);
@@ -193,6 +199,23 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
                             </div>
                         <?php } ?>
                     <?php } ?>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Departamento*</label>
+                            <?php
+                            echo form_dropdown(
+                                'departament',
+                                @$array_dp,
+                                set_value(''),
+                                'class="form-control"'
+                            );
+
+                            ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-12 " align="center">
                     <button type="submit" name="submit" value="salvar_alterar_usuario"
