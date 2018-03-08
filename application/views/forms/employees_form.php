@@ -24,18 +24,22 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
         }
     }
 }
-if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session->userdata('user')['client_type'] != 'managers') {
+if ($this->session->userdata('user')['client_type'] != 'managers') {
     if ($departaments) {
         foreach ($departaments['departaments'] as $manage) {
             $arraydp[$manage['id']] = $manage['name'];
         }
 
     }
-    $disabled = array('disabled' => '', 'class' => 'form-control');
+    $disabled = array('' => '', 'class' => 'form-control');
+
+
 } else {
+
     if (isset($departaments)) {
 
         $arraydp[$departaments['departament']['id']] = $departaments['departament']['name'];
+
     }
     $disabled = array('disabled' => 'disabled', 'class' => 'form-control');
 }
@@ -218,7 +222,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
                             <?php
                             echo form_dropdown(
                                 'departament',
-                                @$array_dp,
+                                @$arraydp,
                                 set_value(''), $disabled
 
                             );
