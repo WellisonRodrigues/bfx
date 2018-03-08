@@ -5,8 +5,8 @@
  * Date: 24/02/2018
  * Time: 13:39
  */
-//echo '<pre>';
-//print_r($employees);
+echo '<pre>';
+print_r($employees);
 ?>
 <!--<li><a href='$url_deptopatch' class='center-block' style='color: gray'> <i class='fas fa-link'> </i>&nbsp;&nbsp; Vincular departamento</a></li>-->
 <!--<hr style='margin-top: 5px;margin-bottom: 5px'>-->

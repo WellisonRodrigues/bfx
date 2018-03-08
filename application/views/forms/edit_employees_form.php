@@ -22,10 +22,22 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session
         }
     }
 }
-if ($departaments) {
-    foreach ($departaments['departaments']as $manage) {
-        $arraydp[$manage['id']] = $manage['name'];
+if ($this->session->userdata('user')['client_type'] == 'admin' or $this->session->userdata('user')['client_type'] != 'managers') {
+    if ($departaments) {
+        foreach ($departaments['departaments'] as $manage) {
+            $arraydp[$manage['id']] = $manage['name'];
+        }
+
     }
+    $disabled = array('disabled' => '', 'class' => 'form-control');
+} else {
+
+    if (isset($departaments)) {
+
+        $arraydp[$departaments['departament']['id']] = $departaments['departament']['name'];
+    }
+
+    $disabled = array('disabled' => 'disabled', 'class' => 'form-control');
 }
 ?>
 
@@ -212,7 +224,7 @@ if ($departaments) {
                                 'departament',
                                 @$arraydp,
                                 set_value(''),
-                                'class="form-control"'
+                                $disabled
                             );
 
                             ?>
