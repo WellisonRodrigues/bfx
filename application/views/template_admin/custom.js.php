@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             "sLoadingRecords": "Carregando...",
             "sProcessing": "Processando...",
             "sZeroRecords": "Nenhum registro encontrado",
-            "sSearch": "<i class='fas fa-sync-alt'></i>&nbsp;&nbsp; ",
+            "sSearch": "",
             "oPaginate": {
                 "sNext": "Próximo",
                 "sPrevious": "Anterior",

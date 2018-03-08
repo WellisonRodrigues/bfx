@@ -113,6 +113,22 @@ else { ?>
                             $this->load->view($view);
                         }
                         ?>
+                        <script>
+                            $(document).ready(function () {
+
+                                $('.dataTables_filter').append('<div class="reload" style="float: left;margin-right: 5px;margin-top: 5px"><i class="fa fa-sync-alt"></i></div>')
+
+
+                            });
+                        </script>
+                        <script>
+                            $(document).ready(function () {
+
+                                $(".reload").on('click', function () {
+                                    location.reload();
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -166,6 +182,7 @@ if (isset($javascript)) {
 }
 
 ?>
+
 </body>
 
 </html>
