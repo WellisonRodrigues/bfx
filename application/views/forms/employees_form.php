@@ -41,7 +41,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
         $arraydp[$departaments['departament']['id']] = $departaments['departament']['name'];
 
     }
-    $disabled = array('disabled' => 'disabled', 'class' => 'form-control');
+    $disabled = array('readyonly' => 'readyonly', 'class' => 'form-control');
 }
 //print_r($array);
 ?>
@@ -180,20 +180,20 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                     if ($this->session->userdata('user')['client_type'] != 'managers'
                     ) {
                         ?>
-                        <div class="col-lg-8">
-                            <div class="form-group">
-                                <label>Gestor*</label>
-                                <?php
-                                echo form_dropdown(
-                                    'manager',
-                                    @$arraymanager,
-                                    set_value(''),
-                                    'class="form-control"'
-                                );
-
-                                ?>
-                            </div>
-                        </div>
+<!--                        <div class="col-lg-8">-->
+<!--                            <div class="form-group">-->
+<!--                                <label>Gestor*</label>-->
+<!--                                --><?php
+//                                echo form_dropdown(
+//                                    'manager',
+//                                    @$arraymanager,
+//                                    set_value(''),
+//                                    'class="form-control"'
+//                                );
+//
+//                                ?>
+<!--                            </div>-->
+<!--                        </div>-->
                         <?php if ($this->session->userdata('user')['client_type'] == 'admin'
 
                         ) { ?>
@@ -223,7 +223,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             echo form_dropdown(
                                 'departament',
                                 @$arraydp,
-                                set_value(''), $disabled
+                                set_value('departament'), $disabled
 
                             );
 

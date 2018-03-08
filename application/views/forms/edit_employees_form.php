@@ -180,22 +180,22 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                 ) {
                     ?>
 
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="form-group">
-                                <label>Gestor*</label>
-                                <?php
-                                echo form_dropdown(
-                                    'manager',
-                                    @$arraymanager,
-                                    set_value(''),
-                                    'class="form-control"'
-                                );
-
-                                ?>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="row">-->
+<!--                        <div class="col-lg-8">-->
+<!--                            <div class="form-group">-->
+<!--                                <label>Gestor*</label>-->
+<!--                                --><?php
+//                                echo form_dropdown(
+//                                    'manager',
+//                                    @$arraymanager,
+//                                    set_value(''),
+//                                    'class="form-control"'
+//                                );
+//
+//                                ?>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 <?php }
                 if ($this->session->userdata('user')['client_type'] == 'admin') { ?>
                     <div class="row">
