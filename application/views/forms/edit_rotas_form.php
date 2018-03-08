@@ -141,7 +141,7 @@ $id = @$rotas['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'day',
-                                    'type' => 'text',
+                                    'type' => 'date',
 //                                'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('day',@$rotas['response']['day']),
@@ -157,7 +157,7 @@ $id = @$rotas['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'hour',
-                                    'type' => 'text',
+                                    'type' => 'time',
 //                                'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('hour',@$rotas['response']['hour']),

@@ -148,7 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         echo form_input(
                             [
                                 'name' => 'day',
-                                'type' => 'text',
+                                'type' => 'date',
 //                                'required' => '',
                                 'class' => 'form-control',
                                 'value' => set_value('day'),
@@ -164,7 +164,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         echo form_input(
                             [
                                 'name' => 'hour',
-                                'type' => 'text',
+                                'type' => 'time',
 //                                'required' => '',
                                 'class' => 'form-control',
                                 'value' => set_value('hour'),

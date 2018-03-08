@@ -140,7 +140,7 @@ $id = @$agendas['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'day',
-                                    'type' => 'text',
+                                    'type' => 'date',
 //                                'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('day',@$agendas['response']['day']),
@@ -156,7 +156,7 @@ $id = @$agendas['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'hour',
-                                    'type' => 'text',
+                                    'type' => 'time',
 //                                'required' => '',
                                     'class' => 'form-control',
                                     'value' => set_value('hour',@$agendas['response']['hour']),

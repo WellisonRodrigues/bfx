@@ -71,6 +71,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
                             echo form_input(
                                 [
                                     'name' => 'cpf',
+                                    'id' => 'cpf',
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -182,3 +183,14 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('[name=phone]').mask('(00) 00000-0000');
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var $seuCampoCpf = $("#cpf");
+        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+    });
+</script>

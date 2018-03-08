@@ -99,6 +99,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                 [
                                     'name' => 'cpf',
                                     'type' => 'text',
+                                    'id' => 'cpf',
                                     'required' => 'required',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
@@ -108,6 +109,12 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                         </div>
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        var $seuCampoCpf = $("#cpf");
+                        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+                    });
+                </script>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -125,6 +132,17 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             ?>
                         </div>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            $('[name=phone]').mask('(00) 00000-0000');
+                        });
+                    </script>
+                    <script>
+                        $(document).ready(function () {
+                            var $seuCampoCpf = $("#cpf");
+                            $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+                        });
+                    </script>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-mail*</label>
@@ -180,10 +198,10 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                     if ($this->session->userdata('user')['client_type'] != 'managers'
                     ) {
                         ?>
-<!--                        <div class="col-lg-8">-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Gestor*</label>-->
-<!--                                --><?php
+                        <!--                        <div class="col-lg-8">-->
+                        <!--                            <div class="form-group">-->
+                        <!--                                <label>Gestor*</label>-->
+                        <!--                                --><?php
 //                                echo form_dropdown(
 //                                    'manager',
 //                                    @$arraymanager,
@@ -192,8 +210,8 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
 //                                );
 //
 //                                ?>
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                         <?php if ($this->session->userdata('user')['client_type'] == 'admin'
 
                         ) { ?>
