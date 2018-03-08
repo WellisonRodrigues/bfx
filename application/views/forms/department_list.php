@@ -36,8 +36,6 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                             $url_deptopatch = base_url() . 'Department/path_department/' . $iddepartment;
                             $options = "<div class='dropdown'><i class='fas fa-wrench center-block' id='$iddepartment' style='color: gray' data-toggle='dropdown'></i><ul class='dropdown-menu'>
     <li><a href='$url_edit' class='center-block' style='color: gray'> <i class='fas fa-pencil-alt'> </i>&nbsp;&nbsp; Editar dados</a></li>
-  <hr style='margin-top: 5px;margin-bottom: 5px'> 
-    <li><a href='$url_deptopatch' class='center-block' style='color: gray'> <i class='fas fa-link'> </i>&nbsp;&nbsp; Vincular usuario</a></li>
    <hr style='margin-top: 5px;margin-bottom: 5px'> 
     <li><a href=''  data-toggle=\"modal\" data-target=\"#modal_rota\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</ahr></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
@@ -175,8 +173,6 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                         $options = "<div class='dropdown'><i class='fas fa-wrench center-block' id='$iddepartment' style='color: gray' data-toggle='dropdown'></i><ul class='dropdown-menu'>
     <li><a href='$url_edit' class='center-block' style='color: gray'> <i class='fas fa-pencil-alt'> </i>&nbsp;&nbsp; Editar dados</a></li>
   <hr style='margin-top: 5px;margin-bottom: 5px'> 
-    <li><a href='$url_deptopatch' class='center-block' style='color: gray'> <i class='fas fa-link'> </i>&nbsp;&nbsp; Vincular usuario</a></li>
-    <hr style='margin-top: 5px;margin-bottom: 5px'> 
     <li><a data-toggle=\"modal\" data-target=\"#modal_rota\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</a></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
      <li><a data-toggle=\"modal\" data-target=\"#modal_money\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>

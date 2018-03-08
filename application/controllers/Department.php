@@ -180,13 +180,13 @@ class Department extends CI_Controller
         if ($this->input->post('submit') and $iddepartment != null) {
 
             $name = $this->input->post('name');
-            if ($this->session->userdata('user')['client_type'] != 'managers') {
+            if ($this->session->userdata('user')['client_type'] == 'managers') {
                 $manager = $this->session->userdata('user')['id'];
             } else {
                 $manager = $this->input->post('manager');
             }
-//
-            if ($this->put_department_ws($name, $manager,$iddepartment)) {
+
+            if ($this->put_department_ws($name, $manager, $iddepartment)) {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -324,13 +324,15 @@ class Department extends CI_Controller
         return $resp;
     }
 
-    private function put_department_ws($name, $manager,$iddepartament)
+    private function put_department_ws($name, $manager, $iddepartament)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
 
+//        print_r($manager);
+//        die;
         curl_setopt_array($curl, array(
             CURLOPT_URL => "$this->url/admin/departaments/$iddepartament",
             CURLOPT_RETURNTRANSFER => true,
