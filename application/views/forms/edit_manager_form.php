@@ -28,6 +28,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
             echo form_open("Managers/edit_manager/$id", ['role' => 'form']);
             ?>
             <div class="col-lg-12">
+                <div class="message"></div>
                 <div class="row">
                     <div class="col-lg-8">
 
@@ -126,8 +127,9 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
                             echo form_input(
                                 [
                                     'name' => 'pass',
+                                    'id' => 'pass',
                                     'type' => 'password',
-                                    'required' => 'required',
+//                                    'required' => 'required',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
@@ -142,8 +144,9 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
                             echo form_input(
                                 [
                                     'name' => 'pass_comfirm',
+                                    'id' => 'pass_comfirm',
                                     'type' => 'password',
-                                    'required' => 'required',
+//                                    'required' => 'required',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente'),
                                     'maxlength' => '70',
@@ -175,7 +178,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
     </div>
     <div class="panel-footer">
         <div align="center">
-            <button type="submit" name="submit" value="salvar_alterar_usuario" class="btn btn-success">
+            <button type="submit" name="submit" id="submit" value="salvar_alterar_usuario" class="btn btn-success">
                 Salvar Alterações
             </button>
         </div>
@@ -186,6 +189,15 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
 <script>
     $(document).ready(function () {
         $('[name=phone]').mask('(00) 00000-0000');
+        $('#submit').click(function () {
+            if ($('#pass').val() != $('#pass_comfirm').val()) {
+                $('.message').addClass('alert alert-danger role="alert"').text('Senhas diferentes');
+                $('input[name=pass').val('');
+                $('input[name=pass_comfirm').val('');
+                // Remove caracteres inválidos do valor
+                return false
+            }
+        });
     });
 </script>
 <script>

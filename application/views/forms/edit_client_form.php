@@ -21,6 +21,7 @@ $id = @$client['response']['id'];
             echo form_open("Clients/edit_client/$id", ['role' => 'form']);
             ?>
             <div class="col-lg-12">
+                <div class="message"></div>
                 <div class="row">
                     <div class="col-lg-8">
 
@@ -81,6 +82,7 @@ $id = @$client['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'cnpj',
+                                    'id' => 'cnpj',
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -115,10 +117,11 @@ $id = @$client['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'pass',
+                                    'id' => 'pass',
                                     'type' => 'password',
-                                    'required' => '',
+//                                    'required' => '',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('pass'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -131,10 +134,11 @@ $id = @$client['response']['id'];
                             echo form_input(
                                 [
                                     'name' => 'pass_comfirm',
+                                    'id' => 'pass_comfirm',
                                     'type' => 'password',
-                                    'required' => '',
+//                                    'required' => '',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value('pass_comfirm'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -146,11 +150,25 @@ $id = @$client['response']['id'];
     </div>
     <div class="panel-footer">
         <div align="center">
-            <button type="submit" name="submit" value="salvar_alterar_usuario" class="btn btn-success">
+            <button type="submit" name="submit" id="submit" value="salvar_alterar_usuario" class="btn btn-success">
                 Salvar Alterações
             </button>
         </div>
         <?php echo form_close(); ?>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#cnpj").mask("99.999.999/9999-99");
+        $('#submit').click(function () {
+            if ($('#pass').val() != $('#pass_comfirm').val()) {
+                $('.message').addClass('alert alert-danger role="alert"').text('Senhas diferentes');
+                $('input[name=pass').val('');
+                $('input[name=pass_comfirm').val('');
+                return false
+            }
+        });
+
+    });
+</script>
 

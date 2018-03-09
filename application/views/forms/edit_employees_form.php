@@ -52,6 +52,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
             echo form_open("Employees/edit_employee/$id", ['role' => 'form']);
             ?>
             <div class="col-lg-12">
+                <div class="message"></div>
                 <div class="row">
                     <div class="col-lg-8">
 
@@ -116,7 +117,8 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             echo form_input(
                                 [
                                     'name' => 'phone',
-                                    'type' => 'number',
+                                    'id' => 'phone',
+                                    'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
                                     'value' => set_value('cliente', @$employee['response']['phone']),
@@ -150,10 +152,10 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             echo form_input(
                                 [
                                     'name' => 'pass',
+                                    'id' => 'pass',
                                     'type' => 'password',
-
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value(''),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -166,10 +168,10 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             echo form_input(
                                 [
                                     'name' => 'pass_comfirm',
+                                    'id' => 'pass_comfirm',
                                     'type' => 'password',
-
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente'),
+                                    'value' => set_value(''),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -181,11 +183,11 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                 ) {
                     ?>
 
-<!--                    <div class="row">-->
-<!--                        <div class="col-lg-8">-->
-<!--                            <div class="form-group">-->
-<!--                                <label>Gestor*</label>-->
-<!--                                --><?php
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-lg-8">-->
+                    <!--                            <div class="form-group">-->
+                    <!--                                <label>Gestor*</label>-->
+                    <!--                                --><?php
 //                                echo form_dropdown(
 //                                    'manager',
 //                                    @$arraymanager,
@@ -194,9 +196,9 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
 //                                );
 //
 //                                ?>
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 <?php }
                 if ($this->session->userdata('user')['client_type'] == 'admin') { ?>
                     <div class="row">
@@ -237,7 +239,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
     </div>
     <div class="panel-footer">
         <div align="center">
-            <button type="submit" name="submit" value="salvar_alterar_usuario" class="btn btn-success">
+            <button type="submit" name="submit" id="submit" value="salvar_alterar_usuario" class="btn btn-success">
                 Salvar Alterações
             </button>
         </div>
@@ -248,7 +250,20 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
 <script>
     $(document).ready(function () {
         $('[name=phone]').mask('(00) 00000-0000');
+        $('#submit').click(function () {
+            var pass = $('#pass').val();
+            var passcomfirm = $('#pass_comfirm').val();
+            if (pass != passcomfirm) {
+                $('.message').addClass('alert alert-danger role="alert"').text('Senhas diferentes');
+                $('input[name=pass').val('');
+                $('input[name=pass_comfirm').val('');
+
+                // Remove caracteres inválidos do valor
+                return false
+            }
+        });
     });
+
 </script>
 <script>
     $(document).ready(function () {

@@ -56,6 +56,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
             echo form_open('Employees/new_employeer', ['role' => 'form']);
             ?>
             <div class="col-lg-12">
+                <div class="message"></div>
                 <div class="row">
                     <div class="col-lg-8">
 
@@ -109,12 +110,6 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                         </div>
                     </div>
                 </div>
-                <script>
-                    $(document).ready(function () {
-                        var $seuCampoCpf = $("#cpf");
-                        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
-                    });
-                </script>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -132,17 +127,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             ?>
                         </div>
                     </div>
-                    <script>
-                        $(document).ready(function () {
-                            $('[name=phone]').mask('(00) 00000-0000');
-                        });
-                    </script>
-                    <script>
-                        $(document).ready(function () {
-                            var $seuCampoCpf = $("#cpf");
-                            $seuCampoCpf.mask('000.000.000-00', {reverse: true});
-                        });
-                    </script>
+
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-mail*</label>
@@ -168,6 +153,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             echo form_input(
                                 [
                                     'name' => 'pass',
+                                    'id' => 'pass',
                                     'type' => 'password',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -185,6 +171,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                             echo form_input(
                                 [
                                     'name' => 'pass_comfirm',
+                                    'id' => 'pass_comfirm',
                                     'type' => 'password',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -250,7 +237,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                     </div>
                 </div>
                 <div class="col-lg-12 " align="center">
-                    <button type="submit" name="submit" value="salvar_alterar_usuario"
+                    <button type="submit" name="submit" id="submit" value="salvar_alterar_usuario"
                             class="btn btn-success"> Concluir Cadastro
                     </button>
                 </div>
@@ -258,3 +245,22 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
             </div>
         </div>
 
+        <script>
+            $(document).ready(function () {
+                $('[name=phone]').mask('(00) 00000-0000');
+                $('#submit').click(function () {
+                    if ($('#pass').val() != $('#pass_comfirm').val()) {
+                        $('.message').addClass('alert alert-danger role="alert"').text('Senhas diferentes');
+                        $('input[name=pass').val('');
+                        $('input[name=pass_comfirm').val('');
+                        return false
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var $seuCampoCpf = $("#cpf");
+                $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+            });
+        </script>

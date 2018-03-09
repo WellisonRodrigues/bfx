@@ -8,6 +8,8 @@
 
 //echo '<pre>';
 
+//print_r($departments);
+
 if ($this->session->userdata('user')['client_type'] == 'admin' or
     $this->session->userdata('user')['client_type'] == 'clients'
 ) {
@@ -23,6 +25,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
 
                 </div>
                 <div class="panel-body">
+                    <div class="message"></div>
                     <?php
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_departments">']);
                     $this->table->set_heading(' Nome ', ' Cliente Master', ' Gestor ', 'N° Colaboradores', ' Alterar ');
@@ -39,7 +42,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
    <hr style='margin-top: 5px;margin-bottom: 5px'> 
     <li><a href=''  data-toggle=\"modal\" data-target=\"#modal_rota\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</ahr></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
-     <li><a href='' data-toggle=\"modal\" data-target=\"#modal_money\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>
+     <li><a href='' data-toggle=\"modal\" data-target=\"#modal_value\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
     <li class='delete'><a href='$url_delete' class='center-block' style='color: gray'><i class='fas fa-trash'> </i>&nbsp;&nbsp; Excluir Departamento</a></li>
 
@@ -53,7 +56,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                 ['data' => $options]
                             );
                             ?>
-                            <div id="modal_rota" class="modal fade" role="dialog">
+                            <div id="modal_rota" class="modal fade cancel" role="dialog">
                                 <div class="modal-dialog">
 
                                     <!-- Modal content-->
@@ -64,64 +67,131 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label>Valor*</label>
-                                                <?php
-                                                echo form_input(
-                                                    [
-                                                        'name' => 'percentage_out',
-                                                        'type' => 'text',
-                                                        'required' => 'required',
-                                                        'class' => 'form-control',
-                                                        'value' => set_value('value', @$department["percentage_out"]),
-                                                        'maxlength' => '70',
-                                                    ]);
-                                                ?>
+                                                <label>Porcentagem*</label>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <?php
+                                                        echo form_input(
+                                                            [
+                                                                'name' => 'percentage_out',
+                                                                'id' => 'percentage_out',
+                                                                'type' => 'text',
+//                                                                'max' => 100,
+                                                                'required' => 'required',
+                                                                'class' => 'form-control percentage_out',
+                                                                'value' => set_value(''),
+                                                                'maxlength' => '70',
+                                                            ]);
+                                                        ?></div>
+                                                    <strong> % </strong>
+
+                                                </div>
                                             </div>
                                             <br/>
-                                            <b>KM
-                                                viajados: <?php echo @$department["percentage_out"] / 1000 ?> </b><br/>
-                                            <b>Variação Máxima: <?php echo @$department["percentage_out"] ?> </b>
+                                            <b>Porcentage atual:<?php echo @$department["percentage_out"] ?> </b><br/>
+                                            <script>
+                                                $(document).ready(function () {
 
+                                                    var id = '<?php echo $iddepartment?>';
+                                                    $('#salvar_percent_<?php echo $iddepartment ?>').bind('click', function () {
+                                                        var percentage = ($("#percentage_out").val());
+
+                                                        $.post('<?php echo base_url()?>Department/setconfigs/' + id, {percentage_out: percentage}, function (data) {
+                                                            $.ajax({
+                                                                statusCode: {
+                                                                    200: function () {
+                                                                        $('.message').addClass('alert alert-success role="alert"').text('Salvo');
+                                                                        $("#modal_rota").modal("hide")
+                                                                    }
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+
+                                                });
+                                            </script>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" id="salvar_percent_<?php echo $iddepartment ?>"
+                                                    class="btn btn-success">Salvar
                                             </button>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                            <div id="modal_money" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
 
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Definições de reembolso</h4>
+
+                            <div id="modal_value" class="modal fade cancel" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Definições de reembolso</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Valor*</label>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <?php
+                                                        echo form_input(
+                                                            [
+                                                                'name' => 'valor',
+                                                                'id' => 'valor',
+                                                                'type' => 'text',
+//                                                                'max' => 100,
+                                                                'required' => 'required',
+                                                                'class' => 'form-control value',
+                                                                'value' => set_value(''),
+                                                                'maxlength' => '70',
+                                                            ]);
+                                                        ?></div>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <b>Valor atual:<?php echo @$department["value"] ?> </b><br/>
+                                            <script>
+                                                $(document).ready(function () {
+
+                                                    var id = '<?php echo $iddepartment?>';
+                                                    $('#salvar_value_<?php echo $iddepartment ?>').bind('click', function () {
+                                                        var value = ($("#valor").val());
+
+                                                        $.post('<?php echo base_url()?>Department/setconfigs/' + id, {value: value}, function (data) {
+                                                            $.ajax({
+                                                                statusCode: {
+                                                                    200: function () {
+                                                                        $('.message').addClass('alert alert-success role="alert"').text('Salvo');
+                                                                        $("#modal_value").modal("hide")
+                                                                    }
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+
+                                                });
+                                            </script>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" id="salvar_value_<?php echo $iddepartment ?>"
+                                                    class="btn btn-success">Salvar
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <?php
-                                        echo form_input(
-                                            [
-                                                'name' => 'value',
-                                                'type' => 'text',
-                                                'required' => 'required',
-                                                'class' => 'form-control',
-                                                'value' => set_value('value', @$department["value"]),
-                                                'maxlength' => '70',
-                                            ]);
-                                        ?><br/>
-                                        <b>KM viajados: <?php echo @$department["value"] / 1000 ?> </b><br/>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                        </button>
-                                    </div>
+
                                 </div>
-
                             </div>
-                            </div><?php
+
+                            <?php
                         }
                     }
                     echo $this->table->generate();
@@ -199,6 +269,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
 <script>
 
     $(document).ready(function () {
+        $("#percentage_out").inputmask("decimal", {min: 0, max: 100, allowMinus: true});
         $('.delete').bind('click', function () {
 
             var comf = confirm('Deseja mesmo excluir?');
@@ -213,22 +284,3 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
         dataTableInit("#tb_departments");
     });
 </script>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>

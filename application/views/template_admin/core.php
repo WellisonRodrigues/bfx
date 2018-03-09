@@ -148,6 +148,7 @@ else { ?>
 <!-- Jquery Mask  -->
 <script src="<?php echo base_url(JS); ?>/jquery.mask.js"></script>
 <script src="<?php echo base_url(JS); ?>/custom.mask.js"></script>
+<script src="<?php echo base_url(JS); ?>/jquery.inputmask.numeric.extensions.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="<?php echo base_url(VENDOR); ?>/metisMenu/metisMenu.min.js"></script>

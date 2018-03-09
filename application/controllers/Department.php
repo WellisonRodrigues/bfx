@@ -30,6 +30,26 @@ class Department extends CI_Controller
 //        print_r($this->get_clients_ws());
     }
 
+    public function setconfigs($iddepartament)
+    {
+        if ($this->input->post('percentage_out')) {
+            $params = array('percentage_out' => $this->input->post('percentage_out') / 100);
+        }
+        if ($this->input->post('value')) {
+            $params = array('value' => $this->input->post('valor'));
+        }
+//        print_r($params);
+//        print_r($iddepartament);
+//        die;
+//        print_r($this->patch_department_ws($iddepartament, $params));
+        if ($this->patch_department_ws($iddepartament, $params)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     private function get_department_ws()
     {
         $aut_code = $this->session->userdata('user')['access-token'];
@@ -383,13 +403,13 @@ class Department extends CI_Controller
         return $resp;
     }
 
-    private function patch_department_ws($iddepartment, $name, $manager)
+    private function patch_department_ws($iddepartment, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
-
+        $array_fields = json_encode($params);
         curl_setopt_array($curl, array(
             CURLOPT_URL => "$this->url/admin/departaments/$iddepartment",
             CURLOPT_RETURNTRANSFER => true,
@@ -400,12 +420,12 @@ class Department extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "PATCH",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"manager_id\"\r\n\r\n$manager\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "$array_fields",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+//                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
                 "postman-token: 7ca904b1-90a9-5011-a525-06e2daedcfd0",
                 "uid: $uid"
             ),

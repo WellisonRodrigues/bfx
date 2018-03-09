@@ -20,6 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo form_open('Clients/new_client', ['role' => 'form']);
             ?>
             <div class="col-lg-12">
+                <div class="message"></div>
                 <div class="row">
                     <div class="col-lg-8">
 
@@ -80,6 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             echo form_input(
                                 [
                                     'name' => 'cnpj',
+                                    'id' => 'cnpj',
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -114,6 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             echo form_input(
                                 [
                                     'name' => 'pass',
+                                    'id' => 'pass',
                                     'type' => 'password',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -130,6 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             echo form_input(
                                 [
                                     'name' => 'pass_comfirm',
+                                    'id' => 'pass_comfirm',
                                     'type' => 'password',
                                     'required' => 'required',
                                     'class' => 'form-control',
@@ -145,7 +149,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <div class="panel-footer">
         <div align="center">
-            <button type="submit" name="submit" value="salvar_alterar_usuario" class="btn btn-success">
+            <button type="submit" name="submit" id="submit" value="salvar_alterar_usuario" class="btn btn-success">
                 Concluir Cadastro
             </button>
         </div>
@@ -153,3 +157,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $("#cnpj").mask("99.999.999/9999-99");
+        $('#submit').click(function () {
+            if ($('#pass').val() != $('#pass_comfirm').val()    ) {
+                $('.message').addClass('alert alert-danger role="alert"').text('Senhas diferentes');
+                $('input[name=pass').val('');
+                $('input[name=pass_comfirm').val('');
+                // Remove caracteres inválidos do valor
+                return false
+            }
+        });
+
+    });
+</script>
