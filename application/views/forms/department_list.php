@@ -200,23 +200,6 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
             </div>
         </div>
     </div>
-    <!--    <script>-->
-    <!---->
-    <!--        $(document).ready(function () {-->
-    <!--            $('.delete').bind('click', function () {-->
-    <!---->
-    <!--                var comf = confirm('Deseja mesmo excluir?');-->
-    <!---->
-    <!--                if (comf == true) {-->
-    <!---->
-    <!--                } else {-->
-    <!--                    event.preventDefault();-->
-    <!--                }-->
-    <!---->
-    <!--            });-->
-    <!--//        dataTableInit("#tb_usuarios");-->
-    <!--        });-->
-    <!--    </script>-->
 <?php } else { ?>
     <div class="row">
         <div class="col-md-12">

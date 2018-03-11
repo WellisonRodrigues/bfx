@@ -27,7 +27,7 @@
                 if ($this->session->userdata("user")['client_type'] == 'admin') {
                     $this->table->set_heading(' Nome ', ' Departamento ', ' Cliente Master ', ' N° Colaboradores ', ' Telefone', 'CPF', ' Alterar ');
                 } else {
-                    $this->table->set_heading(' Nome da empresa ', ' Endereço ', 'Hora ', ' Dia', ' Alterar ');
+                    $this->table->set_heading(' Nome da empresa ', ' Endereço ', 'Hora ', ' Dia', 'Alterar', 'Justf.');
                 }
                 if ($agendas) {
                     foreach (@$agendas as $usuario) {
@@ -53,16 +53,41 @@
                                 ['data' => $options]
                             );
                         } else {
+                            if (@$usuario["need_justification"] !== true) {
+                                $button = "<button type='button' id='requisitar_$idusuario' class='btn btn-primary center-block'><i class='fas fa-comments'></i></button>";
+                            } else {
+                                $button = "<button type='button' class='btn btn-danger center-block'> <i class='fas fa-ban'></i></button>";
+                            }
                             $this->table->add_row(
                                 ['data' => @$usuario["company_name"]],
                                 ['data' => @$usuario["address"]],
                                 ['data' => @$usuario["hour"]],
                                 ['data' => @$usuario["day"]],
-
-//                        ['data' => anchor("usuarios / editar / " . @$usuario["id"] . "", " < p class='fa fa-pencil' ></p > ", 'class = "btn btn - outline btn - primary btn - xs btn - block"'), 'align' => 'center'],
-                                ['data' => $options]
+                                ['data' => $options],
+                                ['data' => $button]
                             );
                         }
+                        ?>
+                        <script>
+                            $(document).ready(function () {
+                                var id = '<?php echo $idusuario?>';
+                                $('#requisitar_<?php echo $idusuario?>').bind('click', function () {
+                                    var value = true;
+                                    $.post('<?php echo base_url()?>Agendas/justificativa/' + id, {value: value}, function (data) {
+                                        $.ajax({
+                                            statusCode: {
+                                                200: function () {
+                                                    alert('Justificativa requisitada!')
+
+                                                }
+                                            }
+                                        });
+                                    });
+                                });
+
+                            });
+                        </script>
+                        <?php
                     }
                 }
                 echo $this->table->generate();

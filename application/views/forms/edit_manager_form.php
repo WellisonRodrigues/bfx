@@ -58,7 +58,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$manager['response']['name']),
+                                    'value' => set_value('cliente', @$manager['response']['full_name']),
                                     'maxlength' => '70',
                                 ]);
                             ?>

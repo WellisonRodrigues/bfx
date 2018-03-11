@@ -40,8 +40,12 @@ if ($this->session->userdata('user')['name'] != '') {
                     <div class='dropdown'>
                         <i class="fas fa-cog" data-toggle='dropdown'></i>
                         <ul class='dropdown-menu' style="margin-top: 12px;margin-right: 25px">
-                            <li><a href='<?php echo base_url() ?>/Myprofile' class='center-block' style='color: gray'> <i
-                                            class='fas fa-user'> </i>&nbsp;&nbsp; Meus Dados</a></li>
+                            <?php if ($this->session->userdata('user')['client_type'] != 'admin') { ?>
+                                <li><a href='<?php echo base_url() ?>/Myprofile' class='center-block'
+                                       style='color: gray'>
+                                        <i
+                                                class='fas fa-user'> </i>&nbsp;&nbsp; Meus Dados</a></li>
+                            <?php } ?>
                             <li>
                                 <a href='<?php echo base_url() ?>/Sair' class='center-block' style='color: gray'> <i
                                             class='fas fa-sign-out-alt'> </i>&nbsp;&nbsp; Logout</a></li>

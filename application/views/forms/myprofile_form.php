@@ -8,7 +8,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
-
+<div class="message"></div>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 style="color:#1ab7ea;"><strong>MEUS DADOS
@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <?php
                                 echo form_input(
                                     [
-                                        'name' => 'name',
+                                        'name' => 'full_name',
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -64,6 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo form_input(
                                     [
                                         'name' => 'cnpj',
+                                        'id' => 'cnpj',
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -98,6 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo form_input(
                                     [
                                         'name' => 'pass',
+                                        'id' => 'pass',
                                         'type' => 'password',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -114,6 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo form_input(
                                     [
                                         'name' => 'pass_comfirm',
+                                        'id' => 'pass_comfirm',
                                         'type' => 'password',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -133,7 +136,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="panel-body">
             <div class="row">
                 <?php
-                echo form_open('Managers/new_manager', ['role' => 'form']);
+                echo form_open('Myprofile/update_user', ['role' => 'form']);
                 ?>
                 <div class="col-lg-12">
                     <div class="row">
@@ -160,6 +163,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo form_input(
                                     [
                                         'name' => 'cpf',
+                                        'id' => 'cpf',
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -213,6 +217,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo form_input(
                                     [
                                         'name' => 'pass',
+                                        'id' => 'pass',
                                         'type' => 'password',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -230,6 +235,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo form_input(
                                     [
                                         'name' => 'pass_comfirm',
+                                        'id' => 'pass_comfirm',
                                         'type' => 'password',
                                         'required' => 'required',
                                         'class' => 'form-control',
@@ -247,7 +253,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php } ?>
     <div class="panel-footer">
         <div align="center">
-            <button type="submit" name="submit" value="salvar_alterar_usuario" class="btn btn-success">
+            <button type="submit" name="submit" id="submit" value="salvar_alterar_usuario" class="btn btn-success">
                 Concluir Cadastro
             </button>
         </div>
@@ -255,3 +261,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
+
+<script>
+    $(document).ready(function () {
+        $('[name=phone]').mask('(00) 00000-0000');
+        $("#cnpj").mask("99.999.999/9999-99");
+        $('#submit').click(function () {
+            var pass = $('#pass').val();
+            var passcomfirm = $('#pass_comfirm').val();
+            if (pass != passcomfirm) {
+                $('.message').addClass('alert alert-danger role="alert"').text('Senhas diferentes');
+                $('input[name=pass').val('');
+                $('input[name=pass_comfirm').val('');
+
+                // Remove caracteres inválidos do valor
+                return false
+            }
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        var $seuCampoCpf = $("#cpf");
+        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+    });
+</script>

@@ -81,18 +81,51 @@ class Managers extends CI_Controller
 
     public function edit_manager($id_manager)
     {
+
         $data['manager'] = $this->get_manager_id_ws($id_manager);
+
         if ($this->input->post('submit') and $id_manager != null) {
-            $name = $this->input->post('name');
-            $full_name = $this->input->post('full_name');
-            $pass = $this->input->post('pass');
-            $pass_comfirm = $this->input->post('pass_comfirm');
-            $email = $this->input->post('email');
-            $client = $this->input->post('client');
-            $cpf = $this->input->post('cpf');
-            $phone = $this->input->post('phone');
-//
-            if ($this->put_manager_ws($id_manager, $name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)) {
+
+            if ($this->input->post('pass') != '') {
+                $array_dados = array(
+                    'name' => $this->input->post('name'),
+                    'full_name' => $this->input->post('full_name'),
+                    'client' => $this->input->post('client'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'cpf' => $this->input->post('cpf'),
+                    'password' => $this->input->post('pass'),
+
+                );
+                $retorno = $this->put_manager_ws($id_manager, $array_dados);
+
+            } else {
+
+                $array_dados = array(
+                    'name' => $this->input->post('name'),
+                    'full_name' => $this->input->post('full_name'),
+                    'client' => $this->input->post('client'),
+                    'email' => $this->input->post('email'),
+                    'client_id' => $this->input->post('client'),
+                    'phone' => $this->input->post('phone'),
+                    'cpf' => $this->input->post('cpf'),
+                );
+                $retorno = $this->put_manager_ws($id_manager, $array_dados);
+
+            }
+//                print_r($retorno);
+//                die;
+            if ($retorno['response']['password']) {
+                $data['alert'] =
+                    [
+                        'type' => 'erro',
+                        'message' => $retorno
+                    ];
+                $this->session->set_flashdata('alert', $data['alert']);
+//                die;
+                redirect('Managers/edit_manager/' . $id_manager);
+
+            } else {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -100,14 +133,6 @@ class Managers extends CI_Controller
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
                 redirect('Managers/index');
-            } else {
-                $data['alert'] =
-                    [
-                        'type' => 'erro',
-                        'message' => 'Erro ao atualizado o usuario.'
-                    ];
-                $this->session->set_flashdata('alert', $data['alert']);
-                redirect("Managers/edit_manager/$id_manager");
 
             }
         }
@@ -140,13 +165,13 @@ class Managers extends CI_Controller
         }
     }
 
-    private function put_manager_ws($id_manager, $name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)
+    private function put_manager_ws($id_manager, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client_user = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
-
+        $params = json_encode($params);
         curl_setopt_array($curl, array(
             CURLOPT_URL => "$this->url/admin/painel/managers/$id_manager",
             CURLOPT_RETURNTRANSFER => true,
@@ -157,12 +182,12 @@ class Managers extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$full_name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "$params",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client_user",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "content-type: application/json",
                 "postman-token: 7ca904b1-90a9-5011-a525-06e2daedcfd0",
                 "uid: $uid"
             ),

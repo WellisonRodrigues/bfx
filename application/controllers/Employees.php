@@ -92,18 +92,52 @@ class Employees extends CI_Controller
     public function edit_employee($id_employee)
     {
         $data['employee'] = $this->get_employee_id_ws($id_employee);
-        if ($this->input->post('submit') and $id_employee != null) {
-            $name = $this->input->post('name');
-            $pass = $this->input->post('pass');
-            $pass_comfirm = $this->input->post('pass_comfirm');
-            $email = $this->input->post('email');
-            $client_id = $this->input->post('client');
-            $cpf = $this->input->post('cpf');
-            $manager = $this->input->post('manager');
-            $phone = $this->input->post('phone');
-            $departament_id = $this->input->post('departament');
+
 //
-            if ($this->put_employees_ws($id_employee, $name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager,$departament_id)) {
+        if ($this->input->post('submit') and $id_employee != null) {
+
+            if ($this->input->post('pass') != '') {
+                $array_dados = array(
+                    'name' => $this->input->post('name'),
+                    'full_name' => $this->input->post('full_name'),
+                    'client' => $this->input->post('client'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'cpf' => $this->input->post('cpf'),
+                    'password' => $this->input->post('pass'),
+                    'departament' => $this->input->post('departament'),
+//                    'password_confirm' => $this->input->post('pass_comfirm'),
+
+                );
+                $retorno = $this->put_employees_ws($id_employee, $array_dados);
+
+            } else {
+
+                $array_dados = array(
+                    'name' => $this->input->post('name'),
+                    'full_name' => $this->input->post('full_name'),
+                    'client_id' => $this->input->post('client'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'cpf' => $this->input->post('cpf'),
+                    'departament' => $this->input->post('departament'),
+                );
+                $retorno = $this->put_employees_ws($id_employee, $array_dados);
+
+            }
+//                print_r($retorno);
+//                die;
+            if ($retorno['response']['password']) {
+                $data['alert'] =
+                    [
+                        'type' => 'erro',
+                        'message' => $retorno['response']['password'][0]
+                    ];
+                $this->session->set_flashdata('alert', $data['alert']);
+//                die;
+                redirect('Employees/edit_employee/' . $id_employee);
+
+            } else {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -111,17 +145,10 @@ class Employees extends CI_Controller
                     ];
                 $this->session->set_flashdata('alert', $data['alert']);
                 redirect('Employees/index');
-            } else {
-                $data['alert'] =
-                    [
-                        'type' => 'erro',
-                        'message' => 'Erro ao atualizado o usuario.'
-                    ];
-                $this->session->set_flashdata('alert', $data['alert']);
-                redirect('Employees/edit_employee');
 
             }
         }
+
         $data['clients'] = $this->get_clients_ws();
         $return_manager = $this->get_managers_ws();
         $return_departaments = $this->get_department_ws();
@@ -149,7 +176,7 @@ class Employees extends CI_Controller
             $iddepartament = $this->input->post('departament');
 
 
-            if ($this->post_employees_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone, $manager,$iddepartament)['response']['status'] == 'success') {
+            if ($this->post_employees_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone, $manager, $iddepartament)['response']['status'] == 'success') {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -256,8 +283,9 @@ class Employees extends CI_Controller
         }
     }
 
-    private function put_employees_ws($id_employee, $name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager,$iddepartament)
+    private function put_employees_ws($id_employee, $params)
     {
+        $array = json_encode($params);
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client_user = $this->session->userdata('user')['clientHeader'];
@@ -273,12 +301,12 @@ class Employees extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "PUT",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"manager_id\"\r\n\r\n$manager\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client_id\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"departament_id\"\r\n\r\n$iddepartament\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "$array",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client_user",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "content-type: application/json",
                 "postman-token: 7ca904b1-90a9-5011-a525-06e2daedcfd0",
                 "uid: $uid"
             ),
@@ -315,7 +343,7 @@ class Employees extends CI_Controller
         return $resp;
     }
 
-    private function post_employees_ws($name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager,$iddepartament)
+    private function post_employees_ws($name, $pass, $pass_comfirm, $email, $client_id, $cpf, $phone, $manager, $iddepartament)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];

@@ -65,7 +65,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$employee['response']['name']),
+                                    'value' => set_value('name', @$employee['response']['name']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -82,7 +82,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$employee['response']['name']),
+                                    'value' => set_value('full_name', @$employee['response']['full_name']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -100,7 +100,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$employee['response']['cpf']),
+                                    'value' => set_value('cpf', @$employee['response']['cpf']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -137,7 +137,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                     'type' => 'email',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$employee['response']['email']),
+                                    'value' => set_value('email', @$employee['response']['email']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -155,7 +155,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                     'id' => 'pass',
                                     'type' => 'password',
                                     'class' => 'form-control',
-                                    'value' => set_value(''),
+                                    'value' => set_value('password'),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -171,7 +171,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
                                     'id' => 'pass_comfirm',
                                     'type' => 'password',
                                     'class' => 'form-control',
-                                    'value' => set_value(''),
+                                    'value' => set_value('pass_comfirm'),
                                     'maxlength' => '70',
                                 ]);
                             ?>

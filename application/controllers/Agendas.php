@@ -50,8 +50,8 @@ class Agendas extends CI_Controller
                 'neighborhood' => $this->input->post('neighborhood'),
                 'city' => $this->input->post('city'),
                 'state' => $this->input->post('state'),
-//                'hour' => $this->input->post('hour'),
-//                'day' => $this->input->post('day')
+                'hour' => $this->input->post('hour'),
+                'day' => $this->input->post('day')
             );
 
 
@@ -104,6 +104,15 @@ class Agendas extends CI_Controller
         $this->load->view('template_admin/core', $data);
     }
 
+    public function justificativa($idagenda)
+    {
+        if ($idagenda != null) {
+            $params = array('need_justification' => $this->input->post('need_justification'));
+            $this->patch_agenda_ws($idagenda, $params);
+            redirect('Agendas/index');
+        }
+    }
+
     public function edit_agenda($id_agenda)
     {
 //        $data['alert'] =
@@ -123,8 +132,8 @@ class Agendas extends CI_Controller
                 'neighborhood' => $this->input->post('neighborhood'),
                 'city' => $this->input->post('city'),
                 'state' => $this->input->post('state'),
-//                'hour' => $this->input->post('hour'),
-//                'day' => $this->input->post('day')
+                'hour' => $this->input->post('hour'),
+                'day' => $this->input->post('day')
             );
 
 //print_r($this->put_agenda_ws($id_agenda, $params));
@@ -177,7 +186,7 @@ class Agendas extends CI_Controller
         }
     }
 
-    private function put_agenda_ws($id_agenda,$params)
+    private function put_agenda_ws($id_agenda, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -197,6 +206,69 @@ class Agendas extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "PUT",
+            CURLOPT_POSTFIELDS => "$array_fields",
+            CURLOPT_HTTPHEADER => array(
+                "access-token: $aut_code",
+                "cache-control: no-cache",
+                "client: $client_user",
+                "content-type: application/json",
+//                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "postman-token: 7664523d-ec35-41ac-078e-172015643508",
+                "uid: $uid"
+            ),
+        ));
+
+        $headers = [];
+        curl_setopt($curl, CURLOPT_HEADERFUNCTION,
+            function ($curl, $header) use (&$headers) {
+                $len = strlen($header);
+                $header = explode(':', $header, 2);
+                if (count($header) < 2) // ignore invalid headers
+                    return $len;
+
+                $name = strtolower(trim($header[0]));
+                if (!array_key_exists($name, $headers))
+                    $headers[$name] = [trim($header[1])];
+                else
+                    $headers[$name][] = trim($header[1]);
+
+                return $len;
+            }
+        );
+
+        $response = curl_exec($curl);
+        $resposta = json_decode($response);
+        $err = curl_error($curl);
+        curl_close($curl);
+        $array = $this->arrayCastRecursive($resposta);
+        $resp['response'] = $array;
+        $resp['headers'] = $headers;
+        $resp['err'] = $err;
+//        print_r($response);
+//        die;
+        return $resp;
+    }
+
+    private function patch_agenda_ws($id_agenda, $params)
+    {
+        $aut_code = $this->session->userdata('user')['access-token'];
+        $uid = $this->session->userdata('user')['uid'];
+        $client_user = $this->session->userdata('user')['clientHeader'];
+        $array_fields = json_encode($params);
+//        print_r($array_fields);
+//        print_r($id_agenda);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "$this->url/admin/managers/agendas/$id_agenda",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
             CURLOPT_POSTFIELDS => "$array_fields",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",

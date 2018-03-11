@@ -32,13 +32,25 @@ class Relatorios extends CI_Controller
 
     private function get_relatorio_ws()
     {
+        if ($this->session->userdata('user')['client_type'] == 'admin'
+        ) {
+            $url = "$this->url/admin/reports/dashboard?q[name_cont]=";
+//            dashboard-client
+//            dashboard-manager
+        }
+        if ($this->session->userdata('user')['client_type'] == 'managers') {
+            $url = "$this->url/admin/reports/dashboard-manager?q[name_cont]=";
+        }
+        if ($this->session->userdata('user')['client_type'] == 'clients') {
+            $url = "$this->url/admin/reports/dashboard-client?q[name_cont]=";
+        }
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/reports/dashboard?q[name_cont]=",
+            CURLOPT_URL => "$url",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -87,7 +99,8 @@ class Relatorios extends CI_Controller
         return $resp;
     }
 
-    public function arrayCastRecursive($array)
+    public
+    function arrayCastRecursive($array)
     {
         if (is_array($array)) {
             foreach ($array as $key => $value) {

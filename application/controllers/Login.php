@@ -65,41 +65,56 @@ class Login extends CI_Controller
 
                 $var = json_decode($retorno["response"]);
                 $userAPI = array();
-                foreach ($var as $point) {
-                    $userAPI['id'] = $point->id;
-                    $userAPI['email'] = $point->email;
-                    $userAPI['provider'] = $point->provider;
-                    $userAPI['uid'] = $point->uid;
-                    $userAPI['nickname'] = $point->nickname;
-                    $userAPI['name'] = $point->name;
-                    $userAPI['image'] = $point->image;
-                    $userAPI['client_type'] = $type;
+                if ($var) {
+                    foreach ($var as $point) {
+
+                        $userAPI['id'] = $point->id;
+                        $userAPI['email'] = $point->email;
+                        $userAPI['provider'] = $point->provider;
+                        $userAPI['uid'] = $point->uid;
+                        $userAPI['nickname'] = $point->nickname;
+                        $userAPI['name'] = $point->name;
+                        $userAPI['image'] = $point->image;
+                        $userAPI['client_type'] = $type;
 //                    $userAPI['client'] = $point->client;
 //                    $userAPI['is_manager'] = $point->is_manager;
 //                    $userAPI['ticket_type'] = $point->ticket_type;
 //                    $userAPI['is_master'] = $point->is_master;
+
+
+                        $userAPI['access-token'] = $retorno["headers"]["access-token"][0];
+                        $userAPI['clientHeader'] = $retorno["headers"]["client"][0];
+                        $userAPI['token-type'] = $retorno["headers"]["token-type"][0];
+                        $userAPI['uidHeader'] = $retorno["headers"]["uid"][0];
+
+                        $this->session->set_flashdata('alert', $data['alert']);
+                        $this->session->set_userdata('user', $userAPI);
+
+                        if ($type == 'admin') {
+                            redirect('Clients/index');
+                        }
+                        if ($type == 'clients') {
+                            redirect('Managers/index');
+                        }
+                        if ($type == 'managers') {
+                            redirect('Employees/index');
+                        }
+                    }
+                } else {
+                    $this->session->sess_destroy();
+                    $data['alert'] =
+                        [
+                            'type' => 'erro',
+                            'message' => 'Erro interno.'
+                        ];
+                    $this->session->set_flashdata('alert', $data['alert']);
+                    redirect('Login');
                 }
 
-                $userAPI['access-token'] = $retorno["headers"]["access-token"][0];
-                $userAPI['clientHeader'] = $retorno["headers"]["client"][0];
-                $userAPI['token-type'] = $retorno["headers"]["token-type"][0];
-                $userAPI['uidHeader'] = $retorno["headers"]["uid"][0];
 
-                $this->session->set_flashdata('alert', $data['alert']);
-                $this->session->set_userdata('user', $userAPI);
-
-                if ($type == 'admin') {
-                    redirect('Clients/index');
-                }
-                if ($type == 'clients') {
-                    redirect('Managers/index');
-                }
-                if ($type == 'managers') {
-                    redirect('Employees/index');
-                }
             }
-//            }
         }
+
         $this->session->sess_destroy();
 
 

@@ -34,7 +34,7 @@ $id = @$client['response']['id'];
                                     'type' => 'text',
                                     'required' => 'required',
                                     'class' => 'form-control',
-                                    'value' => set_value('cliente', @$client['response']['full_name']),
+                                    'value' => set_value('cliente', @$client['response']['name']),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -121,7 +121,7 @@ $id = @$client['response']['id'];
                                     'type' => 'password',
 //                                    'required' => '',
                                     'class' => 'form-control',
-                                    'value' => set_value('pass'),
+                                    'value' => set_value(''),
                                     'maxlength' => '70',
                                 ]);
                             ?>
@@ -138,7 +138,7 @@ $id = @$client['response']['id'];
                                     'type' => 'password',
 //                                    'required' => '',
                                     'class' => 'form-control',
-                                    'value' => set_value('pass_comfirm'),
+                                    'value' => set_value(''),
                                     'maxlength' => '70',
                                 ]);
                             ?>
