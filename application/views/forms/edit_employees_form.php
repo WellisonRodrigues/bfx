@@ -37,7 +37,7 @@ if ($this->session->userdata('user')['client_type'] != 'managers') {
         $arraydp[$departaments['departament']['id']] = $departaments['departament']['name'];
     }
 
-    $disabled = array('disabled' => 'disabled', 'class' => 'form-control');
+    $disabled = array('readyonly' => 'readyonly', 'class' => 'form-control');
 }
 ?>
 

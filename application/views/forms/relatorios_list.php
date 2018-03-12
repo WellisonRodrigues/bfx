@@ -7,20 +7,17 @@
  */
 //echo '<pre>';
 //print_r($relatorio);
-//
-//foreach ($relatorio['employees'] as $res) {
-//    if ($res['agendas']) {
-//        foreach ($res['agendas'] as $agenda) {
-//            if ($agenda['routes']) {
-//                foreach ($agenda as $router) {
-//                    print_r($res['name']);
-//                    print_r($router['created_at']);
-//                }
-//            }
+////
+//foreach ($relatorio['managers'] as $res) {
+//    echo '<br>';
+//    print_r($res['name']);
+//    echo '<br>';
+//    print_r($res['departament']['name']);
+//    if ($res['employees']) {
+//        foreach ($res['employees'] as $employee) {
+//            print_r($employee['name']);
+//            echo '<br>';
 //        }
-//
-//    } else {
-//        print_r($res['name']);
 //    }
 //
 //}
@@ -73,11 +70,11 @@
                                                         ['data' => @$departament['title']],
                                                         ['data' => @$employee['name']],
                                                         ['data' => @$local['company_name']],
-                                                        ['data' => ""],
-                                                        ['data' => ""],
-                                                        ['data' => ""],
-                                                        ['data' => ""],
-                                                        ['data' => ""]
+                                                        ['data' => @$local['created_at']],
+                                                        ['data' => @$local['check_in']],
+                                                        ['data' => @$local['check_out']],
+                                                        ['data' => @$local['total_km']],
+                                                        ['data' => @$local['value_km']]
 
                                                     );
                                                 }
@@ -169,6 +166,41 @@
                                 );
                             }
                         }
+                    }
+                }
+                if ($this->session->userdata('user')['client_type'] == 'clients') {
+                    $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
+                    $this->table->set_heading('Departamentos', 'Colaboradores ', 'Locais Visitados',
+                        'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
+                    if ($relatorio['managers']) {
+                        foreach ($relatorio['managers'] as $res) {
+                            if ($res['employees']) {
+                                foreach ($res['employees'] as $employee) {
+                                    $this->table->add_row(
+                                        ['data' => @$res['departament']['name']],
+                                        ['data' => @$employee['name']],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""],
+                                        ['data' => ""]
+                                    );
+                                }
+                            } else {
+                                $this->table->add_row(
+                                    ['data' => @$res['departament']['name']],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""],
+                                    ['data' => ""]
+                                );
+                            }
+                        }
+
                     }
                 }
                 echo $this->table->generate();

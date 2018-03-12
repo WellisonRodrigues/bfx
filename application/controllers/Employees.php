@@ -105,7 +105,7 @@ class Employees extends CI_Controller
                     'phone' => $this->input->post('phone'),
                     'cpf' => $this->input->post('cpf'),
                     'password' => $this->input->post('pass'),
-                    'departament' => $this->input->post('departament'),
+                    'departament_id' => $this->input->post('departament'),
 //                    'password_confirm' => $this->input->post('pass_comfirm'),
 
                 );
@@ -120,7 +120,7 @@ class Employees extends CI_Controller
                     'email' => $this->input->post('email'),
                     'phone' => $this->input->post('phone'),
                     'cpf' => $this->input->post('cpf'),
-                    'departament' => $this->input->post('departament'),
+                    'departament_id' => $this->input->post('departament'),
                 );
                 $retorno = $this->put_employees_ws($id_employee, $array_dados);
 
