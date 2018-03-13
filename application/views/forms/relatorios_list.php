@@ -152,7 +152,7 @@
                     $this->table->set_heading('Colaboradores ', 'Locais Visitados',
                         'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
                     if (isset($relatorio['employees'])) {
-
+   
                         foreach ($relatorio['employees'] as $row) {
                             if ($row['agendas'] != null) {
                                 foreach ($row['agendas'] as $newrow) {
