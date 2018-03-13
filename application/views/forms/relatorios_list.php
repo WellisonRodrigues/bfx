@@ -65,6 +65,7 @@
                                         foreach ($departament['employees'] as $employee) {
                                             if ($employee['locals']) {
                                                 foreach ($employee['locals'] as $local) {
+                                                    $reembolso = (@$local['km_traveled'] / 1000) * @$departament['value'];
                                                     $this->table->add_row(
                                                         ['data' => @$row['name']],
                                                         ['data' => @$departament['title']],
@@ -73,22 +74,38 @@
                                                         ['data' => @$local['created_at']],
                                                         ['data' => @$local['check_in']],
                                                         ['data' => @$local['check_out']],
-                                                        ['data' => @$local['total_km']],
-                                                        ['data' => @$local['value_km']]
+                                                        ['data' => @$local['total_km'] / 1000 . ' Km'],
+                                                        ['data' => 'R$ ' . @$reembolso]
 
                                                     );
+                                                }
+                                            }
+                                            if ($employee['agendas']) {
+                                                foreach ($employee['agendas'] as $agenda) {
+                                                    $this->table->add_row(
+                                                        ['data' => @$row['name']],
+                                                        ['data' => @$departament['title']],
+                                                        ['data' => @$employee['name']],
+                                                        ['data' => @$agenda['company_name']],
+                                                        ['data' => @$agenda['routes']['created_at']],
+                                                        ['data' => @$agenda['routes']['check_in']],
+                                                        ['data' => @$agenda['routes']['check_out']],
+                                                        ['data' => @$agenda['routes']['total_km'] / 1000 . ' Km'],
+                                                        ['data' => 'R$ ' . @$reembolso]);
                                                 }
                                             } else {
                                                 $this->table->add_row(
                                                     ['data' => @$row['name']],
                                                     ['data' => @$departament['title']],
-                                                    ['data' => @$employee['name']],
                                                     ['data' => ""],
                                                     ['data' => ""],
                                                     ['data' => ""],
                                                     ['data' => ""],
                                                     ['data' => ""],
-                                                    ['data' => ""]);
+                                                    ['data' => ""],
+                                                    ['data' => ""]
+
+                                                );
                                             }
                                         }
                                     } else {

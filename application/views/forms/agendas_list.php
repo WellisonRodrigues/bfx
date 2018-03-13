@@ -77,8 +77,8 @@
                                         $.ajax({
                                             statusCode: {
                                                 200: function () {
-                                                    alert('Justificativa requisitada!')
-
+                                                    alert('Justificativa requisitada!');
+                                                    location.reload();
                                                 }
                                             }
                                         });

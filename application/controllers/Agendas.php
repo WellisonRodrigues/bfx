@@ -107,7 +107,7 @@ class Agendas extends CI_Controller
     public function justificativa($idagenda)
     {
         if ($idagenda != null) {
-            $params = array('need_justification' => $this->input->post('need_justification'));
+            $params = array('need_justification' => $this->input->post('value'));
             $this->patch_agenda_ws($idagenda, $params);
             redirect('Agendas/index');
         }
