@@ -5,6 +5,9 @@
  * Date: 03/10/2017
  * Time: 21:01
  */
+//print_r($dados);
+
+$dados = $dados['response'];
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
@@ -33,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('full_name',@$dados['full_name']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -47,11 +50,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <?php
                                 echo form_input(
                                     [
-                                        'name' => 'razao',
+                                        'name' => 'razao_social',
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('razao_social',@$dados['razao_social']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -68,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('cnpj',@$dados['cnpj']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -86,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'email',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('email',@$dados['email']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -101,9 +104,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'name' => 'pass',
                                         'id' => 'pass',
                                         'type' => 'password',
-                                        'required' => 'required',
+//                                        'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value(''),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -118,9 +121,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'name' => 'pass_comfirm',
                                         'id' => 'pass_comfirm',
                                         'type' => 'password',
-                                        'required' => 'required',
+//                                        'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value(''),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -142,7 +145,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="form-group">
-                                <label>Nome completo*</label>
+                                <label>Nome*</label>
                                 <?php
                                 echo form_input(
                                     [
@@ -150,7 +153,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('name',@$dados['name']),
+                                        'maxlength' => '70',
+                                    ]);
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Nome completo*</label>
+                                <?php
+                                echo form_input(
+                                    [
+                                        'name' => 'full_name',
+                                        'type' => 'text',
+                                        'required' => 'required',
+                                        'class' => 'form-control',
+                                        'value' => set_value('name', @$dados['full_name']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -167,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('cpf',@$dados['cpf']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -186,7 +205,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'text',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('phone',@$dados['phone']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -202,7 +221,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'type' => 'email',
                                         'required' => 'required',
                                         'class' => 'form-control',
-                                        'value' => set_value('cliente'),
+                                        'value' => set_value('email',@$dados['email']),
                                         'maxlength' => '70',
                                     ]);
                                 ?>
@@ -219,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'name' => 'pass',
                                         'id' => 'pass',
                                         'type' => 'password',
-                                        'required' => 'required',
+//                                        'required' => 'required',
                                         'class' => 'form-control',
                                         'value' => set_value('cliente'),
                                         'maxlength' => '70',
@@ -237,7 +256,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         'name' => 'pass_comfirm',
                                         'id' => 'pass_comfirm',
                                         'type' => 'password',
-                                        'required' => 'required',
+//                                        'required' => 'required',
                                         'class' => 'form-control',
                                         'value' => set_value('cliente'),
                                         'maxlength' => '70',

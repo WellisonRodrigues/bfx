@@ -68,7 +68,7 @@ class Myprofile extends CI_Controller
                         'name' => $this->input->post('name'),
                         'full_name' => $this->input->post('full_name'),
                         'email' => $this->input->post('email'),
-                        'razao' => $this->input->post('razao'),
+                        'razao_social' => $this->input->post('razao_social'),
                         'cnpj' => $this->input->post('cnpj'),
                         'password' => $this->input->post('pass'),
                         'password_confirmation' => $this->input->post('pass_comfirm'),
@@ -84,7 +84,7 @@ class Myprofile extends CI_Controller
                         'name' => $this->input->post('name'),
                         'full_name' => $this->input->post('full_name'),
                         'email' => $this->input->post('email'),
-                        'razao' => $this->input->post('razao'),
+                        'razao_social' => $this->input->post('razao_social'),
                         'cnpj' => $this->input->post('cnpj'),
                     );
                     $retorno = $this->update_profile_ws($array_dados);
@@ -181,14 +181,14 @@ class Myprofile extends CI_Controller
     }
 
     private
-    function get_myprofile($type, $id)
+    function get_myprofile()
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$this->url/admin/painel/$type/$id",
+            CURLOPT_URL => "$this->url/admin/my-profile",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -234,8 +234,9 @@ class Myprofile extends CI_Controller
         $resp['response'] = $array;
         $resp['headers'] = $headers;
         $resp['err'] = $err;
-        return $resp;
 //        print_r($resp);
+        return $resp;
+
     }
 
     public
