@@ -158,6 +158,7 @@
                                 foreach ($row['agendas'] as $newrow) {
                                     if ($newrow) {
                                         foreach ($newrow as $newrow2) {
+//                                            $reembolso = (@$newrow2['km_traveled'] / 1000) * @$departament['value'];
                                             $this->table->add_row(
                                                 ['data' => @$row['name']],
                                                 ['data' => @$newrow['company_name']],
