@@ -58,18 +58,18 @@
                                                 }
                                             }
                                             if ($employee['agendas']) {
-                                                foreach ($employee['agendas'] as $agenda) {
-                                                    $valor = @$agenda['routes']['km_travelled'] / 1000;
+                                                foreach ($employee['agendas'] as $agendas) {
+                                                    $valor = @$agendas['routes']['km_travelled'] / 1000;
 
                                                     $new = number_format($valor, 2, ',', ' ');
                                                     $this->table->add_row(
                                                         ['data' => @$row['name']],
                                                         ['data' => @$departament['title']],
                                                         ['data' => @$employee['name']],
-                                                        ['data' => @$agenda['company_name']],
-                                                        ['data' => @$agenda['routes']['created_at']],
-                                                        ['data' => @$agenda['routes']['check_in']],
-                                                        ['data' => @$agenda['routes']['check_out']],
+                                                        ['data' => @$agendas['company_name']],
+                                                        ['data' => @$agendas['routes']['created_at']],
+                                                        ['data' => @$agendas['routes']['check_in']],
+                                                        ['data' => @$agendas['routes']['check_out']],
                                                         ['data' => @$new . ' Km'],
                                                         ['data' => 'R$ ' . @$reembolso],
                                                         ['data' => 'R$ ' . @$departament['value']]
@@ -177,8 +177,8 @@
                         }
                     }
                 }
-                //                echo '<pre>';
-                //                print_r($relatorio);
+//                                echo '<pre>';
+//                                print_r($relatorio);
 
                 if ($this->session->userdata('user')['client_type'] == 'clients') {
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
@@ -190,9 +190,8 @@
                                 foreach ($res['employees'] as $employee) {
                                     if ($employee['agendas']) {
                                         foreach ($employee['agendas'] as $agenda) {
-                                            @$reembolso = (@$agenda['routes']['km_travalled'] / 1000) * @$res['value'];
+                                            @$reembolso = (@$agenda['routes']['km_travelled'] / 1000) * @$res['value'];
                                             $valor = @$agenda['routes']['km_travelled'] / 1000;
-
                                             $new = number_format($valor, 2, ',', ' ');
                                             $this->table->add_row(
                                                 ['data' => @$res['title']],
