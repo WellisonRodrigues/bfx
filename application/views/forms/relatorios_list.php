@@ -5,35 +5,6 @@
  * Date: 24/02/2018
  * Time: 13:39
  */
-//echo '<pre>';
-//print_r($relatorio);
-////
-//foreach ($relatorio['managers'] as $res) {
-//    echo '<br>';
-//    print_r($res['name']);
-//    echo '<br>';
-//    print_r($res['departament']['name']);
-//    if ($res['employees']) {
-//        foreach ($res['employees'] as $employee) {
-//            print_r($employee['name']);
-//            echo '<br>';
-//        }
-//    }
-//
-//}
-
-//if ($this->session->userdata('user')['client_type'] == 'admin'
-//) {
-//    $url = "$this->url/admin/reports/dashboard?q[name_cont]=";
-////            dashboard-client
-////            dashboard-manager
-//}
-//if ($this->session->userdata('user')['client_type'] == 'managers') {
-//    $url = "$this->url/admin/reports/dashboard-manager?q[name_cont]=";
-//}
-//if ($this->session->userdata('user')['client_type'] == 'clients') {
-//    $url = "$this->url/admin/reports/dashboard-client?q[name_cont]=";
-//}
 ?>
 
 <div class="row">
@@ -52,13 +23,14 @@
 
                 $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
                 $this->table->set_heading('Clientes Masters ', 'Departamentos', 'Colaboradores ', 'Locais Visitados',
-                    'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
+                    'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado', 'KM Value');
                 if ($this->session->userdata('user')['client_type'] == 'admin'
                 ) {
                     if (isset($relatorio['clients'])) {
                         foreach ($relatorio['clients'] as $row) {
                             $created_at = date('d/m/Y H:i:s', strtotime(@$usuario["created_at"]));
                             $updated_at = date('d/m/Y H:i:s', strtotime(@$usuario["updated_at"]));
+
                             if ($row['departaments']) {
 
                                 foreach ($row['departaments'] as $departament) {
@@ -66,7 +38,10 @@
                                         foreach ($departament['employees'] as $employee) {
                                             if ($employee['locals']) {
                                                 foreach ($employee['locals'] as $local) {
-                                                    $reembolso = (@$local['km_traveled'] / 1000) * @$departament['value'];
+                                                    $valor = @$local['km_travelled'] / 1000;
+
+                                                    $new = number_format($valor, 2, ',', ' ');
+                                                    $reembolso = (@$local['km_travelled'] / 1000) * @$departament['value'];
                                                     $this->table->add_row(
                                                         ['data' => @$row['name']],
                                                         ['data' => @$departament['title']],
@@ -75,14 +50,18 @@
                                                         ['data' => @$local['created_at']],
                                                         ['data' => @$local['check_in']],
                                                         ['data' => @$local['check_out']],
-                                                        ['data' => @$local['total_km'] / 1000 . ' Km'],
-                                                        ['data' => 'R$ ' . @$reembolso]
+                                                        ['data' => @$new . ' Km'],
+                                                        ['data' => 'R$ ' . @$reembolso],
+                                                        ['data' => 'R$ ' . @$departament['value']]
 
                                                     );
                                                 }
                                             }
                                             if ($employee['agendas']) {
                                                 foreach ($employee['agendas'] as $agenda) {
+                                                    $valor = @$agenda['routes']['km_travelled'] / 1000;
+
+                                                    $new = number_format($valor, 2, ',', ' ');
                                                     $this->table->add_row(
                                                         ['data' => @$row['name']],
                                                         ['data' => @$departament['title']],
@@ -91,13 +70,16 @@
                                                         ['data' => @$agenda['routes']['created_at']],
                                                         ['data' => @$agenda['routes']['check_in']],
                                                         ['data' => @$agenda['routes']['check_out']],
-                                                        ['data' => @$agenda['routes']['total_km'] / 1000 . ' Km'],
-                                                        ['data' => 'R$ ' . @$reembolso]);
+                                                        ['data' => @$new . ' Km'],
+                                                        ['data' => 'R$ ' . @$reembolso],
+                                                        ['data' => 'R$ ' . @$departament['value']]
+                                                    );
                                                 }
                                             } else {
                                                 $this->table->add_row(
                                                     ['data' => @$row['name']],
                                                     ['data' => @$departament['title']],
+                                                    ['data' => ""],
                                                     ['data' => ""],
                                                     ['data' => ""],
                                                     ['data' => ""],
@@ -119,6 +101,7 @@
                                             ['data' => ""],
                                             ['data' => ""],
                                             ['data' => ""],
+                                            ['data' => ""],
                                             ['data' => ""]
 
                                         );
@@ -128,6 +111,7 @@
 
                                 $this->table->add_row(
                                     ['data' => @$row['name']],
+                                    ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
@@ -151,7 +135,7 @@
 
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
                     $this->table->set_heading('Colaboradores ', 'Locais Visitados',
-                        'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
+                        'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado', 'KM Value');
                     if (isset($relatorio['employees'])) {
 
                         foreach ($relatorio['employees'] as $row) {
@@ -160,15 +144,19 @@
                                     if ($newrow) {
 //                                        foreach ($newrow as $newrow2) {
 //                                        $reembolso = (@$local['km_traveled'] / 1000) * @$departament['value'];
-                                        $reembolso = (@$newrow['km_traveled'] / 1000) * @$departament['value'];
+                                        $valor = @$newrow['km_travelled'] / 1000;
+
+                                        $new = number_format($valor, 2, ',', ' ');
+                                        $reembolso = (@$newrow['km_travelled'] / 1000) * @$newrow['value'];
                                         $this->table->add_row(
                                             ['data' => @$row['name']],
                                             ['data' => @$newrow['company_name']],
                                             ['data' => @$newrow['routes']['created_at']],
                                             ['data' => @$newrow['routes']['check_in']],
                                             ['data' => @$newrow['routes']['check_out']],
-                                            ['data' => (@$newrow['routes']['total_km'] / 1000) . ' Km'],
-                                            ['data' => 'R$ ' . @$newrow['routes']['value_km']]
+                                            ['data' => @$new . ' Km'],
+                                            ['data' => 'R$ ' . @$reembolso],
+                                            ['data' => 'R$ ' . @$newrow['value']]
 
                                         );
 //                                        }
@@ -182,19 +170,20 @@
                                     ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
+                                    ['data' => ""],
                                     ['data' => ""]
                                 );
                             }
                         }
                     }
                 }
-//                echo '<pre>';
-//                print_r($relatorio);
+                //                echo '<pre>';
+                //                print_r($relatorio);
 
                 if ($this->session->userdata('user')['client_type'] == 'clients') {
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
                     $this->table->set_heading('Departamentos', 'Colaboradores ', 'Locais Visitados',
-                        'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado');
+                        'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado', 'KM Value');
                     if ($relatorio['departaments']) {
                         foreach ($relatorio['departaments'] as $res) {
                             if ($res['employees']) {
@@ -202,6 +191,9 @@
                                     if ($employee['agendas']) {
                                         foreach ($employee['agendas'] as $agenda) {
                                             @$reembolso = (@$agenda['routes']['km_travalled'] / 1000) * @$res['value'];
+                                            $valor = @$agenda['routes']['km_travelled'] / 1000;
+
+                                            $new = number_format($valor, 2, ',', ' ');
                                             $this->table->add_row(
                                                 ['data' => @$res['title']],
                                                 ['data' => @$employee['name']],
@@ -209,14 +201,16 @@
                                                 ['data' => @$agenda['routes']['created_at']],
                                                 ['data' => @$agenda['routes']['check_in']],
                                                 ['data' => @$agenda['routes']['check_out']],
-                                                ['data' => (@$agenda['routes']['total_km'] / 1000) . ' Km'],
-                                                ['data' => 'R$ ' . @$reembolso]
+                                                ['data' => @$new . ' Km'],
+                                                ['data' => 'R$ ' . @$reembolso],
+                                                ['data' => 'R$ ' . @$res['value']]
                                             );
                                         }
 
                                     } else {
                                         $this->table->add_row(
                                             ['data' => @$res['title']],
+                                            ['data' => ""],
                                             ['data' => ""],
                                             ['data' => ""],
                                             ['data' => ""],
@@ -230,6 +224,7 @@
                             } else {
                                 $this->table->add_row(
                                     ['data' => @$res['title']],
+                                    ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
@@ -264,5 +259,6 @@
 
         });
         dataTableInit("#tb_relatorios");
+//        $('.km').mask("##.#00", {reverse: true, maxlength: false});
     });
 </script>
