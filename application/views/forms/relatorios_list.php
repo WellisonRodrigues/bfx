@@ -177,8 +177,8 @@
                         }
                     }
                 }
-                echo '<pre>';
-                print_r($relatorio);
+//                echo '<pre>';
+//                print_r($relatorio);
 
                 if ($this->session->userdata('user')['client_type'] == 'clients') {
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
