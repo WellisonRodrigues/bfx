@@ -171,7 +171,7 @@
                                     ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
-                                    ['data' => @$row['departament_value']]
+                                    ['data' => 'R$ ' .@$row['departament_value']]
                                 );
                             }
                         }
