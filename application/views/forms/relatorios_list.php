@@ -191,7 +191,8 @@
                                     if ($employee['agendas']) {
                                         foreach ($employee['agendas'] as $agenda) {
                                             @$reembolso = (@$agenda['routes']['km_travelled'] / 1000) * @$res['value'];
-                                            $valor = @$agenda['routes']['km_travelled'] / 1000;
+                                            $valor = @$agenda['routes']['km_travalled'] / 1000;
+//                                            print_r(@$agenda['routes']['km_travalled']);
                                             $new = number_format($valor, 2, ',', ' ');
                                             $this->table->add_row(
                                                 ['data' => @$res['title']],
