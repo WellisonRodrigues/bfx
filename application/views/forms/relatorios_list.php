@@ -147,7 +147,7 @@
                                         $valor = @$newrow['km_travelled'] / 1000;
 
                                         $new = number_format($valor, 2, ',', ' ');
-                                        $reembolso = (@$newrow['km_travelled'] / 1000) * @$newrow['value'];
+                                        $reembolso = (@$newrow['km_travelled'] / 1000) * @$row['departament_value'];
                                         $this->table->add_row(
                                             ['data' => @$row['name']],
                                             ['data' => @$newrow['company_name']],
@@ -156,7 +156,7 @@
                                             ['data' => @$newrow['routes']['check_out']],
                                             ['data' => @$new . ' Km'],
                                             ['data' => 'R$ ' . @$reembolso],
-                                            ['data' => 'R$ ' . @$newrow['value']]
+                                            ['data' => 'R$ ' . @$row['departament_value']]
 
                                         );
 //                                        }
@@ -171,7 +171,7 @@
                                     ['data' => ""],
                                     ['data' => ""],
                                     ['data' => ""],
-                                    ['data' => ""]
+                                    ['data' => @$row['departament_value']]
                                 );
                             }
                         }
