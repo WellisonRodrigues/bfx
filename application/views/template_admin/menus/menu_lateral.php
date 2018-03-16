@@ -33,7 +33,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php echo anchor('Department/index', ' Departamentos'); ?>
                     </li>
                     <?php
-                    if ($this->session->userdata('user')['client_type'] == 'managers'
+                    if ($this->session->userdata('user')['client_type'] == 'managers'or
+                    $this->session->userdata('user')['client_type'] == 'admin'
                     ) {
                         ?>
                         <li>
@@ -71,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php echo anchor('Department/new_department', ' Departamentos'); ?>
                     </li>
                     <?php
-                    if ($this->session->userdata('user')['client_type'] == 'managers'
+                    if ($this->session->userdata('user')['client_type'] == 'managers' or $this->session->userdata('user')['client_type'] == 'admin'
                     ) {
                         ?>
                         <li>

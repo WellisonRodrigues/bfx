@@ -7,10 +7,14 @@
  */
 //echo '<pre>';
 //print_r($agendas);
-//print_r($clients);
-//foreach ($clients['response'] as $client) {
-//    $array['id'] = 'name';
-//}
+
+
+if ($employees) {
+    foreach ($employees['employees'] as $manage) {
+        $arraydp[$manage['id']] = $manage['name'];
+    }
+
+}
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -31,11 +35,13 @@
                 }
                 if ($agendas) {
                     foreach (@$agendas as $usuario) {
-                        $idusuario = $usuario['id'];
+                        $idusuario = @$usuario['id'];
                         $url_edit = base_url() . 'Agendas/edit_agenda/' . $idusuario;
                         $url_delete = base_url() . 'Agendas/delete_agenda/' . $idusuario;
                         $options = "<div class='dropdown'><i class='fas fa-wrench center-block' id='$idusuario' style='color: gray' data-toggle='dropdown'></i><ul class='dropdown-menu'>
     <li><a href='$url_edit' class='center-block' style='color: gray'> <i class='fas fa-pencil-alt'> </i>&nbsp;&nbsp; Editar dados</a></li>
+    <hr style='margin-top: 5px;margin-bottom: 5px'> 
+    <li class='vincular'><a  href=''  data-toggle=\"modal\" data-target=\"#modal\" class='center-block' style='color: gray'><i class='fas fa-edit'> </i>&nbsp;&nbsp; Vincular Colaborador</a></li> 
     <hr style='margin-top: 5px;margin-bottom: 5px'> 
     <li class='delete'><a href='$url_delete' class='center-block' style='color: gray'><i class='fas fa-trash'> </i>&nbsp;&nbsp; Excluir</a></li>
   </ul></div>";
@@ -68,6 +74,69 @@
                             );
                         }
                         ?>
+
+                        <div id="modal" class="modal fade cancel" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Vincular colaborador</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <label>Colaborador*</label>
+                                                        <?php
+                                                        echo form_dropdown(
+                                                            'employee',
+                                                            @$arraydp,
+                                                            set_value('employee'),
+                                                            'class="form-control employee"'
+                                                        );
+
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function () {
+
+                                                var id = '<?php echo @$idusuario?>';
+                                                $('#salvar_user_<?php echo @$idusuario ?>').bind('click', function () {
+                                                    var id_employee = ($(".employee").val());
+                                                    alert(id_employee);
+                                                    $.post('<?php echo base_url()?>Agendas/justificativa/' + id, {id_employee: id_employee}, function (data) {
+                                                        $.ajax({
+                                                            statusCode: {
+                                                                200: function () {
+                                                                    $('.message').addClass('alert alert-success role="alert"').text('Salvo');
+                                                                    $("#modal_rota").modal("hide")
+                                                                }
+                                                            }
+                                                        });
+                                                    });
+                                                });
+
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="button" id="salvar_user_<?php echo @$idusuario ?>"
+                                                class="btn btn-success">Salvar
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                         <script>
                             $(document).ready(function () {
                                 var id = '<?php echo $idusuario?>';
@@ -87,6 +156,7 @@
 
                             });
                         </script>
+
                         <?php
                     }
                 }
@@ -113,3 +183,6 @@
         dataTableInit("#tb_managers");
     });
 </script>
+
+
+

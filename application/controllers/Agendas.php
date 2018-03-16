@@ -24,10 +24,10 @@ class Agendas extends CI_Controller
     {
         $return = $this->get_agenda_ws();
         $data['agendas'] = $return['response'];
-//print_r($return);
+        $return2 = $this->get_employees_ws();
+        $data['employees'] = $return2['response'];
         $data['view'] = 'forms/agendas_list';
         $this->load->view('template_admin/core', $data);
-//        print_r($this->get_clients_ws());
     }
 
     public function new_agenda()
@@ -107,13 +107,19 @@ class Agendas extends CI_Controller
     public function justificativa($idagenda)
     {
         if ($idagenda != null) {
-            $params = array('need_justification' => $this->input->post('value'));
+            if ($this->input->post('need_justification') != '') {
+                $params = array('need_justification' => $this->input->post('value'));
+            } else {
+                $params = array('employee_id' => $this->input->post('id_employee'));
+            }
             $this->patch_agenda_ws($idagenda, $params);
             redirect('Agendas/index');
         }
     }
 
-    public function edit_agenda($id_agenda)
+
+    public
+    function edit_agenda($id_agenda)
     {
 //        $data['alert'] =
 //            [
@@ -162,7 +168,8 @@ class Agendas extends CI_Controller
         $this->load->view('template_admin/core', $data);
     }
 
-    public function delete_agenda($id_manager)
+    public
+    function delete_agenda($id_manager)
     {
         if ($id_manager != null or $id_manager != '') {
             $response = $this->delete_agenda_ws($id_manager);
@@ -186,7 +193,8 @@ class Agendas extends CI_Controller
         }
     }
 
-    private function put_agenda_ws($id_agenda, $params)
+    private
+    function put_agenda_ws($id_agenda, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -249,7 +257,8 @@ class Agendas extends CI_Controller
         return $resp;
     }
 
-    private function patch_agenda_ws($id_agenda, $params)
+    private
+    function patch_agenda_ws($id_agenda, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -312,7 +321,8 @@ class Agendas extends CI_Controller
         return $resp;
     }
 
-    private function post_agenda_ws($params)
+    private
+    function post_agenda_ws($params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -375,7 +385,8 @@ class Agendas extends CI_Controller
     }
 
 
-    private function delete_agenda_ws($id)
+    private
+    function delete_agenda_ws($id)
     {
         $curl = curl_init();
         $aut_code = $this->session->userdata('user')['access-token'];
@@ -413,7 +424,8 @@ class Agendas extends CI_Controller
         }
     }
 
-    private function get_agenda_id_ws($id)
+    private
+    function get_agenda_id_ws($id)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -470,7 +482,8 @@ class Agendas extends CI_Controller
         return $resp;
     }
 
-    private function get_agenda_ws()
+    private
+    function get_agenda_ws()
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -526,7 +539,66 @@ class Agendas extends CI_Controller
         return $resp;
     }
 
-    public function arrayCastRecursive($array)
+    public
+    function get_employees_ws()
+    {
+
+        $aut_code = $this->session->userdata('user')['access-token'];
+        $uid = $this->session->userdata('user')['uid'];
+        $client = $this->session->userdata('user')['clientHeader'];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "$this->url/admin/painel/employees",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+//            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\ngerente\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\ngerente@spacex.com\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n123123123\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n123123123\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_HTTPHEADER => array(
+                "access-token: $aut_code",
+                "cache-control: no-cache",
+                "client: $client",
+                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+                "postman-token: 6bc2f2bb-e39b-479c-2eba-bc417e77d154",
+                "uid: $uid"
+            ),
+        ));
+
+        $headers = [];
+        curl_setopt($curl, CURLOPT_HEADERFUNCTION,
+            function ($curl, $header) use (&$headers) {
+                $len = strlen($header);
+                $header = explode(':', $header, 2);
+                if (count($header) < 2) // ignore invalid headers
+                    return $len;
+
+                $name = strtolower(trim($header[0]));
+                if (!array_key_exists($name, $headers))
+                    $headers[$name] = [trim($header[1])];
+                else
+                    $headers[$name][] = trim($header[1]);
+
+                return $len;
+            }
+        );
+
+        $response = curl_exec($curl);
+        $resposta = json_decode($response);
+        $err = curl_error($curl);
+        curl_close($curl);
+        $array = $this->arrayCastRecursive($resposta);
+        $resp['response'] = $array;
+        $resp['headers'] = $headers;
+        $resp['err'] = $err;
+        return $resp;
+    }
+
+    public
+    function arrayCastRecursive($array)
     {
         if (is_array($array)) {
             foreach ($array as $key => $value) {
