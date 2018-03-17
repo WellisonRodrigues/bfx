@@ -29,7 +29,7 @@ if ($employees) {
                 <?php
                 $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_managers">']);
                 if ($this->session->userdata("user")['client_type'] == 'admin') {
-                    $this->table->set_heading(' Nome ', ' Departamento ', ' Cliente Master ', ' N° Colaboradores ', ' Telefone', 'CPF', ' Alterar ');
+                    $this->table->set_heading(' Nome da empresa ', ' Endereço ', 'Hora ', ' Dia', 'Alterar', 'Justf.');
                 } else {
                     $this->table->set_heading(' Nome da empresa ', ' Endereço ', 'Hora ', ' Dia', 'Alterar', 'Justf.');
                 }
@@ -48,15 +48,19 @@ if ($employees) {
                         $created_at = date('d/m/Y H:i:s', strtotime(@$usuario["created_at"]));
                         $updated_at = date('d/m/Y H:i:s', strtotime(@$usuario["updated_at"]));
                         if ($this->session->userdata("user")['client_type'] == 'admin') {
+                            if (@$usuario["need_justification"] !== true) {
+                                $button = "<button type='button' id='requisitar_$idusuario' class='btn btn-primary center-block'><i class='fas fa-comments'></i></button>";
+                            } else {
+                                $button = "<button type='button' class='btn btn-danger center-block'> <i class='fas fa-ban'></i></button>";
+                            }
                             $this->table->add_row(
                                 ['data' => @$usuario["company_name"]],
                                 ['data' => @$usuario["address"]],
                                 ['data' => @$usuario["hour"]],
                                 ['data' => @$usuario["day"]],
+                                ['data' => $options],
+                                ['data' => $button]
 
-//                                ['data' => @$usuario["employees_count"]],
-//                        ['data' => anchor("usuarios / editar / " . @$usuario["id"] . "", " < p class='fa fa-pencil' ></p > ", 'class = "btn btn - outline btn - primary btn - xs btn - block"'), 'align' => 'center'],
-                                ['data' => $options]
                             );
                         } else {
                             if (@$usuario["need_justification"] !== true) {
