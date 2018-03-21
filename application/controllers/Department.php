@@ -34,19 +34,22 @@ class Department extends CI_Controller
     {
         if ($this->input->post('percentage_out')) {
             $params = array('percentage_out' => $this->input->post('percentage_out') / 100);
+            print_r( $this->patch_department_ws($iddepartament, $params) );
         }
-        if ($this->input->post('value')) {
+        if ($this->input->post('valor')) {
             $params = array('value' => $this->input->post('valor'));
+            print_r( $this->patch_department_ws($iddepartament, $params) );
         }
 //        print_r($params);
-//        print_r($iddepartament);
+//        print_r($this->input->post());
 //        die;
 //        print_r($this->patch_department_ws($iddepartament, $params));
-        if ($this->patch_department_ws($iddepartament, $params)) {
-            return true;
-        } else {
-            return false;
-        }
+//        if ($this->patch_department_ws($iddepartament, $params)) {
+
+
+//        } else {
+//            return false;
+//        }
 
     }
 
@@ -425,6 +428,7 @@ class Department extends CI_Controller
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client",
+                "content-type: application/json",
 //                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
                 "postman-token: 7ca904b1-90a9-5011-a525-06e2daedcfd0",
                 "uid: $uid"

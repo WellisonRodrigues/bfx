@@ -7,7 +7,7 @@
  */
 
 //echo '<pre>';
-
+//
 //print_r($departments);
 
 if ($this->session->userdata('user')['client_type'] == 'admin' or
@@ -34,15 +34,16 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                             $created_at = date('d/m/Y H:i:s', strtotime(@$department["created_at"]));
                             $updated_at = date('d/m/Y H:i:s', strtotime(@$department["updated_at"]));
                             $iddepartment = $department['id'];
+
                             $url_edit = base_url() . 'Department/edit_department/' . $iddepartment;
                             $url_delete = base_url() . 'Department/delete_department/' . $iddepartment;
                             $url_deptopatch = base_url() . 'Department/path_department/' . $iddepartment;
                             $options = "<div class='dropdown'><i class='fas fa-wrench center-block' id='$iddepartment' style='color: gray' data-toggle='dropdown'></i><ul class='dropdown-menu'>
     <li><a href='$url_edit' class='center-block' style='color: gray'> <i class='fas fa-pencil-alt'> </i>&nbsp;&nbsp; Editar dados</a></li>
    <hr style='margin-top: 5px;margin-bottom: 5px'> 
-    <li><a href=''  data-toggle=\"modal\" data-target=\"#modal_rota\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</ahr></li>
+    <li><a href=''  data-toggle=\"modal\" data-target=\"#modal_rota_$iddepartment\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</ahr></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
-     <li><a href='' data-toggle=\"modal\" data-target=\"#modal_value\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>
+     <li><a href='' data-toggle=\"modal\" data-target=\"#modal_value_$iddepartment\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
     <li class='delete'><a href='$url_delete' class='center-block' style='color: gray'><i class='fas fa-trash'> </i>&nbsp;&nbsp; Excluir Departamento</a></li>
 
@@ -56,7 +57,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                 ['data' => $options]
                             );
                             ?>
-                            <div id="modal_rota" class="modal fade cancel" role="dialog">
+                            <div id="modal_rota_<?php echo $iddepartment ?>" class="modal fade cancel" role="dialog">
                                 <div class="modal-dialog">
 
                                     <!-- Modal content-->
@@ -125,7 +126,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                             </div>
 
 
-                            <div id="modal_value" class="modal fade cancel" role="dialog">
+                            <div id="modal_value_<?php echo $iddepartment ?>" class="modal fade cancel" role="dialog">
                                 <div class="modal-dialog">
 
                                     <!-- Modal content-->
@@ -143,7 +144,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                                         echo form_input(
                                                             [
                                                                 'name' => 'valor',
-                                                                'id' => 'valor',
+                                                                'id' => "valor_$iddepartment",
                                                                 'type' => 'text',
 //                                                                'max' => 100,
                                                                 'required' => 'required',
@@ -156,27 +157,8 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                             </div>
                                             <br/>
                                             <b>Valor atual:<?php echo @$department["value"] ?> </b><br/>
-                                            <script>
-                                                $(document).ready(function () {
-
-                                                    var id = '<?php echo $iddepartment?>';
-                                                    $('#salvar_value_<?php echo $iddepartment ?>').bind('click', function () {
-                                                        var value = ($("#valor").val());
-
-                                                        $.post('<?php echo base_url()?>Department/setconfigs/' + id, {value: value}, function (data) {
-                                                            $.ajax({
-                                                                statusCode: {
-                                                                    200: function () {
-                                                                        $('.message').addClass('alert alert-success role="alert"').text('Salvo');
-                                                                        $("#modal_value").modal("hide")
-                                                                    }
-                                                                }
-                                                            });
-                                                        });
-                                                    });
-
-                                                });
-                                            </script>
+                                            <input type="hidden" id="<?php echo $iddepartment ?>"
+                                                   value="<?php echo $iddepartment ?>">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -186,6 +168,30 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                                     class="btn btn-success">Salvar
                                             </button>
                                         </div>
+                                        <script>
+                                            $(document).ready(function () {
+
+                                                //                                                alert(id);
+                                                $('#salvar_value_<?php echo $iddepartment ?>').bind('click', function () {
+                                                    var valor = ($("#valor_<?php echo $iddepartment ?>").val());
+//                                                    alert(valor);
+                                                    var identificador = "<?php echo $iddepartment ?>";
+
+                                                    $.post('<?php echo base_url()?>Department/setconfigs/' + identificador, {valor: valor}, function (data) {
+                                                        $.ajax({
+                                                            statusCode: {
+                                                                200: function () {
+//                                                                    return true;
+                                                                    $('.message').addClass('alert alert-success role="alert"').text('Salvo');
+                                                                    $("#modal_value_" + identificador).modal("hide")
+                                                                }
+                                                            }
+                                                        });
+                                                    });
+                                                });
+
+                                            });
+                                        </script>
                                     </div>
 
                                 </div>
