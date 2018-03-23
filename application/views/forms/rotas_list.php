@@ -29,7 +29,7 @@
                 } else {
                     $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
                 }
-                if (@$rotas) {
+                if ($rotas) {
                     foreach (@$rotas as $usuario) {
                         $idusuario = $usuario['id'];
                         $url_edit = base_url() . 'Rotas/edit_rota/' . $idusuario;

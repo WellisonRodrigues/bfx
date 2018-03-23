@@ -70,7 +70,7 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                             <div class="form-group">
                                                 <label>Porcentagem*</label>
                                                 <div class="row">
-                                                    <div class="col-md-10">
+                                                    <div class="col-md-8">
                                                         <?php
                                                         echo form_input(
                                                             [
@@ -83,8 +83,10 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                                                                 'value' => set_value(''),
                                                                 'maxlength' => '70',
                                                             ]);
-                                                        ?></div>
-                                                    <strong> % </strong>
+                                                        ?>
+
+                                                    </div>
+                                                    <div class="col-md-1"><strong> % </strong></div>
 
                                                 </div>
                                             </div>
@@ -229,12 +231,13 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                         $url_edit = base_url() . 'Department/edit_department/' . $iddepartment;
                         $url_delete = base_url() . 'Department/delete_department/' . $iddepartment;
                         $url_deptopatch = base_url() . 'Department/path_department/' . $iddepartment;
+                        $url_deptopatch = base_url() . 'Department/path_department/' . $iddepartment;
                         $options = "<div class='dropdown'><i class='fas fa-wrench center-block' id='$iddepartment' style='color: gray' data-toggle='dropdown'></i><ul class='dropdown-menu'>
     <li><a href='$url_edit' class='center-block' style='color: gray'> <i class='fas fa-pencil-alt'> </i>&nbsp;&nbsp; Editar dados</a></li>
-  <hr style='margin-top: 5px;margin-bottom: 5px'> 
-    <li><a data-toggle=\"modal\" data-target=\"#modal_rota\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</a></li>
+   <hr style='margin-top: 5px;margin-bottom: 5px'> 
+    <li><a href=''  data-toggle=\"modal\" data-target=\"#modal_rota_$iddepartment\" class='center-block' style='color: gray'> <i class='fas fa-paper-plane'> </i>&nbsp;&nbsp; Definições de variação de rota</ahr></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
-     <li><a data-toggle=\"modal\" data-target=\"#modal_money\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>
+     <li><a href='' data-toggle=\"modal\" data-target=\"#modal_value_$iddepartment\" class='center-block' style='color: gray'> <i class='fas fa-dollar-sign'> </i>&nbsp;&nbsp; Definições de reembolso</a></li>
     <hr style='margin-top: 5px;margin-bottom: 5px'>
     <li class='delete'><a href='$url_delete' class='center-block' style='color: gray'><i class='fas fa-trash'> </i>&nbsp;&nbsp; Excluir Departamento</a></li>
 
@@ -246,6 +249,155 @@ if ($this->session->userdata('user')['client_type'] == 'admin' or
                             ['data' => $options]
                         );
                     }
+
+
+                    ?>
+
+                    <div id="modal_rota_<?php echo $iddepartment ?>" class="modal fade cancel" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Definições de variação de rota</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Porcentagem*</label>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <?php
+                                                echo form_input(
+                                                    [
+                                                        'name' => 'percentage_out',
+                                                        'id' => 'percentage_out',
+                                                        'type' => 'text',
+//                                                                'max' => 100,
+                                                        'required' => 'required',
+                                                        'class' => 'form-control percentage_out',
+                                                        'value' => set_value(''),
+                                                        'maxlength' => '70',
+                                                    ]);
+                                                ?>
+
+                                            </div>
+                                            <div class="col-md-1"><strong> % </strong></div>
+
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <b>Porcentage atual:<?php echo @$department["percentage_out"] ?> </b><br/>
+                                    <script>
+                                        $(document).ready(function () {
+
+                                            var id = '<?php echo $iddepartment?>';
+                                            $('#salvar_percent_<?php echo $iddepartment ?>').bind('click', function () {
+                                                var percentage = ($("#percentage_out").val());
+
+                                                $.post('<?php echo base_url()?>Department/setconfigs/' + id, {percentage_out: percentage}, function (data) {
+                                                    $.ajax({
+                                                        statusCode: {
+                                                            200: function () {
+                                                                $('.message').addClass('alert alert-success role="alert"').text('Salvo');
+                                                                $("#modal_rota").modal("hide")
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            });
+
+                                        });
+                                    </script>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="button" id="salvar_percent_<?php echo $iddepartment ?>"
+                                            class="btn btn-success">Salvar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div id="modal_value_<?php echo $iddepartment ?>" class="modal fade cancel" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Definições de reembolso</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Valor*</label>
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <?php
+                                                echo form_input(
+                                                    [
+                                                        'name' => 'valor',
+                                                        'id' => "valor_$iddepartment",
+                                                        'type' => 'text',
+//                                                                'max' => 100,
+                                                        'required' => 'required',
+                                                        'class' => 'form-control value',
+                                                        'value' => set_value(''),
+                                                        'maxlength' => '70',
+                                                    ]);
+                                                ?></div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <b>Valor atual:<?php echo @$department["value"] ?> </b><br/>
+                                    <input type="hidden" id="<?php echo $iddepartment ?>"
+                                           value="<?php echo $iddepartment ?>">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="button" id="salvar_value_<?php echo $iddepartment ?>"
+                                            class="btn btn-success">Salvar
+                                    </button>
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+
+                                        //                                                alert(id);
+                                        $('#salvar_value_<?php echo $iddepartment ?>').bind('click', function () {
+                                            var valor = ($("#valor_<?php echo $iddepartment ?>").val());
+//                                                    alert(valor);
+                                            var identificador = "<?php echo $iddepartment ?>";
+
+                                            $.post('<?php echo base_url()?>Department/setconfigs/' + identificador, {valor: valor}, function (data) {
+                                                $.ajax({
+                                                    statusCode: {
+                                                        200: function () {
+//                                                                    return true;
+                                                            $('.message').addClass('alert alert-success role="alert"').text('Salvo');
+                                                            $("#modal_value_" + identificador).modal("hide")
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                        });
+
+                                    });
+                                </script>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <?php
+
                     //                    }
                     echo $this->table->generate();
                     ?>
