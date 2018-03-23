@@ -24,7 +24,7 @@
                 <?php
 
                 $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
-                $this->table->set_heading('ID', 'Clientes Masters ', 'Departamentos', 'Colaboradores ', 'Locais Visitados',
+                $this->table->set_heading('Clientes Masters ', 'Departamentos', 'Colaboradores ', 'Locais Visitados',
                     'Data', 'check in', 'check out', ' Quilômetros rodados ', 'Valor reembolsado', 'KM Value');
                 if ($this->session->userdata('user')['client_type'] == 'admin'
                 ) {
@@ -40,12 +40,13 @@
                                         foreach ($departament['employees'] as $employee) {
                                             if ($employee['locals']) {
                                                 foreach ($employee['locals'] as $local) {
-                                                    $valor = @$local['km_travalled']/1000;
+                                                    $valor = @$local['km_travalled'] / 1000;
 
                                                     $new = number_format($valor, 2, ',', ' ');
-                                                    $reembolso = (@$local['km_travalled']/1000) * @$departament['value'];
+                                                    $reembolso = (@$local['km_travalled'] / 1000) * @$departament['value'];
+                                                    $reembolso = number_format($reembolso, 2, ',', ' ');
                                                     $this->table->add_row(
-                                                        ['data' => @$local['id']],
+//                                                        ['data' => @$local['id']],
                                                         ['data' => @$row['name']],
                                                         ['data' => @$departament['title']],
                                                         ['data' => @$employee['name']],
@@ -64,7 +65,7 @@
                                             }
                                             if ($employee['agendas']) {
                                                 foreach ($employee['agendas'] as $agendas) {
-                                                    $valor = @$agendas['routes']['km_travalled']/1000;
+                                                    $valor = @$agendas['routes']['km_travalled'] / 1000;
                                                     //                                                    print_r($valor);
                                                     $idagenda = $agendas['id'];
                                                     if ($idagenda["need_justification"] !== true) {
@@ -72,10 +73,12 @@
                                                     } else {
                                                         $button = "<button type='button' class='btn btn-danger center-block'> <i class='fas fa-ban'></i></button>";
                                                     }
-                                                    $reembolso = (@$agendas['km_travalled']/1000) * @$departament['value'];
+                                                    $reembolso = (@$agendas['routes']['km_travalled'] / 1000) * @$departament['value'];
+//                                                    print_r($reembolso)
                                                     $new = number_format($valor, 2, ',', ' ');
+                                                    $reembolso = number_format($reembolso, 2, ',', ' ');
                                                     $this->table->add_row(
-                                                        ['data' => @$agendas['id']],
+//                                                        ['data' => @$agendas['id']],
                                                         ['data' => @$row['name']],
                                                         ['data' => @$departament['title']],
                                                         ['data' => @$employee['name']],
@@ -91,22 +94,22 @@
                                                     );
 
                                                     ?>
-<!--                                                    <div id="modal_--><?php //echo $idagenda ?><!--" class="modal fade cancel"-->
-<!--                                                         role="dialog">-->
-<!--                                                        <div class="modal-dialog">-->
-<!--                                                            <div class="modal-content">-->
-<!--                                                                <div class="modal-header">-->
-<!--                                                                    <button type="button" class="close"-->
-<!--                                                                            data-dismiss="modal">&times;</button>-->
-<!--                                                                    <h4 class="modal-title">Justificativa</h4>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="modal-body">-->
-<!--                                                                    <div class="form-group">-->
-<!--                                                                        <div class="row">-->
-<!--                                                                            <div class="col-lg-12">-->
-<!--                                                                                <div class="form-group">-->
-<!--                                                                                    <label>Justificativa*</label>-->
-<!--                                                                                    --><?php
+                                                    <!--                                                    <div id="modal_--><?php //echo $idagenda ?><!--" class="modal fade cancel"-->
+                                                    <!--                                                         role="dialog">-->
+                                                    <!--                                                        <div class="modal-dialog">-->
+                                                    <!--                                                            <div class="modal-content">-->
+                                                    <!--                                                                <div class="modal-header">-->
+                                                    <!--                                                                    <button type="button" class="close"-->
+                                                    <!--                                                                            data-dismiss="modal">&times;</button>-->
+                                                    <!--                                                                    <h4 class="modal-title">Justificativa</h4>-->
+                                                    <!--                                                                </div>-->
+                                                    <!--                                                                <div class="modal-body">-->
+                                                    <!--                                                                    <div class="form-group">-->
+                                                    <!--                                                                        <div class="row">-->
+                                                    <!--                                                                            <div class="col-lg-12">-->
+                                                    <!--                                                                                <div class="form-group">-->
+                                                    <!--                                                                                    <label>Justificativa*</label>-->
+                                                    <!--                                                                                    --><?php
 //                                                                                    echo form_textarea(
 //                                                                                        'employee',
 //                                                                                        set_value('employee', @$agendas['need_justification']),
@@ -114,26 +117,26 @@
 //                                                                                    );
 //
 //                                                                                    ?>
-<!--                                                                                </div>-->
-<!--                                                                            </div>-->
-<!--                                                                        </div>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="modal-footer">-->
-<!--                                                                    <button type="button" class="btn btn-default"-->
-<!--                                                                            data-dismiss="modal">-->
-<!--                                                                        Close-->
-<!--                                                                    </button>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
+                                                    <!--                                                                                </div>-->
+                                                    <!--                                                                            </div>-->
+                                                    <!--                                                                        </div>-->
+                                                    <!--                                                                    </div>-->
+                                                    <!--                                                                </div>-->
+                                                    <!--                                                                <div class="modal-footer">-->
+                                                    <!--                                                                    <button type="button" class="btn btn-default"-->
+                                                    <!--                                                                            data-dismiss="modal">-->
+                                                    <!--                                                                        Close-->
+                                                    <!--                                                                    </button>-->
+                                                    <!--                                                                </div>-->
+                                                    <!--                                                            </div>-->
+                                                    <!--                                                        </div>-->
+                                                    <!--                                                    </div>-->
                                                     <?php
 
                                                 }
                                             } else {
                                                 $this->table->add_row(
-                                                    ['data' => ''],
+//                                                    ['data' => ''],
                                                     ['data' => @$row['name']],
                                                     ['data' => @$departament['title']],
                                                     ['data' => @$employee['name']],
@@ -143,7 +146,7 @@
                                                     ['data' => ""],
                                                     ['data' => ""],
                                                     ['data' => ""],
-                                                    ['data' => ""]
+                                                    ['data' => 'R$ ' . @$departament['value']]
 //                                                    ['data' => ""],
 //                                                    ['data' => '']
 
@@ -152,7 +155,7 @@
                                         }
                                     } else {
                                         $this->table->add_row(
-                                            ['data' => ''],
+//                                            ['data' => ''],
                                             ['data' => @$row['name']],
                                             ['data' => @$departament['title']],
                                             ['data' => ""],
@@ -162,7 +165,7 @@
                                             ['data' => ""],
                                             ['data' => ""],
                                             ['data' => ""],
-                                            ['data' => ""]
+                                            ['data' => 'R$ ' . @$departament['value']]
 //                                            ['data' => ""],
 //                                            ['data' => '']
 
@@ -172,7 +175,7 @@
                             } else {
 
                                 $this->table->add_row(
-                                    ['data' => ''],
+//                                    ['data' => ''],
                                     ['data' => @$row['name']],
                                     ['data' => ""],
                                     ['data' => ""],
@@ -215,10 +218,12 @@
                                     if ($newrow) {
 //                                        foreach ($newrow as $newrow2) {
 //                                        $reembolso = (@$local['km_traveled'] / 1000) * @$departament['value'];
-                                        $valor = @$newrow['km_travalled']/1000;
+                                        $valor = @$newrow['routes']['km_travalled'] / 1000;
 
                                         $new = number_format($valor, 2, ',', ' ');
-                                        $reembolso = (@$newrow['km_travalled']/1000) * @$row['departament_value'];
+                                        $reembolso = (@$newrow['routes']['km_travalled'] / 1000) * @$row['departament_value'];
+                                        $reembolso = number_format($reembolso, 2, ',', ' ');
+//                                        print_r($newrow['routes']['km_travalled'] / 1000) ;
                                         $this->table->add_row(
                                             ['data' => @$row['name']],
                                             ['data' => @$newrow['company_name']],
@@ -257,8 +262,8 @@
                         }
                     }
                 }
-//                                echo '<pre>';
-//                                print_r($relatorio);
+                //                                echo '<pre>';
+                //                                print_r($relatorio);
                 //
                 if ($this->session->userdata('user')['client_type'] == 'clients') {
                     $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_relatorios">']);
@@ -274,6 +279,7 @@
                                             $valor = @$agenda['routes']['km_travalled'];
 //                                            print_r(@$agenda['routes']['km_travalled']);
 //                                            print_r(@$res);
+                                            $reembolso = number_format($reembolso, 2, ',', ' ');
                                             $new = number_format($valor, 2, ',', ' ');
                                             $this->table->add_row(
                                                 ['data' => @$res['title']],
