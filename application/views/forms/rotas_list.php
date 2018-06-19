@@ -25,7 +25,7 @@
                 <?php
                 $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_managers">']);
                 if ($this->session->userdata("user")['client_type'] == 'admin') {
-                    $this->table->set_heading(' Nome ', ' Departamento ', ' Cliente Master ', ' N° Colaboradores ', ' Telefone', 'CPF', ' Alterar ');
+                    $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
                 } else {
                     $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
                 }
@@ -43,11 +43,10 @@
                         $updated_at = date('d/m/Y H:i:s', strtotime(@$usuario["updated_at"]));
                         if ($this->session->userdata("user")['client_type'] == 'admin') {
                             $this->table->add_row(
-                                ['data' => @$usuario["total_km"]],
-                                ['data' => @$usuario["check_in"]],
-                                ['data' => @$usuario["check_out"]],
-                                ['data' => @$usuario["employee_id"]],
-
+                                ['data' => @$usuario["company_name"]],
+                                ['data' => @$usuario["address"]],
+                                ['data' => @$usuario["number"]],
+                                ['data' => @$usuario["neighborhood"]],
 //                                ['data' => @$usuario["employees_count"]],
 //                        ['data' => anchor("usuarios / editar / " . @$usuario["id"] . "", " < p class='fa fa-pencil' ></p > ", 'class = "btn btn - outline btn - primary btn - xs btn - block"'), 'align' => 'center'],
                                 ['data' => $options]
