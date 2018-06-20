@@ -29,6 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           type="text/css">
     <!-- Custom CSS -->
     <link href="<?php echo base_url(CSS); ?>/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo base_url(CSS); ?>/jquery.dataTables.yadcf.css" rel="stylesheet">
     <link href="<?php echo base_url(CSS); ?>/custom.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -147,6 +148,8 @@ else { ?>
 <script src="<?php echo base_url(VENDOR); ?>/bootstrap/js/bootstrap.min.js"></script>
 <!-- Jquery Mask  -->
 <script src="<?php echo base_url(JS); ?>/jquery.mask.js"></script>
+<script src="<?php echo base_url(JS); ?>/custom.mask.js"></script>
+<script src="<?php echo base_url(JS); ?>/jquery.dataTables.yadcf.js"></script>
 <script src="<?php echo base_url(JS); ?>/custom.mask.js"></script>
 <script src="<?php echo base_url(JS); ?>/jquery.inputmask.numeric.extensions.min.js"></script>
 

@@ -26,8 +26,10 @@
                 $this->table->set_template(['table_open' => '<table class="table table-striped table-bordered table-hover" style="width: 100%" id="tb_managers">']);
                 if ($this->session->userdata("user")['client_type'] == 'admin') {
                     $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
+//                    $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
                 } else {
                     $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
+//                    $this->table->set_heading(' local ', ' Endereço ', 'Numero ', ' Bairro', ' Alterar ');
                 }
                 if ($rotas) {
                     foreach (@$rotas as $usuario) {
@@ -86,5 +88,12 @@
 
         });
         dataTableInit("#tb_managers");
+    });
+    $(document).ready(function(){
+        $('#tb_managers').dataTable().yadcf([
+            {column_number : 0,filter_default_label: "Local"},
+            {column_number : 1,filter_default_label: "Endereço"},
+            {column_number : 2,filter_default_label: "Numero"},
+            ]);
     });
 </script>
