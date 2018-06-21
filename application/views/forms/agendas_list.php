@@ -113,7 +113,7 @@ if ($employees) {
                                                 var id = '<?php echo @$idusuario?>';
                                                 $('#salvar_user_<?php echo @$idusuario ?>').bind('click', function () {
                                                     var id_employee = ($(".employee").val());
-                                                    alert(id_employee);
+                                                    // alert(id_employee);
                                                     $.post('<?php echo base_url()?>Agendas/justificativa/' + id, {id_employee: id_employee}, function (data) {
                                                         $.ajax({
                                                             statusCode: {

@@ -34,26 +34,42 @@ class Managers extends CI_Controller
     {
         if ($this->input->post('submit')) {
 //            print_r($this->input->post());
-            $name = $this->input->post('name');
-            $pass = $this->input->post('pass');
-            $full_name = $this->input->post('full_name');
-            $pass_comfirm = $this->input->post('pass_comfirm');
-            $email = $this->input->post('email');
 
-            if ($this->session->userdata('user')['client_type'] != 'admin') {
-                $client = $this->input->post('client');
+            if ($this->session->userdata('user')['client_type'] == 'admin') {
+                $array_dados = array(
+                    'name' => $this->input->post('name'),
+                    'full_name' => $this->input->post('full_name'),
+                    'client' => $this->input->post('client'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'cpf' => $this->input->post('cpf'),
+                    'password' => $this->input->post('pass'),
+
+                );
+
             } else {
-                $client = null;
+                $array_dados = array(
+                    'name' => $this->input->post('name'),
+                    'full_name' => $this->input->post('full_name'),
+//                    'client' => $this->input->post('client'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'cpf' => $this->input->post('cpf'),
+                    'password' => $this->input->post('pass'),
+
+                );
+
             }
 
-            $phone = $this->input->post('phone');
-            $cpf = $this->input->post('cpf');
+//            $phone = $this->input->post('phone');
+//            $cpf = $this->input->post('cpf');
 //
 //            print_r($this->post_manager_ws($name, $pass, $pass_comfirm, $email, $client, $cpf, $phone));
 //            die;
-            $var = $this->post_manager_ws($name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)['response'];
-
-            if ($var['status'] == 'success') {
+            $var = $this->post_manager_ws($array_dados);
+//            print_r($var);
+//            die;
+            if (isset($var['status']) == 'success') {
                 $data['alert'] =
                     [
                         'type' => 'sucesso',
@@ -62,24 +78,24 @@ class Managers extends CI_Controller
                 $this->session->set_flashdata('alert', $data['alert']);
                 redirect('Managers/index');
             } else {
-                foreach ($var['errors']['full_messages'] as $full_message) {
-                    $data['alert'] =
-                        [
-                            'type' => 'erro',
-                            'message' => $full_message
-                        ];
-                    $this->session->set_flashdata('alert', $data['alert']);
-                }
-                redirect('Managers/new_manager');
-
+                $data['alert'] =
+                    [
+                        'type' => 'erro',
+                        'message' => 'Email em uso'
+                    ];
+                $this->session->set_flashdata('alert', $data['alert']);
             }
+            redirect('Managers/new_manager');
+
         }
+
         $data['clients'] = $this->get_clients_ws();
         $data['view'] = 'forms/manager_form';
         $this->load->view('template_admin/core', $data);
     }
 
-    public function edit_manager($id_manager)
+    public
+    function edit_manager($id_manager)
     {
 
         $data['manager'] = $this->get_manager_id_ws($id_manager);
@@ -115,7 +131,7 @@ class Managers extends CI_Controller
             }
 //                print_r($retorno);
 //                die;
-            if ($retorno['response']['password']) {
+            if (isset($retorno['response']['password'])) {
                 $data['alert'] =
                     [
                         'type' => 'erro',
@@ -141,7 +157,8 @@ class Managers extends CI_Controller
         $this->load->view('template_admin/core', $data);
     }
 
-    public function delete_manager($id_manager)
+    public
+    function delete_manager($id_manager)
     {
         if ($id_manager != null or $id_manager != '') {
             $response = $this->delete_manager_ws($id_manager);
@@ -165,7 +182,8 @@ class Managers extends CI_Controller
         }
     }
 
-    private function put_manager_ws($id_manager, $params)
+    private
+    function put_manager_ws($id_manager, $params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -224,13 +242,14 @@ class Managers extends CI_Controller
         return $resp;
     }
 
-    private function post_manager_ws($name, $full_name, $pass, $pass_comfirm, $email, $client, $cpf, $phone)
+    private
+    function post_manager_ws($params)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
         $client_user = $this->session->userdata('user')['clientHeader'];
         $curl = curl_init();
-
+        $params = json_encode($params);
         curl_setopt_array($curl, array(
             CURLOPT_URL => "$this->url/admin/managers",
             CURLOPT_RETURNTRANSFER => true,
@@ -241,13 +260,13 @@ class Managers extends CI_Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n$name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"email\"\r\n\r\n$email\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n$pass\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n$pass_comfirm\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"full_name\"\r\n\r\n$full_name\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone\"\r\n\r\n$phone\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"cpf\"\r\n\r\n$cpf\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"client_id\"\r\n\r\n$client\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+            CURLOPT_POSTFIELDS => "$params",
             CURLOPT_HTTPHEADER => array(
                 "access-token: $aut_code",
                 "cache-control: no-cache",
                 "client: $client_user",
-                "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-                "postman-token: 30011478-d090-f8e8-b9a8-b90aba104de3",
+                "content-type: application/json",
+                "postman-token: 7ca904b1-90a9-5011-a525-06e2daedcfd0",
                 "uid: $uid"
             ),
         ));
@@ -283,7 +302,8 @@ class Managers extends CI_Controller
         return $resp;
     }
 
-    private function get_clients_ws()
+    private
+    function get_clients_ws()
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -340,7 +360,8 @@ class Managers extends CI_Controller
         return $resp;
     }
 
-    private function delete_manager_ws($id)
+    private
+    function delete_manager_ws($id)
     {
         $curl = curl_init();
         $aut_code = $this->session->userdata('user')['access-token'];
@@ -378,7 +399,8 @@ class Managers extends CI_Controller
         }
     }
 
-    private function get_manager_id_ws($id)
+    private
+    function get_manager_id_ws($id)
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -435,7 +457,8 @@ class Managers extends CI_Controller
         return $resp;
     }
 
-    private function get_managers_ws()
+    private
+    function get_managers_ws()
     {
         $aut_code = $this->session->userdata('user')['access-token'];
         $uid = $this->session->userdata('user')['uid'];
@@ -491,7 +514,8 @@ class Managers extends CI_Controller
         return $resp;
     }
 
-    public function arrayCastRecursive($array)
+    public
+    function arrayCastRecursive($array)
     {
         if (is_array($array)) {
             foreach ($array as $key => $value) {

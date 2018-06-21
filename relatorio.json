@@ -1,0 +1,1290 @@
+{
+  "clients": [
+    {
+      "id": 16,
+      "name": "Ruby",
+      "number_departaments": 1,
+      "departaments": [
+        {
+          "id": 29,
+          "title": "Finan\u00e7as",
+          "value": null,
+          "percentage_out": null,
+          "number_employees": 1,
+          "employees": [
+            {
+              "name": "Larissa",
+              "id": 67,
+              "agendas": [
+                {
+                  "id": 683,
+                  "need_justification": null,
+                  "company_name": "L.H",
+                  "day": "2018-06-27T00:00:00.000-03:00",
+                  "hour": "2018-06-20T18:00:00.000-03:00"
+                }
+              ],
+              "locals": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Mateus",
+      "number_departaments": 1,
+      "departaments": [
+        {
+          "id": 23,
+          "title": "xyz",
+          "value": null,
+          "percentage_out": null,
+          "number_employees": 2,
+          "employees": [
+            {
+              "name": "kaue",
+              "id": 35,
+              "agendas": [
+                {
+                  "id": 49,
+                  "need_justification": null,
+                  "company_name": "Teste",
+                  "day": "2018-03-12T18:06:44.000-03:00",
+                  "hour": "2018-03-12T18:06:44.000-03:00"
+                },
+                {
+                  "id": 50,
+                  "need_justification": null,
+                  "company_name": "Rota 50",
+                  "day": "2018-03-12T16:07:21.000-03:00",
+                  "hour": "2018-03-12T16:07:21.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 463,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-12T16:07:23.925-03:00",
+                    "value_km": null,
+                    "km_travalled": "464.9950866699219"
+                  }
+                },
+                {
+                  "id": 51,
+                  "need_justification": null,
+                  "company_name": "Rota ",
+                  "day": "2018-03-14T01:32:00.000-03:00",
+                  "hour": "2018-03-14T01:32:00.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 2336,
+                    "check_in": "2018-03-14T01:03:26.187-03:00",
+                    "check_out": "2018-03-14T00:40:38.266-03:00",
+                    "created_at": "2018-03-12T16:08:51.261-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 57,
+                  "need_justification": null,
+                  "company_name": "Hello",
+                  "day": "2018-03-14T00:34:44.000-03:00",
+                  "hour": "2018-03-14T00:34:44.000-03:00"
+                }
+              ],
+              "locals": [
+                {
+                  "company_name": "teste"
+                }
+              ]
+            },
+            {
+              "name": "luana",
+              "id": 56,
+              "agendas": [],
+              "locals": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Pedro SIlva",
+      "number_departaments": 0,
+      "departaments": []
+    },
+    {
+      "id": 11,
+      "name": "Ricardo Informatica",
+      "number_departaments": 1,
+      "departaments": [
+        {
+          "id": 18,
+          "title": "suporte de ti",
+          "value": 12,
+          "percentage_out": null,
+          "number_employees": 10,
+          "employees": [
+            {
+              "name": "Paulo",
+              "id": 19,
+              "agendas": [
+                {
+                  "id": 32,
+                  "need_justification": null,
+                  "company_name": "Jose Alves",
+                  "day": "2018-03-12T15:15:09.000-03:00",
+                  "hour": "2018-03-12T15:15:09.000-03:00"
+                },
+                {
+                  "id": 33,
+                  "need_justification": null,
+                  "company_name": "Paulo Afonso",
+                  "day": "2018-03-30T16:15:49.000-03:00",
+                  "hour": "2018-03-30T16:15:49.000-03:00"
+                },
+                {
+                  "id": 34,
+                  "need_justification": null,
+                  "company_name": "Senac",
+                  "day": "2018-03-07T16:24:12.000-03:00",
+                  "hour": "2018-03-07T16:24:12.000-03:00"
+                },
+                {
+                  "id": 36,
+                  "need_justification": null,
+                  "company_name": "Rota trabalho",
+                  "day": "2018-03-07T17:59:21.000-03:00",
+                  "hour": "2018-03-07T17:59:21.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1335,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-07T17:59:25.703-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 217,
+                  "need_justification": null,
+                  "company_name": "Casa",
+                  "day": "2018-03-23T13:49:01.000-03:00",
+                  "hour": "2018-03-23T13:49:01.000-03:00"
+                },
+                {
+                  "id": 47,
+                  "need_justification": null,
+                  "company_name": "Jose XYZ",
+                  "day": "2018-03-12T15:08:01.000-03:00",
+                  "hour": "2018-03-12T15:08:01.000-03:00"
+                },
+                {
+                  "id": 48,
+                  "need_justification": null,
+                  "company_name": "Rota xyz",
+                  "day": "2018-03-12T15:10:37.000-03:00",
+                  "hour": "2018-03-12T15:10:37.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 986,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-12T15:10:40.542-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 98,
+                  "need_justification": null,
+                  "company_name": "Teste",
+                  "day": "2018-03-16T13:16:27.000-03:00",
+                  "hour": "2018-03-16T13:16:27.000-03:00"
+                },
+                {
+                  "id": 99,
+                  "need_justification": null,
+                  "company_name": "Teste Xxx",
+                  "day": "2018-03-16T13:20:14.000-03:00",
+                  "hour": "2018-03-16T13:20:14.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 327,
+                    "check_in": "2018-03-16T13:18:55.552-03:00",
+                    "check_out": null,
+                    "created_at": "2018-03-16T13:18:07.537-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                }
+              ],
+              "locals": [
+                {
+                  "company_name": ""
+                }
+              ]
+            },
+            {
+              "name": "Jose",
+              "id": 21,
+              "agendas": [],
+              "locals": []
+            },
+            {
+              "name": "Thais",
+              "id": 36,
+              "agendas": [
+                {
+                  "id": 211,
+                  "need_justification": null,
+                  "company_name": "teste",
+                  "day": "2018-03-23T13:54:46.000-03:00",
+                  "hour": "2018-03-23T13:54:46.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 635,
+                    "check_in": "2018-03-23T10:55:38.640-03:00",
+                    "check_out": "2018-03-23T10:55:49.587-03:00",
+                    "created_at": "2018-03-23T10:54:53.076-03:00",
+                    "value_km": null,
+                    "km_travalled": "858.6321"
+                  }
+                },
+                {
+                  "id": 218,
+                  "need_justification": null,
+                  "company_name": "teste fernando",
+                  "day": "2018-03-23T23:03:38.000-03:00",
+                  "hour": "2018-03-23T23:03:38.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 981227,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-23T14:03:30.582-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 104,
+                  "need_justification": null,
+                  "company_name": "Rota teste 3",
+                  "day": "2018-03-16T16:56:53.000-03:00",
+                  "hour": "2018-03-16T16:56:53.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 596,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-16T13:56:54.087-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 213,
+                  "need_justification": null,
+                  "company_name": "rota teste 2",
+                  "day": "2018-03-23T13:59:21.000-03:00",
+                  "hour": "2018-03-23T13:59:21.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1397,
+                    "check_in": "2018-03-23T11:00:39.673-03:00",
+                    "check_out": "2018-03-23T11:00:46.295-03:00",
+                    "created_at": "2018-03-23T10:59:25.294-03:00",
+                    "value_km": null,
+                    "km_travalled": "1496.7017"
+                  }
+                },
+                {
+                  "id": 105,
+                  "need_justification": null,
+                  "company_name": "Rota teste 4",
+                  "day": "2018-03-16T16:58:40.000-03:00",
+                  "hour": "2018-03-16T16:58:40.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 558,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-16T13:58:41.637-03:00",
+                    "value_km": null,
+                    "km_travalled": "1743.0"
+                  }
+                },
+                {
+                  "id": 103,
+                  "need_justification": null,
+                  "company_name": "Rota TESTE2",
+                  "day": "2018-03-16T16:49:58.000-03:00",
+                  "hour": "2018-03-16T16:49:58.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 780,
+                    "check_in": "2018-03-16T13:51:03.769-03:00",
+                    "check_out": "2018-03-16T13:59:29.964-03:00",
+                    "created_at": "2018-03-16T13:49:59.462-03:00",
+                    "value_km": null,
+                    "km_travalled": "1.6610000133514404"
+                  }
+                },
+                {
+                  "id": 122,
+                  "need_justification": null,
+                  "company_name": "Rota b",
+                  "day": "2018-03-19T16:14:29.000-03:00",
+                  "hour": "2018-03-19T16:14:29.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 638,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:14:31.691-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 100,
+                  "need_justification": null,
+                  "company_name": "Rota teste 1",
+                  "day": "2018-03-16T16:39:09.000-03:00",
+                  "hour": "2018-03-16T16:39:09.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1381,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-16T13:39:11.199-03:00",
+                    "value_km": null,
+                    "km_travalled": "1.018999993801117"
+                  }
+                },
+                {
+                  "id": 101,
+                  "need_justification": null,
+                  "company_name": "Atendimento 1",
+                  "day": "2018-03-16T23:12:57.000-03:00",
+                  "hour": "2018-03-16T23:12:57.000-03:00"
+                },
+                {
+                  "id": 92,
+                  "need_justification": null,
+                  "company_name": "Atendimento 1",
+                  "day": "2018-03-16T23:12:57.000-03:00",
+                  "hour": "2018-03-16T23:12:57.000-03:00"
+                },
+                {
+                  "id": 102,
+                  "need_justification": null,
+                  "company_name": "Atendimento 1",
+                  "day": "2018-03-16T23:12:57.000-03:00",
+                  "hour": "2018-03-16T23:12:57.000-03:00"
+                },
+                {
+                  "id": 113,
+                  "need_justification": null,
+                  "company_name": "Rota 24",
+                  "day": "2018-03-17T02:44:11.000-03:00",
+                  "hour": "2018-03-17T02:44:11.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 2927,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-16T23:44:13.511-03:00",
+                    "value_km": null,
+                    "km_travalled": "30565.0"
+                  }
+                },
+                {
+                  "id": 126,
+                  "need_justification": null,
+                  "company_name": "Rota g",
+                  "day": "2018-03-19T16:28:08.000-03:00",
+                  "hour": "2018-03-19T16:28:08.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 708,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:28:09.473-03:00",
+                    "value_km": null,
+                    "km_travalled": "2843.0"
+                  }
+                },
+                {
+                  "id": 123,
+                  "need_justification": null,
+                  "company_name": "Rota c",
+                  "day": "2018-03-19T16:17:17.000-03:00",
+                  "hour": "2018-03-19T16:17:17.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 693,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:17:18.319-03:00",
+                    "value_km": null,
+                    "km_travalled": "319.0"
+                  }
+                },
+                {
+                  "id": 106,
+                  "need_justification": null,
+                  "company_name": "Rota teste5",
+                  "day": "2018-03-16T17:14:08.000-03:00",
+                  "hour": "2018-03-16T17:14:08.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 614,
+                    "check_in": "2018-03-16T14:16:14.401-03:00",
+                    "check_out": "2018-03-19T13:18:59.291-03:00",
+                    "created_at": "2018-03-16T14:14:09.611-03:00",
+                    "value_km": null,
+                    "km_travalled": "1722.0"
+                  }
+                },
+                {
+                  "id": 120,
+                  "need_justification": null,
+                  "company_name": "Rota t",
+                  "day": "2018-03-19T16:02:50.000-03:00",
+                  "hour": "2018-03-19T16:02:50.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 755,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:02:51.635-03:00",
+                    "value_km": null,
+                    "km_travalled": "7.0"
+                  }
+                },
+                {
+                  "id": 121,
+                  "need_justification": null,
+                  "company_name": "Rota a",
+                  "day": "2018-03-19T16:09:44.000-03:00",
+                  "hour": "2018-03-19T16:09:44.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 762,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:09:45.759-03:00",
+                    "value_km": null,
+                    "km_travalled": "325.0"
+                  }
+                },
+                {
+                  "id": 124,
+                  "need_justification": null,
+                  "company_name": "Rota e",
+                  "day": "2018-03-19T16:22:02.000-03:00",
+                  "hour": "2018-03-19T16:22:02.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 479,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:22:03.964-03:00",
+                    "value_km": null,
+                    "km_travalled": "511.0"
+                  }
+                },
+                {
+                  "id": 125,
+                  "need_justification": null,
+                  "company_name": "Rota f",
+                  "day": "2018-03-19T16:26:17.000-03:00",
+                  "hour": "2018-03-19T16:26:17.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 831,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:26:18.685-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 127,
+                  "need_justification": null,
+                  "company_name": "Rota g",
+                  "day": "2018-03-19T16:33:04.000-03:00",
+                  "hour": "2018-03-19T16:33:04.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 799,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:33:05.986-03:00",
+                    "value_km": null,
+                    "km_travalled": "456.0"
+                  }
+                },
+                {
+                  "id": 128,
+                  "need_justification": null,
+                  "company_name": "Rota h",
+                  "day": "2018-03-19T16:35:56.000-03:00",
+                  "hour": "2018-03-19T16:35:56.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 750,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T13:35:57.191-03:00",
+                    "value_km": null,
+                    "km_travalled": "327.0"
+                  }
+                },
+                {
+                  "id": 129,
+                  "need_justification": null,
+                  "company_name": "Rota i",
+                  "day": "2018-03-19T22:05:35.000-03:00",
+                  "hour": "2018-03-19T22:05:35.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1395,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T19:05:36.091-03:00",
+                    "value_km": null,
+                    "km_travalled": "1411.0"
+                  }
+                },
+                {
+                  "id": 130,
+                  "need_justification": null,
+                  "company_name": "Rota i",
+                  "day": "2018-03-19T23:02:59.000-03:00",
+                  "hour": "2018-03-19T23:02:59.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1610,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-19T20:03:00.367-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 214,
+                  "need_justification": null,
+                  "company_name": "teste 1",
+                  "day": "2018-03-23T14:07:24.000-03:00",
+                  "hour": "2018-03-23T14:07:24.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1330,
+                    "check_in": "2018-03-23T11:08:28.183-03:00",
+                    "check_out": "2018-03-23T11:08:38.157-03:00",
+                    "created_at": "2018-03-23T11:07:30.126-03:00",
+                    "value_km": null,
+                    "km_travalled": "1094.4119"
+                  }
+                },
+                {
+                  "id": 141,
+                  "need_justification": null,
+                  "company_name": "Rota j",
+                  "day": "2018-03-20T00:34:22.000-03:00",
+                  "hour": "2018-03-20T00:34:22.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 692,
+                    "check_in": "2018-03-20T20:55:33.163-03:00",
+                    "check_out": "2018-03-20T20:55:38.928-03:00",
+                    "created_at": "2018-03-19T21:34:22.892-03:00",
+                    "value_km": null,
+                    "km_travalled": "2087.9998"
+                  }
+                },
+                {
+                  "id": 245,
+                  "need_justification": null,
+                  "company_name": "Teste",
+                  "day": "2018-03-26T19:15:14.000-03:00",
+                  "hour": "2018-03-26T19:15:14.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1892,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-26T18:53:50.883-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 157,
+                  "need_justification": null,
+                  "company_name": "teste 10",
+                  "day": "2018-03-20T16:42:39.000-03:00",
+                  "hour": "2018-03-20T16:42:39.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1466,
+                    "check_in": "2018-03-20T13:43:13.500-03:00",
+                    "check_out": "2018-03-20T13:43:34.097-03:00",
+                    "created_at": "2018-03-20T13:42:47.151-03:00",
+                    "value_km": null,
+                    "km_travalled": "368.27435"
+                  }
+                },
+                {
+                  "id": 147,
+                  "need_justification": null,
+                  "company_name": "teste 2",
+                  "day": "2018-03-20T15:57:01.000-03:00",
+                  "hour": "2018-03-20T15:57:01.000-03:00"
+                },
+                {
+                  "id": 148,
+                  "need_justification": null,
+                  "company_name": "teste 4",
+                  "day": "2018-03-20T16:01:48.000-03:00",
+                  "hour": "2018-03-20T16:01:48.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 556,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T13:01:56.493-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 149,
+                  "need_justification": null,
+                  "company_name": "teste 5",
+                  "day": "2018-03-20T16:09:04.000-03:00",
+                  "hour": "2018-03-20T16:09:04.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 557,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T13:09:12.084-03:00",
+                    "value_km": null,
+                    "km_travalled": "761.5142"
+                  }
+                },
+                {
+                  "id": 146,
+                  "need_justification": null,
+                  "company_name": "Teste 1",
+                  "day": "2018-03-20T15:48:04.000-03:00",
+                  "hour": "2018-03-20T15:48:04.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 623,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T21:15:16.931-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 151,
+                  "need_justification": null,
+                  "company_name": "teste 7",
+                  "day": "2018-03-20T16:24:03.000-03:00",
+                  "hour": "2018-03-20T16:24:03.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 711,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T13:24:10.187-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 153,
+                  "need_justification": null,
+                  "company_name": "teste 7",
+                  "day": "2018-03-20T16:26:04.000-03:00",
+                  "hour": "2018-03-20T16:26:04.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 596,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T13:26:08.797-03:00",
+                    "value_km": null,
+                    "km_travalled": null
+                  }
+                },
+                {
+                  "id": 154,
+                  "need_justification": null,
+                  "company_name": "teste 8",
+                  "day": "2018-03-20T16:33:21.000-03:00",
+                  "hour": "2018-03-20T16:33:21.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1019,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T13:33:28.842-03:00",
+                    "value_km": null,
+                    "km_travalled": "553.99255"
+                  }
+                },
+                {
+                  "id": 173,
+                  "need_justification": null,
+                  "company_name": "rota 2",
+                  "day": "2018-03-21T04:26:56.000-03:00",
+                  "hour": "2018-03-21T04:26:56.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1008,
+                    "check_in": "2018-03-21T01:37:22.683-03:00",
+                    "check_out": "2018-03-21T01:37:27.203-03:00",
+                    "created_at": "2018-03-21T01:27:08.063-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 156,
+                  "need_justification": null,
+                  "company_name": "teste 9",
+                  "day": "2018-03-20T16:39:41.000-03:00",
+                  "hour": "2018-03-20T16:39:41.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 337,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T13:39:48.535-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 158,
+                  "need_justification": null,
+                  "company_name": "Cria\u00e7ao de rota final",
+                  "day": "2018-03-20T16:48:13.000-03:00",
+                  "hour": "2018-03-20T16:48:13.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 2607,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-20T20:13:13.443-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 159,
+                  "need_justification": null,
+                  "company_name": "criacao de rota",
+                  "day": "2018-03-20T16:49:52.000-03:00",
+                  "hour": "2018-03-20T16:49:52.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 785,
+                    "check_in": "2018-03-20T13:50:19.761-03:00",
+                    "check_out": "2018-03-20T13:50:29.447-03:00",
+                    "created_at": "2018-03-20T13:49:59.423-03:00",
+                    "value_km": null,
+                    "km_travalled": "449.76935"
+                  }
+                },
+                {
+                  "id": 143,
+                  "need_justification": null,
+                  "company_name": "Viagem curta",
+                  "day": "2018-03-20T15:39:02.000-03:00",
+                  "hour": "2018-03-20T15:39:02.000-03:00"
+                },
+                {
+                  "id": 160,
+                  "need_justification": null,
+                  "company_name": "teste 11",
+                  "day": "2018-03-20T16:54:22.000-03:00",
+                  "hour": "2018-03-20T16:54:22.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 589,
+                    "check_in": "2018-03-20T13:54:34.089-03:00",
+                    "check_out": "2018-03-20T13:54:41.958-03:00",
+                    "created_at": "2018-03-20T13:54:29.463-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 163,
+                  "need_justification": null,
+                  "company_name": "a",
+                  "day": "2018-03-20T19:45:09.000-03:00",
+                  "hour": "2018-03-20T19:45:09.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 774,
+                    "check_in": "2018-03-20T16:46:21.042-03:00",
+                    "check_out": "2018-03-20T16:46:40.548-03:00",
+                    "created_at": "2018-03-20T16:45:14.662-03:00",
+                    "value_km": null,
+                    "km_travalled": "5713.6855"
+                  }
+                },
+                {
+                  "id": 162,
+                  "need_justification": null,
+                  "company_name": "teste 13",
+                  "day": "2018-03-20T16:59:57.000-03:00",
+                  "hour": "2018-03-20T16:59:57.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 779,
+                    "check_in": "2018-03-20T20:41:28.079-03:00",
+                    "check_out": "2018-03-20T20:23:16.300-03:00",
+                    "created_at": "2018-03-20T14:00:02.683-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 145,
+                  "need_justification": null,
+                  "company_name": "Viagem curta 3",
+                  "day": "2018-03-20T15:44:25.000-03:00",
+                  "hour": "2018-03-20T15:44:25.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 615,
+                    "check_in": "2018-03-20T21:04:38.933-03:00",
+                    "check_out": "2018-03-20T21:04:53.837-03:00",
+                    "created_at": "2018-03-20T21:04:11.728-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 171,
+                  "need_justification": null,
+                  "company_name": "rota 1",
+                  "day": "2018-03-21T04:04:04.000-03:00",
+                  "hour": "2018-03-21T04:04:04.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 689,
+                    "check_in": "2018-03-21T01:05:00.763-03:00",
+                    "check_out": "2018-03-21T01:05:11.403-03:00",
+                    "created_at": "2018-03-21T01:04:12.112-03:00",
+                    "value_km": null,
+                    "km_travalled": "928.3483"
+                  }
+                },
+                {
+                  "id": 174,
+                  "need_justification": null,
+                  "company_name": "rota final",
+                  "day": "2018-03-21T04:42:34.000-03:00",
+                  "hour": "2018-03-21T04:42:34.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 374,
+                    "check_in": "2018-03-21T01:43:01.814-03:00",
+                    "check_out": "2018-03-21T01:43:06.363-03:00",
+                    "created_at": "2018-03-21T01:42:42.877-03:00",
+                    "value_km": null,
+                    "km_travalled": "192.96957"
+                  }
+                },
+                {
+                  "id": 182,
+                  "need_justification": null,
+                  "company_name": "Almo\u00e7o 02",
+                  "day": "2018-03-21T12:40:02.000-03:00",
+                  "hour": "2018-03-21T12:40:02.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 684,
+                    "check_in": "2018-03-21T12:50:22.782-03:00",
+                    "check_out": "2018-03-21T12:53:15.436-03:00",
+                    "created_at": "2018-03-21T12:39:10.447-03:00",
+                    "value_km": null,
+                    "km_travalled": "395.96487"
+                  }
+                },
+                {
+                  "id": 186,
+                  "need_justification": null,
+                  "company_name": "teste",
+                  "day": "2018-03-21T16:49:15.000-03:00",
+                  "hour": "2018-03-21T16:49:15.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 888,
+                    "check_in": "2018-03-21T14:12:04.651-03:00",
+                    "check_out": null,
+                    "created_at": "2018-03-21T13:49:28.488-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 184,
+                  "need_justification": null,
+                  "company_name": "Destino Fernando",
+                  "day": "2018-03-21T16:18:48.000-03:00",
+                  "hour": "2018-03-21T16:18:48.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 982231,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-21T13:18:56.755-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.0"
+                  }
+                },
+                {
+                  "id": 188,
+                  "need_justification": null,
+                  "company_name": "Teste",
+                  "day": "2018-03-21T15:00:30.000-03:00",
+                  "hour": "2018-03-21T15:00:30.000-03:00"
+                }
+              ],
+              "locals": []
+            },
+            {
+              "name": "Lucas teste",
+              "id": 38,
+              "agendas": [
+                {
+                  "id": 212,
+                  "need_justification": null,
+                  "company_name": "Teste Lucas",
+                  "day": "2018-03-23T11:00:13.000-03:00",
+                  "hour": "2018-03-23T11:00:13.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1078,
+                    "check_in": "2018-03-23T11:03:08.099-03:00",
+                    "check_out": "2018-03-23T11:05:30.394-03:00",
+                    "created_at": "2018-03-23T10:59:16.565-03:00",
+                    "value_km": null,
+                    "km_travalled": "405.19934"
+                  }
+                },
+                {
+                  "id": 215,
+                  "need_justification": null,
+                  "company_name": "sodimac",
+                  "day": "2018-03-23T11:07:39.000-03:00",
+                  "hour": "2018-03-23T11:07:39.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 768,
+                    "check_in": "2018-03-23T11:10:24.523-03:00",
+                    "check_out": "2018-03-23T11:10:50.520-03:00",
+                    "created_at": "2018-03-23T11:07:52.965-03:00",
+                    "value_km": null,
+                    "km_travalled": "666.364"
+                  }
+                },
+                {
+                  "id": 216,
+                  "need_justification": null,
+                  "company_name": "loja",
+                  "day": "2018-03-23T11:12:36.000-03:00",
+                  "hour": "2018-03-23T11:12:36.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 1426,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-03-23T11:12:40.871-03:00",
+                    "value_km": null,
+                    "km_travalled": "722.8294"
+                  }
+                }
+              ],
+              "locals": [
+                {
+                  "company_name": "teste lucas"
+                }
+              ]
+            },
+            {
+              "name": "denise silva",
+              "id": 59,
+              "agendas": [],
+              "locals": []
+            },
+            {
+              "name": "daniele",
+              "id": 58,
+              "agendas": [],
+              "locals": []
+            },
+            {
+              "name": "liliane",
+              "id": 60,
+              "agendas": [],
+              "locals": []
+            },
+            {
+              "name": "kaynara",
+              "id": 61,
+              "agendas": [],
+              "locals": []
+            },
+            {
+              "name": "cynthia",
+              "id": 62,
+              "agendas": [
+                {
+                  "id": 672,
+                  "need_justification": null,
+                  "company_name": "Atendimento Teste",
+                  "day": "2018-06-18T15:25:13.000-03:00",
+                  "hour": "2018-06-18T15:25:13.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 174911,
+                    "check_in": null,
+                    "check_out": null,
+                    "created_at": "2018-06-18T12:39:14.761-03:00",
+                    "value_km": null,
+                    "km_travalled": "0.03595074"
+                  }
+                },
+                {
+                  "id": 677,
+                  "need_justification": null,
+                  "company_name": "t1",
+                  "day": "2018-06-19T02:05:11.000-03:00",
+                  "hour": "2018-06-19T02:05:11.000-03:00"
+                },
+                {
+                  "id": 675,
+                  "need_justification": null,
+                  "company_name": "Teste Mes ",
+                  "day": "2018-06-29T20:45:09.000-03:00",
+                  "hour": "2018-06-29T20:45:09.000-03:00"
+                },
+                {
+                  "id": 676,
+                  "need_justification": null,
+                  "company_name": "Minerva,",
+                  "day": "2018-07-18T15:49:48.000-03:00",
+                  "hour": "2018-07-18T15:49:48.000-03:00"
+                },
+                {
+                  "id": 686,
+                  "need_justification": null,
+                  "company_name": "Voltando",
+                  "day": "2018-06-20T18:57:16.000-03:00",
+                  "hour": "2018-06-20T18:57:16.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 4658,
+                    "check_in": "2018-06-20T19:16:08.624-03:00",
+                    "check_out": "2018-06-20T19:18:01.904-03:00",
+                    "created_at": "2018-06-20T19:00:01.087-03:00",
+                    "value_km": null,
+                    "km_travalled": "5176.09"
+                  }
+                },
+                {
+                  "id": 685,
+                  "need_justification": null,
+                  "company_name": "Teste Lucas ",
+                  "day": "2018-06-20T18:40:04.000-03:00",
+                  "hour": "2018-06-20T18:40:04.000-03:00",
+                  "routes": {
+                    "justification": null,
+                    "total_km": 4126,
+                    "check_in": "2018-06-20T18:53:54.669-03:00",
+                    "check_out": "2018-06-20T18:56:12.698-03:00",
+                    "created_at": "2018-06-20T18:35:54.206-03:00",
+                    "value_km": null,
+                    "km_travalled": "159.20268"
+                  }
+                },
+                {
+                  "id": 666,
+                  "need_justification": null,
+                  "company_name": "teste 1",
+                  "day": null,
+                  "hour": "2018-06-13T21:21:01.000-03:00"
+                },
+                {
+                  "id": 673,
+                  "need_justification": null,
+                  "company_name": "Teste Semana",
+                  "day": "2018-06-22T15:42:05.000-03:00",
+                  "hour": "2018-06-22T15:42:05.000-03:00"
+                },
+                {
+                  "id": 665,
+                  "need_justification": true,
+                  "company_name": "teste 1",
+                  "day": "2018-06-13T18:21:01.000-03:00",
+                  "hour": "2018-06-13T18:21:01.000-03:00",
+                  "routes": {
+                    "justification": "teste3",
+                    "total_km": 15,
+                    "check_in": "2018-06-13T18:21:09.698-03:00",
+                    "check_out": "2018-06-13T18:21:14.139-03:00",
+                    "created_at": "2018-06-13T18:21:06.283-03:00",
+                    "value_km": null,
+                    "km_travalled": "150.0"
+                  }
+                },
+                {
+                  "id": 674,
+                  "need_justification": null,
+                  "company_name": "Teste Mes ",
+                  "day": "2018-06-28T15:43:19.000-03:00",
+                  "hour": "2018-06-28T15:43:19.000-03:00"
+                },
+                {
+                  "id": 668,
+                  "need_justification": null,
+                  "company_name": "teste2",
+                  "day": "2018-06-16T22:25:29.000-03:00",
+                  "hour": "2018-06-16T22:25:29.000-03:00"
+                },
+                {
+                  "id": 688,
+                  "need_justification": null,
+                  "company_name": "teste g1",
+                  "day": "2018-06-21T01:20:42.000-03:00",
+                  "hour": "2018-06-21T01:20:42.000-03:00"
+                },
+                {
+                  "id": 687,
+                  "need_justification": null,
+                  "company_name": "Lucas",
+                  "day": "2018-06-20T20:15:40.000-03:00",
+                  "hour": "2018-06-20T20:15:40.000-03:00"
+                },
+                {
+                  "id": 689,
+                  "need_justification": null,
+                  "company_name": "teste g1",
+                  "day": "2018-06-21T01:25:55.000-03:00",
+                  "hour": "2018-06-21T01:25:55.000-03:00"
+                },
+                {
+                  "id": 669,
+                  "need_justification": true,
+                  "company_name": "teste",
+                  "day": "2018-06-16T22:24:37.000-03:00",
+                  "hour": "2018-06-16T22:24:37.000-03:00",
+                  "routes": {
+                    "justification": "aqui fica a justificativa",
+                    "total_km": 0,
+                    "check_in": "2018-06-16T19:25:20.399-03:00",
+                    "check_out": "2018-06-16T19:25:29.480-03:00",
+                    "created_at": "2018-06-16T19:25:13.951-03:00",
+                    "value_km": null,
+                    "km_travalled": "150.0"
+                  }
+                },
+                {
+                  "id": 667,
+                  "need_justification": true,
+                  "company_name": "teste f",
+                  "day": "2018-06-15T18:50:07.000-03:00",
+                  "hour": "2018-06-15T18:50:07.000-03:00",
+                  "routes": {
+                    "justification": "acabou?",
+                    "total_km": 42,
+                    "check_in": "2018-06-15T15:50:47.454-03:00",
+                    "check_out": "2018-06-15T15:50:51.164-03:00",
+                    "created_at": "2018-06-15T15:50:40.351-03:00",
+                    "value_km": null,
+                    "km_travalled": "150.0"
+                  }
+                }
+              ],
+              "locals": [
+                {
+                  "company_name": "house"
+                },
+                {
+                  "company_name": "house 2"
+                },
+                {
+                  "company_name": ""
+                },
+                {
+                  "company_name": "teste"
+                }
+              ]
+            },
+            {
+              "name": "nathalia",
+              "id": 63,
+              "agendas": [
+                {
+                  "id": 679,
+                  "need_justification": null,
+                  "company_name": "t3",
+                  "day": "2018-06-19T03:55:01.000-03:00",
+                  "hour": "2018-06-19T03:55:01.000-03:00"
+                },
+                {
+                  "id": 680,
+                  "need_justification": null,
+                  "company_name": "t4",
+                  "day": "2018-06-19T04:01:36.000-03:00",
+                  "hour": "2018-06-19T04:01:36.000-03:00"
+                },
+                {
+                  "id": 678,
+                  "need_justification": null,
+                  "company_name": "t2",
+                  "day": "2018-06-19T03:40:03.000-03:00",
+                  "hour": "2018-06-19T03:40:03.000-03:00"
+                },
+                {
+                  "id": 681,
+                  "need_justification": null,
+                  "company_name": "t5",
+                  "day": "2018-06-19T04:10:11.000-03:00",
+                  "hour": "2018-06-19T04:10:11.000-03:00"
+                },
+                {
+                  "id": 682,
+                  "need_justification": null,
+                  "company_name": "t6",
+                  "day": "2018-06-19T04:19:45.000-03:00",
+                  "hour": "2018-06-19T04:19:45.000-03:00"
+                }
+              ],
+              "locals": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
