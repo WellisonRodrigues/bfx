@@ -89,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             </li>
             <li>
-                <?php echo anchor('Reembolso/index', '<b style="color: #42A5F5"><i class="fa fa-money"> </i>&nbsp&nbsp REEMBOLSOS </b>'); ?>
+                <?php echo anchor('Reembolso/index', '<b style="color: #42A5F5"><i class="fa fa-plus"></i>&nbsp&nbsp REEMBOLSOS </b>'); ?>
 
             </li>
         </ul>
