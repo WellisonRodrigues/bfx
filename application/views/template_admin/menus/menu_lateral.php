@@ -88,6 +88,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php echo anchor('Relatorios/index', '<b style="color: #42A5F5"><i class="fas fa-file-alt"> </i>&nbsp&nbsp RELATÓRIOS </b>'); ?>
 
             </li>
+            <li>
+                <?php echo anchor('Reembolso/index', '<b style="color: #42A5F5"><i class="fa fa-money"> </i>&nbsp&nbsp REEMBOLSOS </b>'); ?>
+
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
